@@ -16,14 +16,14 @@
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
 
     {{-- ? memanggil CSS ICPN BPPTSTRAP menggunakan CDN --}}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boostrap-icons@1.13.1/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     {{-- ? memanggil file CSS TEMA DASHBOARD --}}
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 </head>
 <body>
     <main>
-        <section class="p-0 d-flex align-items-center position relative overflow-hidden">
+        <section class="p-0 d-flex align-items-center position-relative overflow-hidden">
             <div class="container-fluid">
                 <div class="row">
                     {{-- 
