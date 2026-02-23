@@ -13,15 +13,19 @@ return new class extends Migration
     {
         Schema::create('kategoris', function (Blueprint $table) {
             $table->id();
+
             // kolom untuk menyimpan kode_kategori | maks 20 karakter | harus unik
             $table->string('kode_kategori',20)->unique();
+
             // kolom untuk menyimpan nama_kategori | maks 100 karakter
             $table->string('nama_kategori',100);
+
             /*
              kolom untuk menyimpan deskripsi kategori | type text agar muat banyak karakter ||
              nullable = boleh di kosongkan
             */
             $table->text('deskripsi')->nullable();
+            
             $table->timestamps();
         });
     }

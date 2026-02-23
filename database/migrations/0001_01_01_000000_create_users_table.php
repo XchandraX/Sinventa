@@ -13,19 +13,25 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+
             // ubah dari 'nama' -> 'nama_lengkap' | maksimal 100 karakter
             $table->string('nama_lengkap', 100);
+
             // tambahkan kolom untuk menyimpan username | maksimal 50 karakter
             $table->string('username')->unique();
+
             // tambahkan batas maksimal 100 di kolom email
             $table->string('email',100)->unique();
+
             /*
              tambahkan kolom role dengan type data enum
              role hanya memiliki 2 pilihan = 'admin' & 'user'
             */
             $table->enum('role', ['admin', 'user'])->default('user');
+
             // tambahkan kolom untuk menyimpan lembaga | maksimal 100 karakter
             $table->string('lembaga', 100);
+            
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

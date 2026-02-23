@@ -16,4 +16,9 @@ class Lokasi extends Model
     public function getRouteKeyName(): string {
         return 'kode_lokasi';
     }
+
+    // relasi antara lokasi dan barang
+    public function barangs() {
+        return $this->hasMany(Barang::class, 'lokasi_id');
+    }
 }
