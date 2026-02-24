@@ -31,7 +31,7 @@
 
         {{-- form login --}}
 
-        <form action="" method="POST">
+        <form action="{{ route('login.store') }}" method="POST">
             @csrf
             {{-- username --}}
             <div class="mb-4">
@@ -48,7 +48,7 @@
             {{-- password --}}
             <div class="mb-4">
                 <label for="password" class="form-label">Password</label>
-                <input type="text" id="password" class="form-control @error('password') is-invalid @enderror"
+                <input type="password" id="password" class="form-control @error('password') is-invalid @enderror"
                     name="password" placeholder="Masukan Password Anda!">
                 {{-- jika invalid --}}
                 @error('password')

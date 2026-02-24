@@ -31,4 +31,12 @@ Route::middleware('guest')->group(function () {
      * ! maks method yang digunakan adalah 'POST'
      */
     Route::post('/daftar', [DaftarController::class, 'store'])->name('daftar.store');
+
+    /**
+     * ? Route untuk proses login (autentikasi)
+     * * Panggil AuthController lalu menjalankan funciton 'login'
+     * ! karena ada data yang dikirim dari form login ke AuthController,,
+     * ! maks method yang digunakan adalah 'POST'
+     */
+    Route::post('/login', [AuthController::class, 'login'])->name('login.store');
 });
