@@ -18,7 +18,7 @@
         <hr>
 
         {{-- formulir pendftaran --}}
-        <form action="" method="POST">
+        <form action="{{ route('daftar.store') }}" method="POST">
             {{-- csrf token untuk keamanan --}}
             @csrf
 
@@ -55,7 +55,7 @@
             {{-- email --}}
             <div class="mb-4">
                 <label for="email" class="form-label">Email</label>
-                <input type="text" id="email" class="form-control @error('email') is-invalid @enderror"
+                <input type="email" id="email" class="form-control @error('email') is-invalid @enderror"
                     name="email" value="{{ old('email') }}" placeholder="Chandra mualana">
 
                 {{-- jika email tidak valid --}}
@@ -111,39 +111,41 @@
 
             {{-- passowrd --}}
             <div class="mb-4">
-                <label for="password" class="form-label">Passowrd</label>
+                <label for="password" class="form-label">Password</label>
                 <div class="input-group">
 
-                    <input type="password" id="password" class="form-control @error('password') is-invalid @enderror"
-                        name="password">
+                    <input type="password" class="pass-input form-control @error('password') is-invalid @enderror"
+                        name="password" id="password" value="{{ old('password') }}">
 
                     <span class="bi toggle-password bi-eye-slash input-group-text"></span>
+                    {{-- jika password tidak valid --}}
+
                 </div>
 
-                {{-- jika password tidak valid --}}
                 @error('password')
-                    <div id="password" class="invalid-feedback">
+                    <div id="password" class="invalid-feedback d-block">
                         {{-- tampilkan pesan error --}}
                         {{ $message }}
                     </div>
                 @enderror
+
             </div>
 
             {{-- konfirmasi passowrd --}}
             <div class="mb-4">
-                <label for="password_confirmation" class="form-label">KOnfirmasi Passowrd</label>
+                <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
                 <div class="input-group">
 
-                    <input type="password_confirmation" id="password_confirmation"
-                        class="form-control @error('password_confirmation') is-invalid @enderror"
+                    <input type="password" id="password_confirmation"
+                        class="pass-input form-control @error('password_confirmation') is-invalid @enderror"
                         name="password_confirmation">
 
-                    <span class="bi toggle-password_confirmation bi-eye-slash input-group-text"></span>
+                    <span class="bi toggle-password bi-eye-slash input-group-text"></span>
                 </div>
 
                 {{-- jika tidak valid --}}
                 @error('password_confirmation')
-                    <div id="password_confirmation" class="invalid-feedback">
+                    <div id="password_confirmation" class="invalid-feedback d-block">
                         {{-- tampilkan pesan error --}}
                         {{ $message }}
                     </div>

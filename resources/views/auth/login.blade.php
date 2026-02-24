@@ -13,6 +13,15 @@
     {{-- ! konten utama halaman form login ditulis disini! --}}
     <div class="col-12 col-lg-4 m-auto py-3 py-lg-5">
 
+        {{-- ? Jika ada session dengan nama 'berhasil' dikirim dari contorller --}}
+        @session('berhasil')
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{-- ? tampilkan pesan --}}
+            {{ session('berhasil') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endsession
+
         {{-- Judul halaman login --}}
         <span class="mb-0 fs-1">👋</span>
         <h1 class="fs-2">Masuk ke SINVESTA!</h1>
