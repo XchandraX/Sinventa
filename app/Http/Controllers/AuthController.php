@@ -74,7 +74,7 @@ class AuthController extends Controller
 
         // ? 7. alihkan ke halaman dashboard
         // ! karena kita belum punya route dashboard
-        return "Gila, proses login berhasil, Welcome ". Auth::user()->nama_lengkap;
+        return redirect()->route('dashboard');
 
     }
 

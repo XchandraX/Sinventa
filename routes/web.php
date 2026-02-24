@@ -4,6 +4,8 @@
 use App\Http\Controllers\AuthController;
 // ! Panggil class DaftarController agar bisa digunakan oleh route
 use App\Http\Controllers\DaftarController;
+// ! Panggil class DashboardController agar bisa digunakan oleh route
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /**
@@ -39,4 +41,25 @@ Route::middleware('guest')->group(function () {
      * ! maks method yang digunakan adalah 'POST'
      */
     Route::post('/login', [AuthController::class, 'login'])->name('login.store');
+});
+
+/**
+ * ? Fungsi Group Miiddleware 'Auth"
+ * * Digunakan khusus untuk menangani permintaan dari user yg sudah melakukan autentikasi
+ * ! "Auth" = "Autentikasi" artinya orang yg sudah masuk / sudah berhasil login ke sistem
+ */
+
+Route::middleware('auth')->group(function () {
+
+    /**
+     * ? Route untuk nemapilkan halaman dashbaord
+     * * panggil DashboardController lalu jalankan funciton "index"
+     */
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    /**
+     * ? Route untuk menangani permintaan logout
+     * * karena fitur logout menggunakan foorm dengan method post, maka method route juga menggunakan post
+     */
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
