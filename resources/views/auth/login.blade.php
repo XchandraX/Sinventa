@@ -61,7 +61,7 @@
 
         {{-- link menuju halaman daftar user --}}
         <div class="mt-4 text-center">
-            <span>Belum punya akun? <a href="">Daftar</a></span>
+            <span>Belum punya akun? <a href="{{ route('daftar.index') }}">Daftar</a></span>
         </div>
     </div>
 
