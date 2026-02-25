@@ -78,4 +78,21 @@ class AuthController extends Controller
 
     }
 
+    /**
+     * ? function logout digunakan untuk proses keluar dari sistem
+     * * gunakan class Request agar dapat menerima data dari view form'logout.blade.php'
+     */
+    public function logout(Request $request) {
+        // ? Keluar dari sistem
+        Auth::logout();
+
+        // ? hapus session dari browser
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        // ? alihkan ke halaman login
+        return redirect()->route('login');
+    }
+
+
 }

@@ -3249,7 +3249,8 @@ div.dataTables_wrapper div.dataTables_info {
     }
 }
 .header .profilename .user-img .status {
-    bottom: 10px;
+    bottom: 18px;
+    left: 9px;
 }
 .header .user-img {
     display: inline-block;
@@ -3266,8 +3267,8 @@ div.dataTables_wrapper div.dataTables_info {
     width: 10px;
     margin: 0;
     position: absolute;
-    right: 0;
-    bottom: 30px;
+    left: 12px;
+    bottom: 25px;
     border-radius: 50%;
     display: inline-block;
     background: #28c76f;

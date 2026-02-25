@@ -22,11 +22,11 @@ Route::middleware('guest')->group(function () {
     Route::get('/', [AuthController::class, 'index'])->name('login');
 
     /**
-     * ? Route untuk menampilkan halaman form daftar
-     * * Panggil DaftarController lalu menjalankan funciton 'index'
+     * ? Route untu menampilkan halaman form pendaftaran user
+     * * Panggil DaftarController lalu menjalankan function 'index'
      */
-    Route::get('/daftar', [DaftarController::class, 'index'])->name('daftar.index');
-
+    Route::get('/chx1xhc', [DaftarController::class, 'index'])->name('daftar.index');
+    
     /**
      * ? Route untuk simpan data user ke database (store)
      * * Panggil DaftarController lalu menjalankan funciton 'store'

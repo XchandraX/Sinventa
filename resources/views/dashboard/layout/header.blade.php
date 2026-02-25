@@ -68,7 +68,7 @@
                     <a href="" class="dropdown-item">Profil Ku</a>
 
                     {{-- tombol logout --}}
-                    <form action="" method="POST">
+                    <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button class="dropdown-item logout pb-0" type="submit">Logout</button>
                     </form>
@@ -92,7 +92,7 @@
             <a href="" class="dropdown-item">Profil Ku</a>
 
             {{-- tombol logout khusus mobile --}}
-            <form action="" method="POST">
+            <form action="{{ route('logout') }}" method="POST">
                 @csrf
                 <button class="dropdown-item py-0" type="submit">Logout</button>
             </form>
