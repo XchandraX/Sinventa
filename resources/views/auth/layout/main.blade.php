@@ -7,9 +7,10 @@
 
     {{-- Meta Tags --}}
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1", shrink-to-fit=no>
+    <meta name='author' content='Chandra Maulana'>
+    <meta name='description' content='Uji Kompetensi Keahlian - Pengembangan Perangkat Lunak'>
+    
     {{-- ? memanggil icon website (logo sekolah) --}}
     <link rel="shortcut icon" href="{{ asset('assets/icon/favicon.png') }}">
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DaftarController;
 // ! Panggil class DashboardController agar bisa digunakan oleh route
 use App\Http\Controllers\DashboardController;
+
 use Illuminate\Support\Facades\Route;
 
 /**
