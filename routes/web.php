@@ -6,6 +6,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DaftarController;
 // ! Panggil class DashboardController agar bisa digunakan oleh route
 use App\Http\Controllers\DashboardController;
+// ! Panggil class UserController agar bisa digunakan oleh route
+use App\Http\Controllers\UserController;
+
 
 use Illuminate\Support\Facades\Route;
 
@@ -63,4 +66,11 @@ Route::middleware('auth')->group(function () {
      * * karena fitur logout menggunakan foorm dengan method post, maka method route juga menggunakan post
      */
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    /**
+     * ? Route untuk mengelola data user
+     * * karena controller yang digunakan adalah controller resource, maka method route juga pake resource
+     * * 1 route ini bisa menangani permintaan: index, create, store, show, edit, update, destroy
+     */
+    Route::resource('/dashboard/users', UserController::class);
 });

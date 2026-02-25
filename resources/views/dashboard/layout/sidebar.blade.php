@@ -46,7 +46,7 @@
                     </li>
 
                     {{-- menu halaman barang --}}
-                    <li class="submenu"></li>
+                    <li class="submenu">
                         <a href="#">
                             <i class="bi bi-box-seam"></i>
                             <span>Barang</span>
@@ -70,6 +70,27 @@
                             <li><a href="">Buat Berita Acara</a></li>
                         </ul>
                     </li>
+
+                    {{-- menu halaman pengguna --}}
+                    <li class="submenu">
+                        <a>
+                            <i class="bi bi-people"></i>
+                            <span>Pengguna</span>
+                            <span class="ms-auto bi bi-caret-down"></span>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="{{ route('users.index') }}" class="{{ Request::is('dashboard/users') ? 'active' : '' }}">
+                                    List Pengguna
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('users.create') }}" class="{{ Request::is('dashboard/users/create') ? 'active' : '' }}">
+                                    Tambah Pengguna
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
 
                 {{-- jika user yang login adalah user biasa --}}
@@ -77,7 +98,6 @@
 
                 {{-- tampilkan menu khusus untuk user biasa --}}
                 <ul>
-
 
                     {{-- menu dashboard --}}
                     <li class="active">
