@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     {{-- ? variable titiel akan dikirim dari Controller --}}
-    <title>{{ $title ?? 'SINVESTA'}}</title>
+    <title>{{ $title ?? 'SINVESTA' }}</title>
 
     {{-- ? meta tag --}}
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1", shrink-to-fit=no>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name='author' content='Chandra Maulana'>
     <meta name='description' content='Uji Kompetensi Keahlian - Pengembangan Perangkat Lunak'>
 
@@ -17,7 +18,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
 
     {{-- ? memanggil CSS SELECT2 --}}
-    <link rel="stylesheet" href="{{ asset('assets/css/vendor/select2/css/select2.min.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('assets/css/vendor/select2/css/select2.min.css') }}">
 
     {{-- ? memanggil CSS ANIMATE --}}
     <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
@@ -38,6 +39,7 @@
     {{-- ? @yield ini berfungsi untuk menambahkan css dari file view lain jika dibutuhkan --}}
     @yield('css')
 </head>
+
 <body>
     <div class="min-wrapper">
 
@@ -88,4 +90,5 @@
     {{-- ? @yield() ini berfungsi untuk menambahkan javascript dari file view lain jika dibutuhkan --}}
     @yield('js')
 </body>
+
 </html>

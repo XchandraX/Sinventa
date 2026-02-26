@@ -73,7 +73,7 @@
 
                     {{-- menu halaman pengguna --}}
                     <li class="submenu">
-                        <a>
+                        <a href="#">
                             <i class="bi bi-people"></i>
                             <span>Pengguna</span>
                             <span class="ms-auto bi bi-caret-down"></span>
@@ -100,8 +100,8 @@
                 <ul>
 
                     {{-- menu dashboard --}}
-                    <li class="active">
-                        <a href="#">
+                    <li class="{{ Request::routeIs('dashboard') ? 'active' : '' }}">
+                        <a href="{{ route('dashboard') }}">
                             <i class="bi bi-speedometer2"></i>
                             <span>Dashboard</span>
                         </a>

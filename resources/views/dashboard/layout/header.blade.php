@@ -24,16 +24,16 @@
         </span>
     </a>
 
+    {{-- alert pemberitahun saat ada update data (store/update/delete) --}}
+    @session('berhasil')
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('berhasil') }}
+            <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endsession
+
     {{-- menu bagian kanan --}}
     <ul class="nav user-menu">
-
-        {{-- alert pemberitahun saat ada update data (store/update/delete) --}}
-        @session('berhasil')
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('berhasil') }}
-                <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endsession
 
         {{-- menu profil --}}
         <li class="nav-item dropdown has-arrow main-drop">
