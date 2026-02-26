@@ -74,3 +74,4 @@ Route::middleware('auth')->group(function () {
      */
     Route::resource('/dashboard/users', UserController::class);
 });
+
