@@ -41,7 +41,7 @@
 </head>
 
 <body>
-    <div class="min-wrapper">
+    <div class="main-wrapper">
 
         {{-- ? memanggil file yang berisi code HTML bagian header --}}
         @include('dashboard.layout.header')
