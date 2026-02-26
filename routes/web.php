@@ -111,6 +111,16 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
      */
     Route::resource('/dashboard/lokasi', LokasiController::class);
 
+    // ? Route untuk fitur ekspor data lokasi ke file PDF
+    Route::get('/dashboard/export-lokasi-to/pdf', [LokasiController::class, 'exportToPdf'])->name('lokasi.exportToPdf');
+
+    // ? Route untuk fitur ekspor data lokasi ke file Excel
+    Route::get('/dashboard/export-lokasi-to/excel', [LokasiController::class, 'exportToExcel'])->name('lokasi.exporToExcel');
+
+    // ? Route untuk fitur print daftar lokasi barang
+    Route::get('/dashboard/print-lokasi', [LokasiController::class, 'print'])->name('lokasi.print');
+
+
     /**
      * ? Route untuk mengelola data kategori
      * * karena controller yang digunakan adalah controller resource, maka method route juga pake resource

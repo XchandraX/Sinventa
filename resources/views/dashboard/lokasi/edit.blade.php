@@ -7,8 +7,8 @@
     {{-- judul halaman --}}
     <div class="page-header">
         <div class="page-title">
-            <h4>{{ $title }}</h4>
-            <h6>Buat Kategori Barang Baru</h6>
+            <h4>{{ $title }} </h4>
+            <h6>Edit dan Update Lokasi Barang Baru</h6>
         </div>
     </div>
 
@@ -16,51 +16,50 @@
     <div class="card">
         <div class="card-body">
 
-            {{-- form tambah data kategori --}}
-            <form action="{{ route('kategori.store') }}" method="POST">
+            {{-- form tambah data lokasi --}}
+            <form action="{{ route('lokasi.update', $lokasi) }}" method="POST">
 
 
                 {{-- blade csrf --}}
                 @csrf
 
+                {{-- ganti method dari post -> put  --}}
+                @method('put')
+
                 <div class="row">
+                    @php
+                        $cards = [
+                            ['id' => 'kode_lokasi', 'label' => 'Kode Lokasi'],
+                            ['id' => 'nama_lokasi', 'label' => 'Nama Lokasi']
+                            ]
+                    @endphp
 
-                    {{-- kolom kode_kategori --}}
+                    @foreach ($cards as $card)
+                        
+                    {{-- kolom kode dan nama lokasi --}}
                     <div class="col-lg-6 col-sm-6 col-12">
                         <div class="form-group">
-                            <label for="kode_kategori">Kode Kategori</label>
-                            <input type="text" class="form-control  @error('kode_kategori') is-invalid @enderror" id="kode_kategori" name="kode_kategori"
-                                value="{{ old('kode_kategori') }}" placeholder="Masukkan Kode Kategori">
+                            <label for="{{ $card['id'] }}">{{ $card['label'] }} *</label>
+                            <input type="text" class="form-control  @error($card['id']) is-invalid @enderror" id="{{ $card['id'] }}" name="{{ $card['id'] }}"
+                                value="{{ old($card['id'], $lokasi->{$card['id']} ?? '') }}" placeholder="Masukkan {{ $card['label'] }}">
 
-                            {{-- jika kode_kategori tidak valid --}}
-                            @error('kode_kategori')
+                            {{-- jika kode_lokasi tidak valid --}}
+                            @error($card['id'])
                                 {{-- tampilkan pesan error --}}
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
 
-                    {{-- kolom nama_kategori --}}
-                    <div class="col-lg-6 col-sm-6 col-12">
-                        <div class="form-group">
-                            <label for="nama_kategori">Nama Kategori</label>
-                            <input type="text" class="form-control  @error('nama_kategori') is-invalid @enderror" id="nama_kategori" name="nama_kategori"
-                                value="{{ old('nama_kategori') }}" placeholder="Masukkan Nama Kategori">
+                    @endforeach
 
-                            {{-- jika nama_kategori tidak valid --}}
-                            @error('nama_kategori')
-                                {{-- tampilkan pesan error --}}
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
 
                     {{-- kolom deskripsi --}}
                     <div class="col-12">
                         <div class="form-group">
                             <label for="deskripsi">Deskripsi</label>
                             <textarea class="form-control  @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi"
-                                 placeholder="Masukkan deskripsi pengguna">{{ old('deskripsi') }}</textarea>
+                                 placeholder="Masukkan deskripsi pengguna">{{ old('deskripsi', $lokasi->deskripsi) }}</textarea>
 
                             {{-- jika deskripsi tidak valid --}}
                             @error('deskripsi')
