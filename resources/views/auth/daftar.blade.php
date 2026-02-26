@@ -115,7 +115,7 @@
                 <div class="input-group">
 
                     <input type="password" class="pass-input form-control @error('password') is-invalid @enderror"
-                        name="password" id="password" value="{{ old('password') }}">
+                        name="password" id="password">
 
                     <span class="bi toggle-password bi-eye-slash input-group-text"></span>
                     {{-- jika password tidak valid --}}

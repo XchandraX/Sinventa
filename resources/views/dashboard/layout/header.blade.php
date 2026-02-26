@@ -65,7 +65,7 @@
                     <hr class="m-0">
 
                     {{-- tombol edit profil --}}
-                    <a href="" class="dropdown-item">Profil Ku</a>
+                    <a href="{{ route('users.edit', Auth::user()) }}" class="dropdown-item">Profil Ku</a>
 
                     {{-- tombol logout --}}
                     <form action="{{ route('logout') }}" method="POST">
@@ -89,7 +89,7 @@
         <div class="dropdown-menu dropdown-menu-right">
 
             {{-- tombol edit profil khusus mobile --}}
-            <a href="" class="dropdown-item">Profil Ku</a>
+            <a href="{{ route('users.edit', Auth::user()) }}" class="dropdown-item">Profil Ku</a>
 
             {{-- tombol logout khusus mobile --}}
             <form action="{{ route('logout') }}" method="POST">

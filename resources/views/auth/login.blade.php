@@ -45,16 +45,26 @@
                 @enderror
             </div>
 
-            {{-- password --}}
+            {{-- passowrd --}}
             <div class="mb-4">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" id="password" class="form-control @error('password') is-invalid @enderror"
-                    name="password" placeholder="Masukan Password Anda!">
-                {{-- jika invalid --}}
+                <div class="input-group">
+
+                    <input type="password" class="pass-input form-control @error('password') is-invalid @enderror"
+                        name="password" id="password" placeholder="Masukan Password Anda!">
+
+                    <span class="bi toggle-password bi-eye-slash input-group-text"></span>
+                    {{-- jika password tidak valid --}}
+
+                </div>
+
                 @error('password')
-                    {{-- tampilkan pesan errornya --}}
-                    <div class="invalid-feedback">{{ $message }}</div>
+                    <div id="password" class="invalid-feedback d-block">
+                        {{-- tampilkan pesan error --}}
+                        {{ $message }}
+                    </div>
                 @enderror
+
             </div>
 
             <hr>

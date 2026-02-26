@@ -48,7 +48,7 @@ class DaftarController extends Controller
             'email' => 'Kolom:attribute pakai email yang valid dong!!.',
             'min' => 'Kolom :attribute minimal :m karakter.',
             'confirmed' => ':attribute tidak sama!!.',
-            'min' => 'Kolom :attribute tidak valid!!.',
+            'in' => 'Kolom :attribute tidak valid!!.',
             'max' => 'Kolom :attribute maksimal :max karakter !!.',
         ];
 
