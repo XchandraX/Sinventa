@@ -16,13 +16,14 @@ class UserMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    // ? tambah string $role untuk 'role !== $role' biar bisa
+    public function handle(Request $request, Closure $next, string $role): Response
     {
         /**
          * ? jika user belum login
          * ? atau lore user tidak sama dengan role yg ditentukan di middleware group
          */
-        if(! Auth::chechk() || Auth::user()->role !==$role) {
+        if(! Auth::check() || Auth::user()->role !== $role) {
             // ? alihkan user ke halaman abort 403
             abort(403);
         }

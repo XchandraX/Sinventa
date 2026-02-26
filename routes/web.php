@@ -8,6 +8,12 @@ use App\Http\Controllers\DaftarController;
 use App\Http\Controllers\DashboardController;
 // ! Panggil class UserController agar bisa digunakan oleh route
 use App\Http\Controllers\UserController;
+// ! Panggil class KategoriController agar bisa digunakan oleh route
+use App\Http\Controllers\KategoriController;
+// ! Panggil class Lokasicontroller agar bisa digunakan oleh route
+use App\Http\Controllers\LokasiController;
+// ! Panggil class Barangcontroller agar bisa digunakan oleh route
+use App\Http\Controllers\BarangController;
 
 
 use Illuminate\Support\Facades\Route;
@@ -75,3 +81,34 @@ Route::middleware('auth')->group(function () {
     Route::resource('/dashboard/users', UserController::class);
 });
 
+/**
+ * ? fungsi group middleware auth dengan role = admin
+ * * digunakan khusus untuk fitur2 yang tersedia hanya untuk user yang sudah login dan role = admin
+ * ! user yang blum login dan user dengan = user tidak akan bisa akses fitur didalam group ini
+ */
+Route::middleware(['auth', 'role:admin'])->group(function () {
+
+    /**
+     * ? Route untuk mengelola data kategori
+     * * karena controller yang digunakan adalah controller resource, maka method route juga pake resource
+     * * 1 route ini bisa menangani: index, create, store, show, edit, update dan destroy
+     */
+    Route::resource('/dashboard/kategori', KategoriController::class);
+    
+    // ? Route untuk fitur ekspor data kategori ke file PDF
+    Route::get('/dashboard/export-kategori-to/pdf', [KategoriController::class, 'exportToPdf'])->name('kategori.exportToPdf');
+
+    /**
+     * ? Route untuk mengelola data kategori
+     * * karena controller yang digunakan adalah controller resource, maka method route juga pake resource
+     * * 1 route ini bisa menangani: index, create, store, show, edit, update dan destroy
+     */
+    Route::resource('/dashboard/lokasi', LokasiController::class);
+
+    /**
+     * ? Route untuk mengelola data kategori
+     * * karena controller yang digunakan adalah controller resource, maka method route juga pake resource
+     * * 1 route ini bisa menangani: index, create, store, show, edit, update dan destroy
+     */
+    Route::resource('/dashboard/barang', BarangController::class);
+});

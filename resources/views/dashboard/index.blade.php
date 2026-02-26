@@ -9,90 +9,35 @@
 @section('konten')
     {{-- ! konten utama halaman dashboard ditulis diisini --}}
     <h6>Selamat Datang,</h6>
-    <h2 class="fw-bold mb-5">{{ Auth::user()->nama_lengkap }}</h2>
+    <h2 class="fw-bold mb-5">{{ Auth::user()->nama_lengkap ?? 'Pengguna' }}</h2>
 
     {{-- memapilkan jumlah data di database --}}
     <div class="row">
+        @php
+            $cards = [
+                ['icon' => 'bi-card-list', 'label' => 'Kategori', 'count' => $jumlah_kategori],
+                ['icon' => 'bi-buildings', 'label' => 'Lokasi', 'count' => $jumlah_lokasi],
+                ['icon' => 'bi-box-seam', 'label' => 'Barang', 'count' => $jumlah_barang],
+                ['icon' => 'bi-file-earmark-medical', 'label' => 'Berita Acara', 'count' => $jumlah_bast],
+            ];
+        @endphp
 
-        {{-- card jumlah kategori --}}
-        <div class="col-lg-3 col-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex gap-3">
-                        {{-- icon kategori --}}
-                        <div class="p-3 bg-warning rounded-3">
-                            <i class="bi bi-card-list"></i>
-                        </div>
-
-                        {{-- jumlah data kategori --}}
-                        <div>
-                            <h4 class="fw-bold">{{ $jumlah_kategori }}</h4>
-                            <div>Total Data Kategori</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        {{-- card jumlah lokasi --}}
-        <div class="col-lg-3 col-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex gap-3">
-                        {{-- icon lokasi --}}
-                        <div class="p-3 bg-warning rounded-3">
-                            <i class="bi bi-buildings"></i>
-                        </div>
-
-                        {{-- jumlah data lokasi --}}
-                        <div>
-                            <h4 class="fw-bold">{{ $jumlah_lokasi }}</h4>
-                            <div>Total Data Lokasi</div>
+        @foreach ($cards as $card)
+            <div class="col-lg-3 col-12 mb-3">
+                <div class="card h-20">
+                    <div class="card-body">
+                        <div class="d-flex gap-3 align-items-center">
+                            <div class="p-3 bg-warning rounded-3">
+                                <i class="bi {{ $card['icon'] }}"></i>
+                            </div>
+                            <div>
+                                <h4 class="fw-bold mb-0">{{ $card['count'] }}</h4>
+                                <div>Total Data {{ $card['label'] }}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        {{-- card jumlah barang --}}
-        <div class="col-lg-3 col-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex gap-3">
-                        {{-- icon barang --}}
-                        <div class="p-3 bg-warning rounded-3">
-                            <i class="bi bi-box-seam"></i>
-                        </div>
-
-                        {{-- jumlah data barang --}}
-                        <div>
-                            <h4 class="fw-bold">{{ $jumlah_barang }}</h4>
-                            <div>Total Data Barang</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        {{-- card jumlah bast --}}
-        <div class="col-lg-3 col-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex gap-3">
-                        {{-- icon bast --}}
-                        <div class="p-3 bg-warning rounded-3">
-                            <i class="bi bi-file-earmark-medical"></i>
-                        </div>
-
-                        {{-- jumlah data bast --}}
-                        <div>
-                            <h4 class="fw-bold">{{ $jumlah_bast }}</h4>
-                            <div>Total Data BAST</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        @endforeach
     </div>
 @endsection

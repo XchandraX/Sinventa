@@ -15,7 +15,6 @@
                         <a href="{{ route('dashboard') }}">
                             <i class="bi bi-speedometer2"></i>
                             <span>Dashboard</span>
-                            <span>Dashboard</span>
                         </a>
                     </li>
 
@@ -27,8 +26,18 @@
                             <span class="ms-auto bi bi-caret-down"></span>
                         </a>
                         <ul>
-                            <li><a href="">List Kategori</a></li>
-                            <li><a href="">Tambah Kategori</a></li>
+                            <li>
+                                <a href="{{ route('kategori.index') }}"
+                                    class="{{ Request::is('dashboard/kategori') ? 'active' : '' }}">
+                                    List Kategori
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('kategori.create') }}"
+                                    class="{{ Request::is('dashboard/kategori/create') ? 'active' : '' }}">
+                                    Tambah Kategori
+                                </a>
+                            </li>
                         </ul>
                     </li>
 
@@ -40,8 +49,18 @@
                             <span class="ms-auto bi bi-caret-down"></span>
                         </a>
                         <ul>
-                            <li><a href="">List Lokasi</a></li>
-                            <li><a href="">Tambah Lokasi</a></li>
+                            <li>
+                                <a href="{{ route('lokasi.index') }}"
+                                    class="{{ Request::is('dashboard/lokasi') ? 'active' : '' }}">
+                                    List Lokasi
+                                    </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('lokasi.create') }}"
+                                    class="{{ Request::is('dashboard/lokasi/create') ? 'active' : '' }}">
+                                    Tambah Lokasi
+                                    </a>
+                            </li>
                         </ul>
                     </li>
 
@@ -53,8 +72,19 @@
                             <span class="ms-auto bi bi-caret-down"></span>
                         </a>
                         <ul>
-                            <li><a href="">List Barang</a></li>
-                            <li><a href="">Tambah Barang</a></li>
+                            <li>
+                                <a href="{{ route('barang.index') }}"
+                                    class="{{ Request::is('dashboard/barang') ? 'active' : '' }}">
+                                    List Barang
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('barang.create') }}"
+                                    class="{{ Request::is('dashboard/barang/create') ? 'active' : '' }}">
+                                    Tambah
+                                    Barang
+                                </a>
+                            </li>
                         </ul>
                     </li>
 
@@ -80,12 +110,14 @@
                         </a>
                         <ul>
                             <li>
-                                <a href="{{ route('users.index') }}" class="{{ Request::is('dashboard/users') ? 'active' : '' }}">
+                                <a href="{{ route('users.index') }}"
+                                    class="{{ Request::is('dashboard/users') ? 'active' : '' }}">
                                     List Pengguna
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('users.create') }}" class="{{ Request::is('dashboard/users/create') ? 'active' : '' }}">
+                                <a href="{{ route('users.create') }}"
+                                    class="{{ Request::is('dashboard/users/create') ? 'active' : '' }}">
                                     Tambah Pengguna
                                 </a>
                             </li>
@@ -94,13 +126,12 @@
                 </ul>
 
                 {{-- jika user yang login adalah user biasa --}}
-                @else
-
+            @else
                 {{-- tampilkan menu khusus untuk user biasa --}}
                 <ul>
 
                     {{-- menu dashboard --}}
-                    <li class="{{ Request::routeIs('dashboard') ? 'active' : '' }}">
+                    <li class="{{ Request::is('dashboard') ? 'active' : '' }}">
                         <a href="{{ route('dashboard') }}">
                             <i class="bi bi-speedometer2"></i>
                             <span>Dashboard</span>
@@ -134,7 +165,7 @@
                     </li>
                 </ul>
             @endif
-            
+
         </div>
     </div>
 </div>

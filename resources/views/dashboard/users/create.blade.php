@@ -29,7 +29,7 @@
                     <div class="col-lg-6 col-sm-12">
                         <div class="form-group">
                             <label for="nama_lengkap">Nama Lengkap</label>
-                            <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap"
+                            <input type="text" class="form-control  @error('nama_lengkap') is-invalid @enderror" id="nama_lengkap" name="nama_lengkap"
                                 value="{{ old('nama_lengkap') }}" placeholder="Masukkan nama lengkap pengguna">
 
                             {{-- jika nama_lengkap tidak valid --}}
@@ -44,7 +44,7 @@
                     <div class="col-lg-6 col-sm-12">
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email"
+                            <input type="email" class="form-control  @error('email') is-invalid @enderror" id="email" name="email"
                                 value="{{ old('email') }}" placeholder="Masukkan email pengguna">
 
                             {{-- jika email tidak valid --}}
@@ -59,7 +59,7 @@
                     <div class="col-lg-6 col-sm-12">
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" class="form-control" id="username" name="username"
+                            <input type="text" class="form-control  @error('username') is-invalid @enderror" id="username" name="username"
                                 value="{{ old('username') }}" placeholder="Masukkan username pengguna">
 
                             {{-- jika username tidak valid --}}
@@ -74,7 +74,7 @@
                     <div class="col-lg-6 col-sm-12">
                         <div class="form-group">
                             <label for="lembaga">Nama Lembaga</label>
-                            <input type="text" class="form-control" id="lembaga" name="lembaga"
+                            <input type="text" class="form-control  @error('lembaga') is-invalid @enderror" id="lembaga" name="lembaga"
                                 value="{{ old('lembaga') }}" placeholder="Masukkan nama lembaga pengguna">
 
                             {{-- jika lembaga tidak valid --}}
