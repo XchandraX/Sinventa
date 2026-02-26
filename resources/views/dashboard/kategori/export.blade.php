@@ -74,7 +74,8 @@
     </style>
 </head>
 
-<body>
+{{-- ? Jika url = /dashboard/print-kategori maka print halaman ini --}}
+<body @if(Request::is('dashboard/print-kategori')) onload='window.print()' @endif>
     {{-- HEADER --}}
     <div class="header">
         <h2>{{ $title ?? 'Daftar Kategori Barang' }}</h2>

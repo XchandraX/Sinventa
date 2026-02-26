@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kategori;
-use Barryvdh\DomPDF\Facade\Pdf;
+
 // ! panggil class facade PDF agar bisa digunakan di function exportToPdf()
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+
+// ! panggil clss kategori export dan facade excel agar bisa digunakan di function exportToExcel()
+use App\Exports\KategoriExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class KategoriController extends Controller
 {
@@ -135,7 +140,7 @@ class KategoriController extends Controller
     }
 
     /**
-     * ? ekspor semua dat kategori ke file PDF
+     * ? ekspor semua data kategori ke file PDF
      */
     public function exportToPdf() {
         // ? 1. ambil semua dat kategori dari database
@@ -149,5 +154,27 @@ class KategoriController extends Controller
 
         // ? 3. download file PDF yang udah dibuat pada langkah 2
         return $pdf->download('daftar_kategori_barang.pdf');
+    }
+
+    /**
+     * ? ekspor semua data ke kategori ke file Excel
+     */
+    public function exportToExcel() {
+        // ? download file excel, isinya sesuai dengan yang dikonfigurasidi fiel KategoriExport.php
+        return Excel::download(new KategoriExport, 'daftar_kategori_barang.xlsx');
+    }
+
+    /**
+     * ? cetak list data kategori
+     */
+    public function print() {
+        // ? ambil semua dat kategori dari database
+        $kategoris = Kategori::latest()->get();
+
+        // ? jalankan view export.blade.php sambil kirim data:
+        return view('dashboard.kategori.export', [
+            'title' => 'Daftar Kategori Barang', // judul halaman
+            'kategoris' => $kategoris,
+        ]);
     }
 }

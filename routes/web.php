@@ -98,6 +98,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     // ? Route untuk fitur ekspor data kategori ke file PDF
     Route::get('/dashboard/export-kategori-to/pdf', [KategoriController::class, 'exportToPdf'])->name('kategori.exportToPdf');
 
+    // ? Route untuk fitur ekspor data kategori ke file Excel
+    Route::get('/dashboard/export-kategori-to/excel', [KategoriController::class, 'exportToExcel'])->name('kategori.exporToExcel');
+
+    // ? Route untuk fitur print daftar kategori barang
+    Route::get('/dashboard/print-kategori', [KategoriController::class, 'print'])->name('kategori.print');
+
     /**
      * ? Route untuk mengelola data kategori
      * * karena controller yang digunakan adalah controller resource, maka method route juga pake resource

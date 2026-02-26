@@ -53,12 +53,12 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{ route('kategori.exporToExcel') }}">
                                     <img src="{{ asset('assets/icon/excel.svg') }}" alt="img">
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{ route('kategori.print') }}">
                                     <img src="{{ asset('assets/icon/printer.svg') }}" alt="img">
                                 </a>
                             </li>
