@@ -20,7 +20,7 @@
         </div>
 
     </div>
-
+    
     {{-- card list lokasi Barang --}}
     <div class="card">
         <div class="card-body">
