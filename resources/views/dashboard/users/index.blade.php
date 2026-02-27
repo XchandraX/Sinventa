@@ -14,7 +14,7 @@
 
         {{-- tombol tambah user baru --}}
         <div class="page-btn">
-            <a href="{{ route('users.create') }}" class="btn-btn-added">
+            <a href="{{ route('users.create') }}" class="btn btn-added">
                 <i class="bi bi-plus-circle"></i> Tambah Pengguna
             </a>
         </div>

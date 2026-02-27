@@ -20,7 +20,7 @@
 
                     {{-- menu halaman kategori barang --}}
                     <li class="submenu">
-                        <a href="#">
+                        <a>
                             <i class="bi bi-card-list"></i>
                             <span>Kategori Barang</span>
                             <span class="ms-auto bi bi-caret-down"></span>
@@ -43,7 +43,7 @@
 
                     {{-- menu halaman lokasi barang --}}
                     <li class="submenu">
-                        <a href="#">
+                        <a>
                             <i class="bi bi-buildings"></i>
                             <span>Lokasi Barang</span>
                             <span class="ms-auto bi bi-caret-down"></span>
@@ -66,7 +66,7 @@
 
                     {{-- menu halaman barang --}}
                     <li class="submenu">
-                        <a href="#">
+                        <a>
                             <i class="bi bi-box-seam"></i>
                             <span>Barang</span>
                             <span class="ms-auto bi bi-caret-down"></span>
@@ -90,7 +90,7 @@
 
                     {{-- menu halaman berita acara --}}
                     <li class="submenu">
-                        <a href="#">
+                        <a>
                             <i class="bi bi-file-earmark-medical"></i>
                             <span>BAST</span>
                             <span class="ms-auto bi bi-caret-down"></span>
@@ -103,7 +103,7 @@
 
                     {{-- menu halaman pengguna --}}
                     <li class="submenu">
-                        <a href="#">
+                        <a>
                             <i class="bi bi-people"></i>
                             <span>Pengguna</span>
                             <span class="ms-auto bi bi-caret-down"></span>
@@ -140,7 +140,7 @@
 
                     {{-- menu halaman berita acara sebagai penyerah --}}
                     <li class="submenu">
-                        <a href="#">
+                        <a>
                             <i class="bi bi-person-down"></i>
                             <span>BAST Penyerah</span>
                             <span class="ms-auto bi bi-caret-down"></span>
@@ -153,7 +153,7 @@
 
                     {{-- menu halaman berita acara sebagai penerima --}}
                     <li class="submenu">
-                        <a href="#">
+                        <a>
                             <i class="bi bi-person-up"></i>
                             <span>BAST Penerima</span>
                             <span class="ms-auto bi bi-caret-down"></span>

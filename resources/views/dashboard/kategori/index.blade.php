@@ -8,13 +8,13 @@
     {{-- judul halaman --}}
     <div class="page-header">
         <div class="page-title">
-            <h4>List Kategori Barang</h4>
+            <h4>{{ $title }}</h4>
             <h6>Lihat atau cari Kategori Barang</h6>
         </div>
 
         {{-- tombol tambah kategori baru --}}
         <div class="page-btn">
-            <a href="{{ route('kategori.create') }}" class="btn-btn-added">
+            <a href="{{ route('kategori.create') }}" class="btn btn-added">
                 <i class="bi bi-plus-circle"></i> Tambah Kategori Barang
             </a>
         </div>

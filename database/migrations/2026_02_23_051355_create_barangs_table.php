@@ -21,13 +21,13 @@ return new class extends Migration
 
             // untuk menyimpan data kategori_id 
             // jika kategori di hapus, semua data barang yang memiliki id kategori tersebut juga akan ikut terhapus
-            $table->integer('kategori_id')->constrained('kategoris')->onDelete('cascade');
+            $table->foreignId('kategori_id')->constrained('kategoris')->onDelete('cascade');
 
             /*
                 untuk menyimpan data lokasi_id
                 jika lokasi di hapus, smeua data barang yang memiliki id lokasi tersebut juga akan ikut terhapus
             */
-            $table->integer('lokasi_id')->constrained('lokasis')->onDelete('cascade');
+            $table->foreignId('lokasi_id')->constrained('lokasis')->onDelete('cascade');
 
             // untuk menyimpan status barang | pilihannya hanya Baik, Rusak Ringan, Rusak Berat, dan Hilang, selain itu akan error
             $table->enum('status_barang', ['Baik', 'Rusak Ringan', 'Rusak Berat', 'Hilang'])->default('Baik');

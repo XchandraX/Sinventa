@@ -16,15 +16,15 @@ return new class extends Migration
 
             // untuk menyimpan id barang
             // jika barang dihapus, maka data bast yang ada barang tersebut akan ikut terhapus
-            $table->integer('barang_id')->constrained('barangs')->onDelete('cascade');
+            $table->foreignId('barang_id')->constrained('barangs')->onDelete('cascade');
 
             // untuk menyimpan id user serah
             // jika user dihapus, maka data bast yang ada user tersebut akan ikut terhapus
-            $table->integer('user_serah_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('user_serah_id')->constrained('users')->onDelete('cascade');
 
             // untuk menyimpan id user terima
             // jika user dihapus, maka data bast yang ada user tersebut akan ikut terhapus
-            $table->integer('user_terima_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('user_terima_id')->constrained('users')->onDelete('cascade');
 
             // untuk menyimpan status serah | menunggu / Disetujui, selain itu error
             $table->enum('status_serah', ['Menunggu', 'Disetujui'])->default('Menunggu');

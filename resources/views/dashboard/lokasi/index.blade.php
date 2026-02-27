@@ -8,13 +8,13 @@
     {{-- judul halaman --}}
     <div class="page-header">
         <div class="page-title">
-            <h4>List Lokasi Barang</h4>
+            <h4>{{ $title }}</h4>
             <h6>Lihat atau cari lokasi Barang</h6>
         </div>
 
         {{-- tombol tambah lokasi baru --}}
         <div class="page-btn">
-            <a href="{{ route('lokasi.create') }}" class="btn-btn-added">
+            <a href="{{ route('lokasi.create') }}" class="btn btn-added">
                 <i class="bi bi-plus-circle"></i> Tambah Lokasi Barang
             </a>
         </div>
