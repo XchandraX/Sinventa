@@ -6,6 +6,7 @@ use App\Models\Barang;
 // ! panggil class modul yang dibutuhkan di function
 use App\Models\Kategori;
 use App\Models\Lokasi;
+use App\Models\Bast;
 use Illuminate\Http\Request;
 
 class BarangController extends Controller
@@ -39,27 +40,74 @@ class BarangController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * ? tampilkan halman form tambahan barang baru
      */
     public function create()
     {
-        //
+        // ? hanya admin yang boleh membuaka halaman form tambah barang baru
+        $this->authorize('create', Barang::class);
+
+        // ? tampilkan view crete.blade.php di folder dashboard/barang
+        return view('dashboard.barang.create', [
+            'title' => 'Tambah Barang', //kirim judul halaman
+            'kategoris' => Kategori::latest()->get(), // ? kirim semua data kategori
+            'lokasis' => Lokasi::latest()->get() // ? kirim semua data lokasi
+        ]);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * ? simpan data barangbaru ke database
      */
     public function store(Request $request)
     {
-        //
+        // ? 1. buat data barang baru ke database
+        $aturan = [
+            'kode_barang' => 'required|string|max:20|unique:barangs,kode_barang',
+            'nama_barang' => 'required|string|max:100',
+            'kategori_id' => 'required|exists:kategoris,id',
+            'lokasi_id' => 'required|exists:lokasis,id',
+            'status_barang' => 'required|in:Baik,Rusak Ringan,Rusak Berat,Hilang',
+            'deskripsi' => 'nullable|string'
+        ];
+
+        // ? 2. buat pesan untuk kolom yang tidak valid
+        $pesan = [
+            // 
+            'required' => 'Kolom :attribute nggak boleh kosong!!.',
+            'unique' => 'Kolom :attribute sudah ada yg pakai!!.',
+            'exists' => 'Kolom :attribute tidak valid!!.',
+            'in' => 'Kolom :attribute tidak valid!!.',
+            'max' => 'Kolom :attribute maksimal :max karakter !!.',
+            'string' => 'Kolom :attribute mharus berupa teks!',
+        ];
+
+        // ? 3. lakukan validasi data
+        $validatedData = $request->validate($aturan, $pesan);
+
+        // ? 4. simpan data ke database
+        Barang::create($validatedData);
+
+        // ? 5. alihkan ke halaman list data barang dan kirimkan pesan konfimrasi berhasil
+        return redirect()->route('barang.index')->with('berhasil', 'teay! Barang berhasil ditambahkan.');
     }
 
     /**
-     * Display the specified resource.
+     * ? tampilkan detail barang yang dipilih
      */
     public function show(Barang $barang)
     {
-        //
+        // ? kirim data berita acara untuk barang yang ini
+        // ? data ini digunakan untuk melihat riwayat berita acara untuk barang ini
+        $basts = Bast::with(['barang', 'userSerah', 'userTerima'])
+            ->where('barang_id', $barang->id)
+            ->latest()->get();
+
+        // ? tampilkan view show.blade.php di folder dashboard/barang
+        return view('dashboard.barang.show', [
+            'title' => 'Detail Barang', // ? kirimkan judul halaman
+            'barang' => $barang, // ? kirim detail barang
+            'basts' => $basts, // ? kirimkan data bast untuk barang ini
+        ]);
     }
 
     /**
