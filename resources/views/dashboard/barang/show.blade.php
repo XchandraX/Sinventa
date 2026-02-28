@@ -183,7 +183,80 @@
                             </tr>
                         </thead>
 
-                        
+                        {{-- isi table --}}
+                        <tbody>
+                            {{-- tampilkan berita acara satu persatu menggunakan perulangan --}}
+                            @foreach ($basts as $bats)
+                                <tr>
+                                    <td>{{ $loop->iteration }}}</td>
+                                    <td>{{ $bast->barang->nama_barang }}</td>
+                                    <td>
+                                        @if ($bats->status_serah == 'Menunggu')
+                                            <span class="btn btn-sm text-white bg-secondary">
+                                                <i class="bi bi-hourglass-split"></i>
+                                            </span>
+                                        @else
+                                            <span class="btn btn-sm text-white bg-success">
+                                                <i class="bi bi-chech-circle"></i>
+                                            </span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($bats->status_terima == 'Menunggu')
+                                            <span class="btn btn-sm text-white bg-secondary">
+                                                <i class="bi bi-hourglass-split"></i>
+                                            </span>
+                                        @else
+                                            <span class="btn btn-sm text-white bg-success">
+                                                <i class="bi bi-chech-circle"></i>
+                                            </span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($bats->status_serah == 'Disetujui' && $bats->status_terima == 'Disetujui')
+                                            <span class="btn btn-sm text-white bg-success">
+                                                <i class="bi bi-chech-circle"></i> Disetujui
+                                            </span>
+                                        @else
+                                            <span class="btn btn-sm text-white bg-secondary">
+                                                <i class="bi bi-hourglass-split"></i> Menunggu
+                                            </span>
+                                        @endif
+                                    </td>
+
+                                    {{-- jika user yang login adalah role - admin --}}
+                                    @if (Auth::user()->role == 'admin')
+                                        <td>
+                                            {{-- tampilkan tombol cetak berita acara --}}
+                                            <a href="#" class="me-3">
+                                                <i class="bi bi-download"></i>
+                                            </a>
+
+                                            {{-- tombol lihat detail barang --}}
+                                            <a href="#" class="me-3">
+                                                <i class="bi bi-eye"></i>
+                                            </a>
+
+                                            {{-- tombol edit barang --}}
+                                            <a href="#" class="me-3">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+
+                                            {{-- tombol hapus barang --}}
+                                            <form action="#" method="post"
+                                                class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="confirm-text btn p-0 m-0" type="submit"
+                                                    onclick="return confirm('Yakin ingin menghapus berita acara {{ $bast->kode_barang }}?')">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    @endif
+                                </tr>
+                            @endforeach
+                        </tbody>
                     </table>
                 </div>
             @endif
