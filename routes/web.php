@@ -127,4 +127,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
      * * 1 route ini bisa menangani: index, create, store, show, edit, update dan destroy
      */
     Route::resource('/dashboard/barang', BarangController::class);
+
+    // ? Route untuk download QRCode Barang dari halaman show detail barang
+    Route::get('/dashboard/barang/{barang}/download-qrcode', [BarangController::class, 'downloadQr'])->name('barang.downloadQr');
 });

@@ -103,7 +103,7 @@
                         </a>
 
                         {{-- tombol download QRCode --}}
-                        <a href="" class="btn btn-primary">
+                        <a href="{{ route('barang.downloadQr', $barang) }}" class="btn btn-primary">
                             <i class="bi bi-download"></i>
                         </a>
                     </div>

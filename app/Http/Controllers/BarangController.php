@@ -3,11 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+
 // ! panggil class modul yang dibutuhkan di function
 use App\Models\Kategori;
 use App\Models\Lokasi;
 use App\Models\Bast;
 use Illuminate\Http\Request;
+
+// ! panggil class facades agar bisa digunakan di function downloadQr
+use Illuminate\Support\Facades\Response;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class BarangController extends Controller
 {
@@ -132,5 +137,24 @@ class BarangController extends Controller
     public function destroy(Barang $barang)
     {
         //
+    }
+
+    /**
+     * ? download QRCode barang
+     */
+    public function downloadQr(Barang $barang) {
+        // ? Buat file QrCode dengan format .svg
+        $qr = QrCode::format('svg')
+            ->size(300)
+            ->generate(route('barang.show', $barang)); //! yang dibuat menjadi QrCode adalah link detail barang
+
+        // ? tentukan nama file QrCode menggunak kode_barang
+        $filename = 'qroce-'.$barang->kode_barang.'.svg';
+
+        // ? download qr yg sudah dibuat
+        return Response::make($qr, 200, [
+            'Content-Type' => 'image/svg+xml',
+            'Content-Disposition' => "attachment; filename=\"$filename\"",
+        ]);
     }
 }
