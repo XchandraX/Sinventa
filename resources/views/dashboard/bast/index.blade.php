@@ -164,20 +164,20 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $bast->barang->nama_barang }}</td>
                                     <td>{{ $bast->barang->kategori->nama_kategori }}</td>
-                                    <td>{{ $bast->barang->kategori->nama_lokasi }}</td>
+                                    <td>{{ $bast->barang->lokasi->nama_lokasi }}</td>
                                     <td>
-                                        @if ($barang->status_barang == 'Baik')
+                                        @if ($bast->barang->status_barang == 'Baik')
                                             <span
-                                                class="btn btn-sm text-white bg-success">{{ $barang->status_barang }}</span>
-                                        @elseif ($barang->status_barang == 'Rusak Ringan')
+                                                class="btn btn-sm text-white bg-success">Baik</span>
+                                        @elseif ($bast->barang->status_barang == 'Rusak Ringan')
                                             <span
-                                                class="btn btn-sm text-white bg-warning">{{ $barang->status_barang }}</span>
-                                        @elseif ($barang->status_barang == 'Rusak Berat')
+                                                class="btn btn-sm text-white bg-warning">Rusak Ringan</span>
+                                        @elseif ($bast->barang->status_barang == 'Rusak Berat')
                                             <span
-                                                class="btn btn-sm text-white bg-danger">{{ $barang->status_barang }}</span>
+                                                class="btn btn-sm text-white bg-danger">Rusak Berat</span>
                                         @else
                                             <span
-                                                class="btn btn-sm text-white bg-secondary">{{ $barang->status_barang }}</span>
+                                                class="btn btn-sm text-white bg-secondary">Hilang</span>
                                         @endif
                                     </td>
                                     <td>
@@ -203,10 +203,10 @@
                                     <td>
                                         @if ($bast->status_serah == 'Disetujui' && $bast->status_terima == 'Disetujui')
                                             <span class="btn btn-sm text-white bg-success"><i
-                                                    class="bi bi-check-circle"></i></span>
+                                                    class="bi bi-check-circle"></i></span> Disetujui
                                         @else
                                             <span class="btn btn-sm text-white bg-secondary"><i
-                                                    class="bi bi-hourglass-split"></i></span>
+                                                    class="bi bi-hourglass-split"></i></span> Menunggu
                                         @endif
                                     </td>
                                     <td>

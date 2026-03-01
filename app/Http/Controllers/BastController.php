@@ -8,7 +8,13 @@ use App\Models\Bast;
 use App\Models\Kategori;
 use App\Models\Lokasi;
 use App\Models\User;
+
+// ! panggil facades agar bisa digunakan di function
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Riskihajar\Terbilang\Facades\Terbilang;
 
 class BastController extends Controller
 {
@@ -86,11 +92,57 @@ class BastController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * ? simpan berita acara baru ke database
      */
     public function store(Request $request)
     {
-        //
+        // ? 1. membuat aturan validasi data 
+        $aturan = [
+            'barang_id' => 'required|exists:barangs,id',
+            'user_serah_id' => 'required|exists:users,id',
+            'status_serah' => 'required|in:Menunggu,Disetujui',
+            'user_terima_id' => 'required|exists:users,id',
+            'status_terima' => 'required|in:Menunggu,Disetujui',
+        ];
+
+        // ? 2. membuat pesan custom validasi
+        $pesan = [
+            'required' => ':Attribute wajib diisi!',
+            'in' => 'Attribute tidak valid!',
+            'exists' => 'Attribute tidak ditemukan di database!',
+        ];
+
+        // ? 3. aturan agar valid
+        $validatedData = $request->validate($aturan, $pesan);
+
+        // ? 4. simpan berita acara ke database
+        $bast = Bast::create($validatedData);
+
+        // ? 5. ambil tanggal dibuatnya berita acara dari kolom created_at, lalu ubah ke formta indonesai
+        $tanggal = Carbon::parse($bast->created_at);
+
+        // ? 6. buat dokumen berita acara menggunakan formt view dokumen.blade.php
+        $pdf = Pdf::loadView('dashboard.bast.dokumen', [
+            'bast' => $bast, // kirimkan data bast yg baru disimpan ke view
+            'hari' => strtoupper($tanggal->translatedFormat('l')), // ambil hari dari tanggal (contoh : Senin)
+            'tanggal' => strtoupper(Terbilang::make($tanggal->day)), // ubah tanggal menjadi terbilang (contoh : lima)
+            'bulang' => strtoupper($tanggal->translatedFormat('F')), // ambil bulan dari tanggal (Contoh : Januari)
+            'tahun_terbilang' => strtoupper(Terbilang::make($tanggal->year)), // ubah tahun menjadi  terbilang(contoh : Dua ribu dua puluh enam)
+        ])->setPaper('a4', 'portrait'); // set ukuran kertas dan orientasi
+
+        // ? 7. simpan dokumen pdf ke storage dengan nama berdasarkan id bast
+        $filename = 'Bast-'.$bast->id.'.pdf';
+        $path = 'bast-pdf/'.$filename;
+        Storage::put($path, $pdf->output());
+
+        // ? 8. ubah kolom file_export di table bast menjadi nama file pdf yang sudah disimpan di storage,
+        // ? lalu simpan kembali ke database
+        $bast->update([
+            'file_export' => $path,
+        ]);
+
+        // ? 9. alihkan ke hlaman index bast, denga psena berhaisl dibuat
+        return redirect()->route('bast.index')->with('berhasil', 'Berita Acara Serah Terima berhasil dibuat.');
     }
 
     /**

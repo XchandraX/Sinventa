@@ -189,7 +189,7 @@
                             @foreach ($basts as $bats)
                                 <tr>
                                     <td>{{ $loop->iteration }}}</td>
-                                    <td>{{ $bast->barang->nama_barang }}</td>
+                                    <td>{{ $barang->nama_barang }}</td>
                                     <td>
                                         @if ($bats->status_serah == 'Menunggu')
                                             <span class="btn btn-sm text-white bg-secondary">
@@ -197,7 +197,7 @@
                                             </span>
                                         @else
                                             <span class="btn btn-sm text-white bg-success">
-                                                <i class="bi bi-chech-circle"></i>
+                                                <i class="bi bi-check-circle"></i>
                                             </span>
                                         @endif
                                     </td>
@@ -208,14 +208,14 @@
                                             </span>
                                         @else
                                             <span class="btn btn-sm text-white bg-success">
-                                                <i class="bi bi-chech-circle"></i>
+                                                <i class="bi bi-check-circle"></i>
                                             </span>
                                         @endif
                                     </td>
                                     <td>
                                         @if ($bats->status_serah == 'Disetujui' && $bats->status_terima == 'Disetujui')
                                             <span class="btn btn-sm text-white bg-success">
-                                                <i class="bi bi-chech-circle"></i> Disetujui
+                                                <i class="bi bi-check-circle"></i> Disetujui
                                             </span>
                                         @else
                                             <span class="btn btn-sm text-white bg-secondary">
@@ -248,7 +248,7 @@
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="confirm-text btn p-0 m-0" type="submit"
-                                                    onclick="return confirm('Yakin ingin menghapus berita acara {{ $bast->kode_barang }}?')">
+                                                    onclick="return confirm('Yakin ingin menghapus berita acara {{ $barang->kode_barang }}?')">
                                                     <i class="bi bi-trash"></i>
                                                 </button>
                                             </form>
