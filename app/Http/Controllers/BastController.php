@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 // ! panggil semua model agar bisa digunakaan
+use App\Models\Barang;
 use App\Models\Bast;
 use App\Models\Kategori;
 use App\Models\Lokasi;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BastController extends Controller
@@ -69,11 +71,18 @@ class BastController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * ? menapilkan form buat berita baru
      */
     public function create()
     {
         //
+        $this->authorize('create', Bast::class);
+
+        return view('dashboard.bast.create',[
+            'title' => 'Buat Berita Acara Serah Terima Baru',
+            'users' => User::latest()->select('id', 'nama_lengkap')->get(),
+            'barangs' => Barang::latest()->select('id', 'kode_barang', 'nama_barang')->get(),
+        ]);
     }
 
     /**
