@@ -116,11 +116,20 @@ class BarangController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * ? tampilkan halaman form edit data barang tertentu!
      */
     public function edit(Barang $barang)
     {
-        //
+        // ? hnaya admin yang bisa akses halaman edit data barang
+        $this->authorize('update', $barang);
+
+        // ? tampilkan view edit.blade.php di folder dashboard/barang, sambil kirim:
+        return view('dashboard.barang.edit', [
+            'title' => 'Edit Barang',
+            'barang' => $barang,
+            'kategoris' => Kategori::latest()->get(),
+            'lokasis' => Lokasi::latest()->get()
+        ]);
     }
 
     /**
