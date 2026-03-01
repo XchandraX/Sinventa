@@ -46,7 +46,7 @@
 
                         $cardsSt = [
                             ['id' => 'status_baik', 'label' => 'Baik'],
-                            ['id' => 'status_rusak_ringa', 'label' => 'Rusak Ringan'],
+                            ['id' => 'status_rusak_ringan', 'label' => 'Rusak Ringan'],
                             ['id' => 'status_rusak_berat', 'label' => 'Rusak Berat'],
                             ['id' => 'status_hilang', 'label' => 'Hilang'],
                         ];

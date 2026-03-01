@@ -3,19 +3,17 @@
 // ! Panggil class AuthController agar bisa digunakan oleh route
 use App\Http\Controllers\AuthController;
 // ! Panggil class DaftarController agar bisa digunakan oleh route
-use App\Http\Controllers\DaftarController;
+use App\Http\Controllers\BarangController;
 // ! Panggil class DashboardController agar bisa digunakan oleh route
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DaftarController;
 // ! Panggil class UserController agar bisa digunakan oleh route
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\DashboardController;
 // ! Panggil class KategoriController agar bisa digunakan oleh route
 use App\Http\Controllers\KategoriController;
 // ! Panggil class Lokasicontroller agar bisa digunakan oleh route
 use App\Http\Controllers\LokasiController;
 // ! Panggil class Barangcontroller agar bisa digunakan oleh route
-use App\Http\Controllers\BarangController;
-
-
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /**
@@ -35,7 +33,7 @@ Route::middleware('guest')->group(function () {
      * * Panggil DaftarController lalu menjalankan function 'index'
      */
     Route::get('/chx1xhc', [DaftarController::class, 'index'])->name('daftar.index');
-    
+
     /**
      * ? Route untuk simpan data user ke database (store)
      * * Panggil DaftarController lalu menjalankan funciton 'store'
@@ -58,7 +56,6 @@ Route::middleware('guest')->group(function () {
  * * Digunakan khusus untuk menangani permintaan dari user yg sudah melakukan autentikasi
  * ! "Auth" = "Autentikasi" artinya orang yg sudah masuk / sudah berhasil login ke sistem
  */
-
 Route::middleware('auth')->group(function () {
 
     /**
@@ -94,7 +91,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
      * * 1 route ini bisa menangani: index, create, store, show, edit, update dan destroy
      */
     Route::resource('/dashboard/kategori', KategoriController::class);
-    
+
     // ? Route untuk fitur ekspor data kategori ke file PDF
     Route::get('/dashboard/export-kategori-to/pdf', [KategoriController::class, 'exportToPdf'])->name('kategori.exportToPdf');
 
@@ -120,7 +117,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     // ? Route untuk fitur print daftar lokasi barang
     Route::get('/dashboard/print-lokasi', [LokasiController::class, 'print'])->name('lokasi.print');
 
-
     /**
      * ? Route untuk mengelola data kategori
      * * karena controller yang digunakan adalah controller resource, maka method route juga pake resource
@@ -130,4 +126,13 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     // ? Route untuk download QRCode Barang dari halaman show detail barang
     Route::get('/dashboard/barang/{barang}/download-qrcode', [BarangController::class, 'downloadQr'])->name('barang.downloadQr');
+
+    // ? Route untuk fitur ekspor data barang ke file dpf
+    Route::get('/dashboard/expor/barang-to/pdf', [BarangController::class, 'exportToPdf'])->name('barang.exportToPdf');
+
+    // ? Route utnuk fitur eskpor data ke file excel
+    Route::get('/dashboard/export-barang-to/excel', [Barangcontroller::class, 'exportToExcel'])->name('barang.exportToExcel');
+
+    // ? Route untuk fitur cetak daftar barang
+    Route::get('/dashboard/print-barang', [Barangcontroller::class, 'print'])->name('barang.print');
 });

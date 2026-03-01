@@ -37,21 +37,21 @@
 
                         {{-- tombol ekspor pdf --}}
                         <li>
-                            <a href="#">
+                            <a href="{{ route('barang.exportToPdf') }}">
                                 <img src="{{ asset('assets/icon/pdf.svg') }}" alt="img">
                             </a>
                         </li>
 
                         {{-- tombol ekspor excel --}}
                         <li>
-                            <a href="#">
+                            <a href="{{ route('barang.exportToExcel') }}">
                                 <img src="{{ asset('assets/icon/excel.svg') }}" alt="img">
                             </a>
                         </li>
 
                         {{-- tombol ekspor printer --}}
                         <li>
-                            <a href="#">
+                            <a href="{{ route('barang.print') }}">
                                 <img src="{{ asset('assets/icon/printer.svg') }}" alt="img">
                             </a>
                         </li>

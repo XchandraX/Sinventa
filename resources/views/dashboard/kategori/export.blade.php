@@ -96,7 +96,7 @@
                 <th width="20%">Kode Kategori</th>
                 <th width="25%">Nama Kategori</th>
                 <th width="30%">Deskripsi</th>
-                <th width="20%">Tanggall Dibuat</th>
+                <th width="20%">Tanggal Dibuat</th>
             </tr>
         </thead>
         <tbody>

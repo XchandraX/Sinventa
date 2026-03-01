@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>{{ $title ?? 'Data lokasi Barang' }}</title>
+    <title>{{ $title ?? 'Data Lokasi Barang' }}</title>
 
     {{-- ? buat styling css di sini --}}
     <style>
@@ -96,7 +96,7 @@
                 <th width="20%">Kode lokasi</th>
                 <th width="25%">Nama lokasi</th>
                 <th width="30%">Deskripsi</th>
-                <th width="20%">Tanggall Dibuat</th>
+                <th width="20%">Tanggal Dibuat</th>
             </tr>
         </thead>
         <tbody>

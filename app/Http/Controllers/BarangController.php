@@ -3,15 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
-
 // ! panggil class modul yang dibutuhkan di function
+use App\Models\Bast;
 use App\Models\Kategori;
 use App\Models\Lokasi;
-use App\Models\Bast;
+use App\Exports\BarangExport;
+
+// ! panggil class facade PDF agar bisa digunakan di function exportToPdf()
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
-// ! panggil class facades agar bisa digunakan di function downloadQr
+// ! panggil class kategori export dan facade excel agar bisa digunakan di function exportToExcel()
 use Illuminate\Support\Facades\Response;
+
+// ! panggil class facades agar bisa digunakan di function downloadQr
+use Maatwebsite\Excel\Facades\Excel;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class BarangController extends Controller
@@ -34,7 +40,7 @@ class BarangController extends Controller
             })->when($request->status, function ($query, $status) { // ? jika ada filter berdasarkan status
                 $query->where('status_barang', $status); // ? ambil data barang berdasarkan status yang dipilih
             })->latest()->get(); // ? urutkan dari yang terbaru
-            
+
         // ? tampilkan view index.blade.php di folder dashboard/barang
         return view('dashboard.barang.index', [
             'title' => 'Daftar Barang', // ? kirim judul halaman
@@ -54,9 +60,9 @@ class BarangController extends Controller
 
         // ? tampilkan view crete.blade.php di folder dashboard/barang
         return view('dashboard.barang.create', [
-            'title' => 'Tambah Barang', //kirim judul halaman
+            'title' => 'Tambah Barang', // kirim judul halaman
             'kategoris' => Kategori::latest()->get(), // ? kirim semua data kategori
-            'lokasis' => Lokasi::latest()->get() // ? kirim semua data lokasi
+            'lokasis' => Lokasi::latest()->get(), // ? kirim semua data lokasi
         ]);
     }
 
@@ -72,12 +78,12 @@ class BarangController extends Controller
             'kategori_id' => 'required|exists:kategoris,id',
             'lokasi_id' => 'required|exists:lokasis,id',
             'status_barang' => 'required|in:Baik,Rusak Ringan,Rusak Berat,Hilang',
-            'deskripsi' => 'nullable|string'
+            'deskripsi' => 'nullable|string',
         ];
 
         // ? 2. buat pesan untuk kolom yang tidak valid
         $pesan = [
-            // 
+            //
             'required' => 'Kolom :attribute nggak boleh kosong!!.',
             'unique' => 'Kolom :attribute sudah ada yg pakai!!.',
             'exists' => 'Kolom :attribute tidak valid!!.',
@@ -128,34 +134,74 @@ class BarangController extends Controller
             'title' => 'Edit Barang',
             'barang' => $barang,
             'kategoris' => Kategori::latest()->get(),
-            'lokasis' => Lokasi::latest()->get()
+            'lokasis' => Lokasi::latest()->get(),
         ]);
     }
 
     /**
-     * Update the specified resource in storage.
+     * ? perbarui data barang yang diedit
      */
     public function update(Request $request, Barang $barang)
     {
-        //
+        // ? 1. buat data barang baru ke database
+        $aturan = [
+            'nama_barang' => 'required|string|max:100',
+            'kategori_id' => 'required|exists:kategoris,id',
+            'lokasi_id' => 'required|exists:lokasis,id',
+            'status_barang' => 'required|in:Baik,Rusak Ringan,Rusak Berat,Hilang',
+            'deskripsi' => 'nullable|string',
+        ];
+
+        // ? 2. jika kode_barang diubah, buat aturan untuk kode_barang yang baru
+        if ($request->kode_barang != $barang->kode_barang) {
+            $aturan['kode_barang'] = 'required|string|max:20|unique:barangs,kode_barang';
+        }
+
+        // ? 3. buat pesan untuk kolom yang tidak valid
+        $pesan = [
+            //
+            'required' => 'Kolom :attribute nggak boleh kosong!!.',
+            'unique' => 'Kolom :attribute sudah ada yg pakai!!.',
+            'exists' => 'Kolom :attribute tidak valid!!.',
+            'in' => 'Kolom :attribute tidak valid!!.',
+            'max' => 'Kolom :attribute maksimal :max karakter !!.',
+            'string' => 'Kolom :attribute mharus berupa teks!',
+        ];
+
+        // ? 4. lakukan validasi data
+        $validatedData = $request->validate($aturan, $pesan);
+
+        // ? 5. perbarui data ke database
+        $barang->update($validatedData);
+
+        // ? 6 alihkan ke halaman list barang dan kirim pesan konfirmasi berhasil
+        return redirect()->route('barang.index')->with('berhasil', 'Barang berhasil diupdate');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * ? hapus data barang
      */
     public function destroy(Barang $barang)
     {
-        //
+        // ? hanay admin yg bisa hapus
+        $this->authorize('delete', $barang);
+
+        // ? hapus data barang dari database
+        $barang->delete();
+
+        // ? alihkan ke halaman list barang samibl kirim pesan konfirmasi
+        return redirect()->route('barang.index')->with('berhasil', 'Barang berhasil dihapus');
     }
 
     /**
      * ? download QRCode barang
      */
-    public function downloadQr(Barang $barang) {
+    public function downloadQr(Barang $barang)
+    {
         // ? Buat file QrCode dengan format .svg
         $qr = QrCode::format('svg')
             ->size(300)
-            ->generate(route('barang.show', $barang)); //! yang dibuat menjadi QrCode adalah link detail barang
+            ->generate(route('barang.show', $barang)); // ! yang dibuat menjadi QrCode adalah link detail barang
 
         // ? tentukan nama file QrCode menggunak kode_barang
         $filename = 'qroce-'.$barang->kode_barang.'.svg';
@@ -164,6 +210,57 @@ class BarangController extends Controller
         return Response::make($qr, 200, [
             'Content-Type' => 'image/svg+xml',
             'Content-Disposition' => "attachment; filename=\"$filename\"",
+        ]);
+    }
+
+    public function exportToPdf()
+    {
+        // ? amibl semua data barang, urutkan dari paling baru
+        $barangs = Barang::with(['kategori', 'lokasi'])->latest()->get();
+
+        // ? buat QrCode untuk masing-masing barang menggunakan perualanga
+        foreach ($barangs as $barang) {
+            $barang->qr_base64 = base64_encode(
+                QrCode::format('svg') // buat dalam format svg
+                    ->size(80) // ukuran 80
+                    ->generate(route('barang.show', $barang)
+                )
+            );
+        }
+
+        // ? buat file pdf dari view export.blade.php di folder barang
+        $pdf = Pdf::loadView('dashboard.barang.export', [
+            'title' => 'Daftar Barang Inventaris', // ? kirim judul halamannay
+            'barangs' => $barangs, // ? dan data barang
+        ])->setPaper('a4', 'portrait');
+
+        // ? download PDF
+        return $pdf->download('daftar_barang_inventaris.pdf');
+    }
+
+    public function exportToExcel() {
+        // ? download excel berdasarkan konfigurasi yang ada di file BarangExport.php
+        return Excel::download(new BarangExport, 'daftar_barang_inventaris.xlsx');
+    }
+
+    public function print() {
+        // ? amibl semua data barang, urutkan dari paling baru
+        $barangs = Barang::with(['kategori', 'lokasi'])->latest()->get();
+
+        // ? buat QrCode untuk masing-masing barang menggunakan perualanga
+        foreach ($barangs as $barang) {
+            $barang->qr_base64 = base64_encode(
+                QrCode::format('svg') // buat dalam format svg
+                    ->size(80) // ukuran 80
+                    ->generate(route('barang.show', $barang)
+                )
+            );
+        }
+
+        // ? jalankan view export.blade.php sambil kirim data:
+        return view('dashboard.barang.export', [
+            'title' => 'Daftar Barang',
+            'barangs' => $barangs,
         ]);
     }
 }
