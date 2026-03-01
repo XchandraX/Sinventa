@@ -114,7 +114,7 @@
         <div class="card-footer">
 
             {{-- tombol cetak detail barang --}}
-            <a href="#" class="btn btn-secondary" target="_blank">
+            <a href="" class="btn btn-secondary" target="_blank">
                 <i class="bi bi-printer"></i>
             </a>
 

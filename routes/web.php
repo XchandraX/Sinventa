@@ -2,18 +2,29 @@
 
 // ! Panggil class AuthController agar bisa digunakan oleh route
 use App\Http\Controllers\AuthController;
+
 // ! Panggil class DaftarController agar bisa digunakan oleh route
-use App\Http\Controllers\BarangController;
-// ! Panggil class DashboardController agar bisa digunakan oleh route
 use App\Http\Controllers\DaftarController;
-// ! Panggil class UserController agar bisa digunakan oleh route
+
+// ! Panggil class DashboardController agar bisa digunakan oleh route
 use App\Http\Controllers\DashboardController;
+
+// ! Panggil class UserController agar bisa digunakan oleh route
+use App\Http\Controllers\UserController;
+
 // ! Panggil class KategoriController agar bisa digunakan oleh route
 use App\Http\Controllers\KategoriController;
+
 // ! Panggil class Lokasicontroller agar bisa digunakan oleh route
 use App\Http\Controllers\LokasiController;
+
 // ! Panggil class Barangcontroller agar bisa digunakan oleh route
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\BarangController;
+
+// ! Panggil class BastController agar bisa digunakan oleh route
+use App\Http\Controllers\BastController;
+
+
 use Illuminate\Support\Facades\Route;
 
 /**
@@ -135,4 +146,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     // ? Route untuk fitur cetak daftar barang
     Route::get('/dashboard/print-barang', [Barangcontroller::class, 'print'])->name('barang.print');
+
+    /**
+     * ? Route untuk mengelola data bast 
+     * * karena controller yang digunakan adalah controller resource, maka method route juga pake resource
+     * * 1 route ini bisa menangani permintaan: index, create, store, show, edit, update dan destroy
+     */
+    Route::resource('/dashboard/bast', BastController::class);
+
 });

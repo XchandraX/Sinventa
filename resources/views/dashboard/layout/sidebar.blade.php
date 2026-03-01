@@ -96,8 +96,10 @@
                             <span class="ms-auto bi bi-caret-down"></span>
                         </a>
                         <ul>
-                            <li><a href="">List Berita Acara</a></li>
-                            <li><a href="">Buat Berita Acara</a></li>
+                            <li><a href="{{ route('bast.index') }}"
+                                class="{{ Request::is('dashboard/bast' ? 'active' : '') }}">List Berita Acara</a></li>
+                            <li><a href="{{ route('bast.create') }}"
+                                class="{{ Request::is('dashboard/bast/create' ? 'active' : '') }}">Buat Berita Acara</a></li>
                         </ul>
                     </li>
 
@@ -153,7 +155,7 @@
 
                     {{-- menu halaman berita acara sebagai penerima --}}
                     <li class="submenu">
-                        <a>
+                        <a href="#" >
                             <i class="bi bi-person-up"></i>
                             <span>BAST Penerima</span>
                             <span class="ms-auto bi bi-caret-down"></span>
