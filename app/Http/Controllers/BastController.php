@@ -146,11 +146,18 @@ class BastController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * ? tampilan detail bast yg dipilih
      */
     public function show(Bast $bast)
     {
-        //
+        // ?  hanya admin atau user penyerah atau penerima yg bisa membuak detail bast
+        $this->authorize('view', $bast);
+
+        // ? tampilkan view show.blade.php di folder dashboard/bast, lalu kirimkan data
+        return view('dashboard.bast.show', [
+            'title' => 'Berita Acara Serah Terima', // judul halamana
+            'bast' => $bast,
+        ]);
     }
 
     /**
