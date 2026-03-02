@@ -126,7 +126,7 @@ class BastController extends Controller
             'bast' => $bast, // kirimkan data bast yg baru disimpan ke view
             'hari' => strtoupper($tanggal->translatedFormat('l')), // ambil hari dari tanggal (contoh : Senin)
             'tanggal' => strtoupper(Terbilang::make($tanggal->day)), // ubah tanggal menjadi terbilang (contoh : lima)
-            'bulang' => strtoupper($tanggal->translatedFormat('F')), // ambil bulan dari tanggal (Contoh : Januari)
+            'bulan' => strtoupper($tanggal->translatedFormat('F')), // ambil bulan dari tanggal (Contoh : Januari)
             'tahun_terbilang' => strtoupper(Terbilang::make($tanggal->year)), // ubah tahun menjadi  terbilang(contoh : Dua ribu dua puluh enam)
         ])->setPaper('a4', 'portrait'); // set ukuran kertas dan orientasi
 
