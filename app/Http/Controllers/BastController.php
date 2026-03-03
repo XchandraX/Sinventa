@@ -3,18 +3,21 @@
 namespace App\Http\Controllers;
 
 // ! panggil semua model agar bisa digunakaan
+use App\Exports\BastExport;
 use App\Models\Barang;
 use App\Models\Bast;
 use App\Models\Kategori;
 use App\Models\Lokasi;
 use App\Models\User;
-
 // ! panggil facades agar bisa digunakan di function
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 use Riskihajar\Terbilang\Facades\Terbilang;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class BastController extends Controller
 {
@@ -70,8 +73,8 @@ class BastController extends Controller
         return view('dashboard.bast.index', [
             'title' => 'Daftar Berita Acara Serah Terima', // judul halaman
             'basts' => $basts, // data bast yang diambil dari database
-            'kategoris' => Kategori::latest()->get(), 
-            'lokasis' => Lokasi::latest()->get(), 
+            'kategoris' => Kategori::latest()->get(),
+            'lokasis' => Lokasi::latest()->get(),
         ]);
 
     }
@@ -84,7 +87,7 @@ class BastController extends Controller
         //
         $this->authorize('create', Bast::class);
 
-        return view('dashboard.bast.create',[
+        return view('dashboard.bast.create', [
             'title' => 'Buat Berita Acara Serah Terima Baru',
             'users' => User::latest()->select('id', 'nama_lengkap')->get(),
             'barangs' => Barang::latest()->select('id', 'kode_barang', 'nama_barang')->get(),
@@ -96,7 +99,7 @@ class BastController extends Controller
      */
     public function store(Request $request)
     {
-        // ? 1. membuat aturan validasi data 
+        // ? 1. membuat aturan validasi data
         $aturan = [
             'barang_id' => 'required|exists:barangs,id',
             'user_serah_id' => 'required|exists:users,id',
@@ -165,13 +168,13 @@ class BastController extends Controller
      */
     public function edit(Bast $bast)
     {
-        //  ? hanya admin yg bisa membuka 
+        //  ? hanya admin yg bisa membuka
         $this->authorize('update', $bast);
 
         // ? tampilkan view edit.blade.php
-        return view('dashboard.bast.edit',[
+        return view('dashboard.bast.edit', [
             'title' => 'Ubah Berita Acara',
-            'bast' =>$bast,
+            'bast' => $bast,
             'users' => User::latest()->select('id', 'nama_lengkap')->get(),
             'barangs' => Barang::latest()->select('id', 'kode_barang', 'nama_barang')->get(),
         ]);
@@ -182,7 +185,7 @@ class BastController extends Controller
      */
     public function update(Request $request, Bast $bast)
     {
-        // ? 1. membuat aturan validasi data 
+        // ? 1. membuat aturan validasi data
         $aturan = [
             'barang_id' => 'required|exists:barangs,id',
             'user_serah_id' => 'required|exists:users,id',
@@ -204,7 +207,7 @@ class BastController extends Controller
         // ? 4. simpan berita acara ke database
         $bast->update($validatedData);
 
-         // ? 5. ambil tanggal dibuatnya berita acara dari kolom created_at, lalu ubah ke formta indonesai
+        // ? 5. ambil tanggal dibuatnya berita acara dari kolom created_at, lalu ubah ke formta indonesai
         $tanggal = Carbon::parse($bast->created_at);
 
         // ? 6. buat dokumen berita acara menggunakan formt view dokumen.blade.php
@@ -229,7 +232,6 @@ class BastController extends Controller
 
         // ? 9. alihkan ke hlaman index bast, denga psena berhaisl dibuat
         return redirect()->route('bast.index')->with('berhasil', 'Berita Acara Serah Terima berhasil diperbarui.');
-    
 
     }
 
@@ -238,15 +240,159 @@ class BastController extends Controller
      */
     public function destroy(Bast $bast)
     {
-        //
+        // ? hanay admin yang bisa menghapus bast
+        $this->authorize('delete', $bast);
+
+        // ? 1. cek & hapus file pdf jika ada
+
+        if ($bast->file_export && Storage::exists($bast->file_export)) {
+            Storage::delete($bast->file_export);
+        }
+
+        // ? 2. hapus data bast
+        $bast->delete();
+
+        // ?  3. alihkan ke hlaman index bast, denga psena berhaisl dibuat
+        return redirect()->route('bast.index')->with('berhasil', 'Berita Acara Serah Terima berhasil dihapus.');
+
     }
 
     /**
     // ? download file pdf berita acara yang sudah dibuat
      */
-    public function downloadPdf(Bast $bast) {
+    public function downloadPdf(Bast $bast)
+    {
         // ? donwload file dokumen berita acara yang sudah disimpan di strage,
         // ? dengan nama file sesuai dengan nama file yang ada di kolom file_export di tabel bast
         return Storage::download($bast->file_export);
+    }
+
+    public function exportToPdf()
+    {
+        // ? amibl semua data barang, urutkan dari paling baru
+        $basts = Bast::with(['barang.kategori', 'barang.lokasi', 'userSerah', 'UserTerima'])->latest()->get();
+
+        // ? buat QrCode untuk masing-masing barang menggunakan perualanga
+        foreach ($basts as $bast) {
+            $bast->qr_base64 = base64_encode(
+                QrCode::format('svg') // buat dalam format svg
+                    ->size(80) // ukuran 80
+                    ->generate(route('bast.show', $bast->barang)
+                    )
+            );
+        }
+
+        // ? buat file pdf dari view export.blade.php di folder bast
+        $pdf = Pdf::loadView('dashboard.bast.export', [
+            'title' => 'Daftar Berita Acara Serah Terima', // ? kirim judul halamannay
+            'bast' => $bast, // ? dan data bast
+        ])->setPaper('a4', 'portrait');
+
+        // ? download PDF
+        return $pdf->download('daftar_berita_acara_serah_terima.pdf');
+    }
+
+    public function exportToExcel()
+    {
+        // ? download excel berdasarkan konfigurasi yang ada di file BarangExport.php
+        return Excel::download(new BastExport, 'daftar_berita_acara_serah_terima.xlsx');
+    }
+
+    public function print()
+    {
+        // ? amibl semua data barang, urutkan dari paling baru
+        $basts = Bast::with(['barang.kategori', 'barang.lokasi', 'userSerah', 'UserTerima'])->latest()->get();
+
+        // ? buat QrCode untuk masing-masing barang menggunakan perualanga
+        foreach ($basts as $bast) {
+            $bast->qr_base64 = base64_encode(
+                QrCode::format('svg') // buat dalam format svg
+                    ->size(80) // ukuran 80
+                    ->generate(route('bast.show', $bast->barang)
+                    )
+            );
+        }
+
+        // ? jalankan view export.blade.php sambil kirim data:
+        return view('dashboard.bast.export', [
+            'title' => 'Daftar Berita Acara Serah Terima',
+            'basts' => $basts,
+        ]);
+    }
+
+    public function bastSerahMenunggu()
+    {
+        $basts = Bast::with(['barang.kategori', 'userSerah', 'userTerima'])
+            ->where('user_serah_id', Auth::id())
+            ->where('status_serah', 'Menunggu')
+            ->latest()->get();
+
+        return view('dashboard.bast.basts', [
+            'title' => 'Daftar BAST Penyerah',
+            'deskripsi' => 'Lihat dan temukan berita acara serah terima untuk pihak penyerah yang menunggu persetujuan',
+            'basts' => $basts]);
+
+    }
+
+    public function bastSerahDisetujui()
+    {
+        $basts = Bast::with(['barang.kategori', 'userSerah', 'userTerima'])
+            ->where('status_serah', 'Disetujui')
+            ->latest()->get();
+
+        return view('dashboard.bast.basts', [
+            'title' => 'Daftar BAST Penyerah (Disetujui)',
+            'deskripsi' => 'Daftar berita acara yang telah Anda setujui sebagai penyerah',
+            'basts' => $basts,
+        ]);
+    }
+
+    public function setujuiSerah(Bast $bast)
+    {
+        $this->authorize('approveSerah', $bast);
+
+        $bast->update([
+            'status_serah' => 'Disetujui',
+        ]);
+
+        return redirect()->route('bast.show', $bast);
+    }
+
+    public function bastTerimaMenunggu()
+    {
+        $basts = Bast::with(['barang.kategori', 'userSerah', 'userTerima'])
+            ->where('user_terima_id', Auth::id())
+            ->where('status_terima', 'Menunggu')
+            ->latest()->get();
+
+        return view('dashboard.bast.basts', [
+            'title' => 'Daftar BAST Penerima',
+            'deskripsi' => 'Lihat dan temukan berita acara serah terima untuk pihak penyerah yang menunggu persetujuan',
+            'basts' => $basts]);
+
+    }
+
+    public function bastTerimaDisetujui()
+    {
+        $basts = Bast::with(['barang.kategori', 'userSerah', 'userTerima'])
+            ->where('status_terima', 'Disetujui')
+            ->latest()->get();
+
+        return view('dashboard.bast.basts', [
+            'title' => 'Daftar BAST Penerima (Disetujui)',
+            'deskripsi' => 'Daftar berita acara yang telah Anda setujui sebagai penerima',
+            'basts' => $basts,
+        ]);
+    }
+
+    public function setujuiTerima(Bast $bast)
+    {
+        $this->authorize('approveTerima', $bast);
+
+        $bast->update([
+            'status_terima' => 'Disetujui',
+        ]);
+
+        return redirect()->route('bast.show', $bast);
     }
 }

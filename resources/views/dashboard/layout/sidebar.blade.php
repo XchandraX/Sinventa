@@ -53,13 +53,13 @@
                                 <a href="{{ route('lokasi.index') }}"
                                     class="{{ Request::is('dashboard/lokasi') ? 'active' : '' }}">
                                     List Lokasi
-                                    </a>
+                                </a>
                             </li>
                             <li>
                                 <a href="{{ route('lokasi.create') }}"
                                     class="{{ Request::is('dashboard/lokasi/create') ? 'active' : '' }}">
                                     Tambah Lokasi
-                                    </a>
+                                </a>
                             </li>
                         </ul>
                     </li>
@@ -97,9 +97,11 @@
                         </a>
                         <ul>
                             <li><a href="{{ route('bast.index') }}"
-                                class="{{ Request::is('dashboard/bast' ? 'active' : '') }}">List Berita Acara</a></li>
+                                    class="{{ Request::is('dashboard/bast' ? 'active' : '') }}">List Berita Acara</a>
+                            </li>
                             <li><a href="{{ route('bast.create') }}"
-                                class="{{ Request::is('dashboard/bast/create' ? 'active' : '') }}">Buat Berita Acara</a></li>
+                                    class="{{ Request::is('dashboard/bast/create' ? 'active' : '') }}">Buat Berita
+                                    Acara</a></li>
                         </ul>
                     </li>
 
@@ -148,21 +150,26 @@
                             <span class="ms-auto bi bi-caret-down"></span>
                         </a>
                         <ul>
-                            <li><a href="">Menunggu Disetujui</a></li>
-                            <li><a href="">Riwayat BAST</a></li>
+                            <li><a href="{{ route('bast.serah.menunggu') }}"
+                                    class="{{ Request::is('dashboard/bast-serah/menunggu') ? 'active' : '' }}">Menunggu
+                                    Disetujui</a></li>
+                            <li><a href="{{ route('bast.serah.disetujui') }}"
+                                    class="{{ Request::is('dashboard/bast-serah/disetujui') ? 'active' : '' }}">Riwayat BAST</a></li>
                         </ul>
                     </li>
 
                     {{-- menu halaman berita acara sebagai penerima --}}
                     <li class="submenu">
-                        <a href="#" >
+                        <a>
                             <i class="bi bi-person-up"></i>
                             <span>BAST Penerima</span>
                             <span class="ms-auto bi bi-caret-down"></span>
                         </a>
                         <ul>
-                            <li><a href="">Menunggu Disetujui</a></li>
-                            <li><a href="">Riwayat BAST</a></li>
+                            <li><a href="{{ route('bast.terima.menunggu') }}"
+                                    class="{{ Request::is('dashboard/bast-terima/menunggu') ? 'active' : '' }}">Menunggu Disetujui</a></li>
+                            <li><a href="{{ route('bast.terima.disetujui') }}"
+                                    class="{{ Request::is('dashboard/bast-terima/disetujui') ? 'active' : '' }}">Riwayat BAST</a></li>
                         </ul>
                     </li>
                 </ul>

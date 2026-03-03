@@ -176,9 +176,9 @@
             @endif
 
             @if (auth()->user()->id == $bast->user_serah_id && $bast->status_serah == 'Menunggu')
-                <form action="#" method="POST" class="d-inline">
+                <form action="{{ route('bast.serah.setujui', $bast) }}" method="POST" class="d-inline">
                     @csrf
-                    @method('PATCH')
+                    @method('PUT')
                     <button type="submit" class="btn btn-success" 
                         onclick="return confirm('Anda akan menyetujui Berita Acara ini sebagai pihak Penyerah! Lanjutkan?')">
                         <i class="bi bi-check-circle">Setujui Penyerah</i>
