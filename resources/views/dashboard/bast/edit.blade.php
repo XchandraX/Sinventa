@@ -4,14 +4,17 @@
     <div class="page-header">
         <div class="page-titile">
             <h4>{{ $title }}</h4>
-            <h6>Buat Berita Acara Baru</h6>
+            <h6>Ubah Berita Acara</h6>
         </div>
     </div>
 
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('bast.store') }}" method="POST">
+            {{-- Perbaikan: Gunakan route update dan method PUT --}}
+            <form action="{{ route('bast.update', $bast) }}" method="POST">
                 @csrf
+                @method('PUT')
+
                 <div class="row">
                     @php
                         $cards = [
@@ -30,12 +33,10 @@
                                 'nama' => 'nama_lengkap',
                                 'name' => 'Serah',
                                 'for' => 'status_serah',
-                                'idM' => 'status_menunggu1',
-                                'idD' => 'status_disetujui1',
                                 'options' => [
                                     ['label' => 'Menunggu', 'value' => 'Menunggu', 'class' => 'btn-secondary'],
-                                    ['label' => 'Disetujui', 'value' => 'Disetujui', 'class' => 'btn-success']
-                                ]
+                                    ['label' => 'Disetujui', 'value' => 'Disetujui', 'class' => 'btn-success'],
+                                ],
                             ],
                             [
                                 'class' => 'col-lg-6 col-sm-6 col-12',
@@ -45,19 +46,16 @@
                                 'nama' => 'nama_lengkap',
                                 'name' => 'Terima',
                                 'for' => 'status_terima',
-                                'idM' => 'status_menunggu2',
-                                'idD' => 'status_disetujui2',
                                 'options' => [
                                     ['label' => 'Menunggu', 'value' => 'Menunggu', 'class' => 'btn-secondary'],
-                                    ['label' => 'Disetujui', 'value' => 'Disetujui', 'class' => 'btn-success']
-                                ]
+                                    ['label' => 'Disetujui', 'value' => 'Disetujui', 'class' => 'btn-success'],
+                                ],
                             ],
                         ];
                     @endphp
 
                     @foreach ($cards as $card)
                         @if ($card['label'] == 'Barang')
-                            {{-- Input Select Barang --}}
                             <div class="{{ $card['class'] }}">
                                 <div class="form-group">
                                     <label for="{{ $card['id'] }}">{{ $card['label'] }} Inventaris *</label>
@@ -65,7 +63,9 @@
                                         name="{{ $card['id'] }}" id="{{ $card['id'] }}">
                                         <option value="">Pilih {{ $card['label'] }}</option>
                                         @foreach ($card['items'] as $item)
-                                            <option value="{{ $item->id }}" {{ old($card['id']) == $item->id ? 'selected' : '' }}>
+                                            {{-- Perbaikan: $bast->{$card['id']} --}}
+                                            <option value="{{ $item->id }}"
+                                                {{ old($card['id'], $bast->{$card['id']}) == $item->id ? 'selected' : '' }}>
                                                 {{ $item->{$card['nama']} }}
                                             </option>
                                         @endforeach
@@ -84,7 +84,9 @@
                                         name="{{ $card['id'] }}" id="{{ $card['id'] }}">
                                         <option value="">Pilih {{ $card['label'] }}</option>
                                         @foreach ($card['items'] as $item)
-                                            <option value="{{ $item->id }}" {{ old($card['id']) == $item->id ? 'selected' : '' }}>
+                                            {{-- Perbaikan: Double koma di old() dihapus dan pakai -> --}}
+                                            <option value="{{ $item->id }}"
+                                                {{ old($card['id'], $bast->{$card['id']}) == $item->id ? 'selected' : '' }}>
                                                 {{ $item->{$card['nama']} }}
                                             </option>
                                         @endforeach
@@ -102,11 +104,10 @@
                                     <br>
                                     @foreach ($card['options'] as $index => $opt)
                                         <div class="form-check form-check-inline">
-                                            <input type="radio" class="form-check-input" 
-                                                name="{{ $card['for'] }}"
-                                                id="{{ $card['for'] . $index }}" 
-                                                value="{{ $opt['value'] }}"
-                                                {{ old($card['for'], ($card['name'] == 'Serah' ? 'Menunggu' : 'Disetujui')) == $opt['value'] ? 'checked' : '' }}>
+                                            <input type="radio" class="form-check-input" name="{{ $card['for'] }}"
+                                                id="{{ $card['for'] . $index }}" value="{{ $opt['value'] }}"
+                                                {{-- Perbaikan: Ambil status dari database, bukan hardcoded --}}
+                                                {{ old($card['for'], $bast->{$card['for']}) == $opt['value'] ? 'checked' : '' }}>
                                             <label class="form-check-label" for="{{ $card['for'] . $index }}">
                                                 <span class="btn {{ $opt['class'] }} btn-sm">{{ $opt['label'] }}</span>
                                             </label>
@@ -121,14 +122,14 @@
                     @endforeach
 
                     <div class="col-lg-12">
-                        <button class="btn btn-submit me-2" type="submit">Simpan</button>
+                        <button class="btn btn-submit me-2" type="submit">Simpan Perubahan</button>
+                        <a href="{{ route('bast.index') }}" class="btn btn-cancel">Batal</a>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 @endsection
-
 @section('js')
     <script>
         $(document).ready(function() {

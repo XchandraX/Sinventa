@@ -156,7 +156,7 @@
         {{-- card footer --}}
         <div class="card-footer">
             @if (auth()->user()->role == 'admin')
-                <a href="#" class="btn btn-secondary" target="_blank">
+                <a href="{{ route('bast.downloadPdf', $bast) }}" class="btn btn-secondary" target="_blank">
                     <i class="bi bi-download"></i>
                 </a>
 

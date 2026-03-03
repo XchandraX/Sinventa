@@ -161,11 +161,20 @@ class BastController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * ? menampilkan form edit berita acara yg dipilih
      */
     public function edit(Bast $bast)
     {
-        //
+        //  ? hanya admin yg bisa membuka 
+        $this->authorize('update', $bast);
+
+        // ? tampilkan view edit.blade.php
+        return view('dashboard.bast.edit',[
+            'title' => 'Ubah Berita Acara',
+            'bast' =>$bast,
+            'users' => User::latest()->select('id', 'nama_lengkap')->get(),
+            'barangs' => Barang::latest()->select('id', 'kode_barang', 'nama_barang')->get(),
+        ]);
     }
 
     /**
@@ -173,7 +182,55 @@ class BastController extends Controller
      */
     public function update(Request $request, Bast $bast)
     {
-        //
+        // ? 1. membuat aturan validasi data 
+        $aturan = [
+            'barang_id' => 'required|exists:barangs,id',
+            'user_serah_id' => 'required|exists:users,id',
+            'status_serah' => 'required|in:Menunggu,Disetujui',
+            'user_terima_id' => 'required|exists:users,id',
+            'status_terima' => 'required|in:Menunggu,Disetujui',
+        ];
+
+        // ? 2. membuat pesan custom validasi
+        $pesan = [
+            'required' => ':Attribute wajib diisi!',
+            'in' => 'Attribute tidak valid!',
+            'exists' => 'Attribute tidak ditemukan di database!',
+        ];
+
+        // ? 3. aturan agar valid
+        $validatedData = $request->validate($aturan, $pesan);
+
+        // ? 4. simpan berita acara ke database
+        $bast->update($validatedData);
+
+         // ? 5. ambil tanggal dibuatnya berita acara dari kolom created_at, lalu ubah ke formta indonesai
+        $tanggal = Carbon::parse($bast->created_at);
+
+        // ? 6. buat dokumen berita acara menggunakan formt view dokumen.blade.php
+        $pdf = Pdf::loadView('dashboard.bast.dokumen', [
+            'bast' => $bast, // kirimkan data bast yg baru disimpan ke view
+            'hari' => strtoupper($tanggal->translatedFormat('l')), // ambil hari dari tanggal (contoh : Senin)
+            'tanggal' => strtoupper(Terbilang::make($tanggal->day)), // ubah tanggal menjadi terbilang (contoh : lima)
+            'bulan' => strtoupper($tanggal->translatedFormat('F')), // ambil bulan dari tanggal (Contoh : Januari)
+            'tahun_terbilang' => strtoupper(Terbilang::make($tanggal->year)), // ubah tahun menjadi  terbilang(contoh : Dua ribu dua puluh enam)
+        ])->setPaper('a4', 'portrait'); // set ukuran kertas dan orientasi
+
+        // ? 7. simpan dokumen pdf ke storage dengan nama berdasarkan id bast
+        $filename = 'Bast-'.$bast->id.'.pdf';
+        $path = 'bast-pdf/'.$filename;
+        Storage::put($path, $pdf->output());
+
+        // ? 8. ubah kolom file_export di table bast menjadi nama file pdf yang sudah disimpan di storage,
+        // ? lalu simpan kembali ke database
+        $bast->update([
+            'file_export' => $path,
+        ]);
+
+        // ? 9. alihkan ke hlaman index bast, denga psena berhaisl dibuat
+        return redirect()->route('bast.index')->with('berhasil', 'Berita Acara Serah Terima berhasil diperbarui.');
+    
+
     }
 
     /**
@@ -182,5 +239,14 @@ class BastController extends Controller
     public function destroy(Bast $bast)
     {
         //
+    }
+
+    /**
+    // ? download file pdf berita acara yang sudah dibuat
+     */
+    public function downloadPdf(Bast $bast) {
+        // ? donwload file dokumen berita acara yang sudah disimpan di strage,
+        // ? dengan nama file sesuai dengan nama file yang ada di kolom file_export di tabel bast
+        return Storage::download($bast->file_export);
     }
 }

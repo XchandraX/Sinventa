@@ -211,7 +211,7 @@
                                     </td>
                                     <td>
                                         {{-- tombol download dokumen berita acara --}}
-                                        <a href="#" class="me-3">
+                                        <a href="{{ route('bast.downloadPdf', $bast) }}" class="me-3">
                                             <i class="bi bi-download"></i>
                                         </a>
 

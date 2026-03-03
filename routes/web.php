@@ -154,4 +154,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
      */
     Route::resource('/dashboard/bast', BastController::class);
 
+    // ? route untuk fitur download dockumen BAST dalam format PDF
+    Route::get('/dashboard/bast{bast}/download-pdf', [BastController::class, 'downloadPdf'])->name('bast.downloadPdf');
 });
