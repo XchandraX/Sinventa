@@ -99,7 +99,7 @@
             @forelse ($basts as $bast)
                 <tr>
                     <td class="text-center">{{ $loop->iteration }}</td>
-                    <td class="qr text-center">
+                    <td class="text-center">
                         <img src="data:image/svg+xml;base64,{{ $bast->qr_base64 }}" alt="qr" width="70"
                             height="70">
                     </td>

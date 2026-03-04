@@ -29,21 +29,21 @@
                     <ul>
 
                         <li>
-                            <a href="">
+                            <a href="{{ route('bast.exportToPdf') }}">
                                 <img src="{{ asset('assets/icon/pdf.svg') }}" alt="img">
                             </a>
                         </li>
 
 
                         <li>
-                            <a href="">
+                            <a href="{{ route('bast.exportToExcel') }}">
                                 <img src="{{ asset('assets/icon/excel.svg') }}" alt="img">
                             </a>
                         </li>
 
 
                         <li>
-                            <a href="">
+                            <a href="{{ route('bast.print') }}">
                                 <img src="{{ asset('assets/icon/printer.svg') }}" alt="img">
                             </a>
                         </li>
@@ -211,7 +211,7 @@
                                     </td>
                                     <td>
                                         {{-- tombol download dokumen berita acara --}}
-                                        <a href="{{ route('bast.downloadPdf', $bast) }}" class="me-3">
+                                        <a href="{{ route('bast.exportToPdf') }}" class="me-3">
                                             <i class="bi bi-download"></i>
                                         </a>
 

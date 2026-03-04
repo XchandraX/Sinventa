@@ -276,7 +276,7 @@ class BastController extends Controller
         foreach ($basts as $bast) {
             $bast->qr_base64 = base64_encode(
                 QrCode::format('svg') // buat dalam format svg
-                    ->size(80) // ukuran 80
+                    ->size(70) // ukuran 80
                     ->generate(route('bast.show', $bast->barang)
                     )
             );
@@ -285,7 +285,7 @@ class BastController extends Controller
         // ? buat file pdf dari view export.blade.php di folder bast
         $pdf = Pdf::loadView('dashboard.bast.export', [
             'title' => 'Daftar Berita Acara Serah Terima', // ? kirim judul halamannay
-            'bast' => $bast, // ? dan data bast
+            'basts' => $basts, // ? dan data bast
         ])->setPaper('a4', 'portrait');
 
         // ? download PDF
@@ -322,7 +322,7 @@ class BastController extends Controller
 
     public function bastSerahMenunggu()
     {
-        $basts = Bast::with(['barang.kategori', 'userSerah', 'userTerima'])
+        $basts = Bast::with(['barang.kategori', 'barang.lokasi', 'userSerah', 'userTerima'])
             ->where('user_serah_id', Auth::id())
             ->where('status_serah', 'Menunggu')
             ->latest()->get();
@@ -336,13 +336,15 @@ class BastController extends Controller
 
     public function bastSerahDisetujui()
     {
-        $basts = Bast::with(['barang.kategori', 'userSerah', 'userTerima'])
+        $basts = Bast::with(['barang.kategori', 'barang.lokasi', 'userSerah', 'userTerima'])
+            ->where('user_serah_id', Auth::id())
             ->where('status_serah', 'Disetujui')
-            ->latest()->get();
+            ->latest()
+            ->get();
 
         return view('dashboard.bast.basts', [
             'title' => 'Daftar BAST Penyerah (Disetujui)',
-            'deskripsi' => 'Daftar berita acara yang telah Anda setujui sebagai penyerah',
+            'deskripsi' => 'Lihat dan temukan berita acara serha terima untuk pihak penyerah yang sudah disetujui',
             'basts' => $basts,
         ]);
     }
@@ -360,27 +362,28 @@ class BastController extends Controller
 
     public function bastTerimaMenunggu()
     {
-        $basts = Bast::with(['barang.kategori', 'userSerah', 'userTerima'])
+        $basts = Bast::with(['barang.kategori', 'barang.lokasi', 'userSerah', 'userTerima'])
             ->where('user_terima_id', Auth::id())
             ->where('status_terima', 'Menunggu')
             ->latest()->get();
 
         return view('dashboard.bast.basts', [
             'title' => 'Daftar BAST Penerima',
-            'deskripsi' => 'Lihat dan temukan berita acara serah terima untuk pihak penyerah yang menunggu persetujuan',
+            'deskripsi' => 'Lihat dan temukan berita acara serah terima untuk pihak penerima yang menunggu persetujuan',
             'basts' => $basts]);
 
     }
 
     public function bastTerimaDisetujui()
     {
-        $basts = Bast::with(['barang.kategori', 'userSerah', 'userTerima'])
+        $basts = Bast::with(['barang.kategori', 'barang.lokasi', 'userSerah', 'userTerima'])
+            ->where('user_serah_id', Auth::id())
             ->where('status_terima', 'Disetujui')
             ->latest()->get();
 
         return view('dashboard.bast.basts', [
             'title' => 'Daftar BAST Penerima (Disetujui)',
-            'deskripsi' => 'Daftar berita acara yang telah Anda setujui sebagai penerima',
+            'deskripsi' => 'Lihat dan temukan berita acara serha terima untuk pihak penerima yang sudah disetujui',
             'basts' => $basts,
         ]);
     }

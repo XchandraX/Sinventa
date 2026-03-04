@@ -79,17 +79,24 @@ Route::middleware('auth')->group(function () {
      */
     Route::resource('/dashboard/users', UserController::class);
 
+    /**
+     * ? Route untuk mengelola data bast
+     * * karena controller yang digunakan adalah controller resource, maka method route juga pake resource
+     * * 1 route ini bisa menangani permintaan: index, create, store, show, edit, update dan destroy
+     */
+    Route::resource('/dashboard/bast', BastController::class);
+    
     Route::get('/dashboard/bast-serah/menunggu', [BastController::class, 'bastSerahMenunggu'])->name('bast.serah.menunggu');
 
     Route::get('/dashboard/bast-serah/disetujui', [BastController::class, 'bastSerahDisetujui'])->name('bast.serah.disetujui');
-    
-    Route::get('/dashboard/bast-serah/{bast}/setujui', [BastController::class, 'setujuiSerah'])->name('bast.serah.setujui');
-    
+
+    Route::put('/dashboard/bast-serah/{bast}/setujui', [BastController::class, 'setujuiSerah'])->name('bast.serah.setujui');
+
     Route::get('/dashboard/bast-terima/menunggu', [BastController::class, 'bastTerimaMenunggu'])->name('bast.terima.menunggu');
 
     Route::get('/dashboard/bast-terima/disetujui', [BastController::class, 'bastTerimaDisetujui'])->name('bast.terima.disetujui');
-    
-    Route::get('/dashboard/bast-terima/{bast}/setujui', [BastController::class, 'setujuiTerima'])->name('bast.terima.setujui');
+
+    Route::put('/dashboard/bast-terima/{bast}/setujui', [BastController::class, 'setujuiTerima'])->name('bast.terima.setujui');
 });
 
 /**
@@ -146,20 +153,13 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     // ? Route utnuk fitur eskpor data ke file excel
     Route::get('/dashboard/export-barang-to/excel', [Barangcontroller::class, 'exportToExcel'])->name('barang.exportToExcel');
-    
+
     // ? Route untuk fitur cetak daftar barang
     Route::get('/dashboard/print-barang', [Barangcontroller::class, 'print'])->name('barang.print');
-    
-    /**
-     * ? Route untuk mengelola data bast
-     * * karena controller yang digunakan adalah controller resource, maka method route juga pake resource
-     * * 1 route ini bisa menangani permintaan: index, create, store, show, edit, update dan destroy
-    */
-    Route::resource('/dashboard/bast', BastController::class);
-    
+
     // ? route untuk fitur download dockumen BAST dalam format PDF
     Route::get('/dashboard/bast{bast}/download-pdf', [BastController::class, 'downloadPdf'])->name('bast.downloadPdf');
-    
+
     // ? route untuk ekspor list bast ke file pdf
     Route::get('/dashboard/export-bast-to/pdf', [BastController::class, 'exportToPdf'])->name('bast.exportToPdf');
     // ? Route utnuk fitur eskpor data ke file excel

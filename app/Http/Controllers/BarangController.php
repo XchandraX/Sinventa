@@ -2,20 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Barang;
+use App\Exports\BarangExport;
 // ! panggil class modul yang dibutuhkan di function
+use App\Models\Barang;
 use App\Models\Bast;
 use App\Models\Kategori;
 use App\Models\Lokasi;
-use App\Exports\BarangExport;
-
 // ! panggil class facade PDF agar bisa digunakan di function exportToPdf()
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
-
 // ! panggil class kategori export dan facade excel agar bisa digunakan di function exportToExcel()
 use Illuminate\Support\Facades\Response;
-
 // ! panggil class facades agar bisa digunakan di function downloadQr
 use Maatwebsite\Excel\Facades\Excel;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -224,7 +221,7 @@ class BarangController extends Controller
                 QrCode::format('svg') // buat dalam format svg
                     ->size(80) // ukuran 80
                     ->generate(route('barang.show', $barang)
-                )
+                    )
             );
         }
 
@@ -238,12 +235,14 @@ class BarangController extends Controller
         return $pdf->download('daftar_barang_inventaris.pdf');
     }
 
-    public function exportToExcel() {
+    public function exportToExcel()
+    {
         // ? download excel berdasarkan konfigurasi yang ada di file BarangExport.php
         return Excel::download(new BarangExport, 'daftar_barang_inventaris.xlsx');
     }
 
-    public function print() {
+    public function print()
+    {
         // ? amibl semua data barang, urutkan dari paling baru
         $barangs = Barang::with(['kategori', 'lokasi'])->latest()->get();
 
@@ -253,7 +252,7 @@ class BarangController extends Controller
                 QrCode::format('svg') // buat dalam format svg
                     ->size(80) // ukuran 80
                     ->generate(route('barang.show', $barang)
-                )
+                    )
             );
         }
 

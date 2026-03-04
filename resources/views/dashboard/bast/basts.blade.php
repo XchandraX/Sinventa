@@ -2,6 +2,13 @@
 @extends('dashboard.layout.main')
 
 @section('konten')
+
+    <div class="page-header">
+        <div class="page-title">
+            <h4>{{ $title }}</h4>
+            <h6>{{ $deskripsi }}</h6>
+        </div>
+    </div>
     <div class="card">
         <div class="card-body">
 
@@ -12,14 +19,15 @@
                 <div class="alert alert-info" role="alert">
                     Tidak ada berita acara tersedia
                 </div>
-            @else<div class="table-top">
-
+            @else
+                <div class="table-top">
                     <div class="search-set">
                         <div class="search-input">
                             <a class="btn btn-searchset"><i class="bi bi-search"></i></a>
                         </div>
                     </div>
                 </div>
+
                 <div class="table-responsive">
                     <table class="table datanew">
 
@@ -31,8 +39,6 @@
                                 <th>Kategori Barang</th>
                                 <th>Lokasi Barang</th>
                                 <th>Status Barang</th>
-                                <th>Penyerah</th>
-                                <th>Penerima</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
@@ -65,12 +71,17 @@
                                                         class="bi bi-hourglass-split"></i></span> {{ $bast->status_serah }}
                                             @else
                                                 <span class="btn btn-sm text-white bg-success"><i
-                                                        class="bi bi-check-circle"></i></span> {{ $bast->status_serah }}
+                                                        class="bi bi-check-circle-fill"></i></span> {{ $bast->status_serah }}
                                             @endif
                                         @else
+                                            @if ($bast->status_terima == 'Menunggu')
+                                                <span class="btn btn-sm text-white bg-secondary"><i
+                                                        class="bi bi-hourglass-split"></i></span> {{ $bast->status_serah }}
+                                            @else
+                                                <span class="btn btn-sm text-white bg-success"><i
+                                                        class="bi bi-check-circle-fill"></i></span> {{ $bast->status_serah }}
+                                            @endif
                                         @endif
-
-                                        <span class="ms-2">{{ $bast->userSerah->nama_lengkap }}</span>
                                     </td>
                                     <td>
 

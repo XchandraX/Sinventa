@@ -114,7 +114,7 @@
         <div class="card-footer">
 
             {{-- tombol cetak detail barang --}}
-            <a href="" class="btn btn-secondary" target="_blank">
+            <a href="{{ route('barang.print', $barang) }}" class="btn btn-secondary" target="_blank">
                 <i class="bi bi-printer"></i>
             </a>
 
@@ -228,22 +228,22 @@
                                     @if (Auth::user()->role == 'admin')
                                         <td>
                                             {{-- tampilkan tombol cetak berita acara --}}
-                                            <a href="#" class="me-3">
+                                            <a href="{{ route('barang.downloadQr', $barang) }}" class="me-3">
                                                 <i class="bi bi-download"></i>
                                             </a>
 
                                             {{-- tombol lihat detail barang --}}
-                                            <a href="#" class="me-3">
+                                            <a href="{{ route('barang.show', $barang) }}" class="me-3">
                                                 <i class="bi bi-eye"></i>
                                             </a>
 
                                             {{-- tombol edit barang --}}
-                                            <a href="#" class="me-3">
+                                            <a href="{{ route('barang.edit', $barang) }}" class="me-3">
                                                 <i class="bi bi-pencil-square"></i>
                                             </a>
 
                                             {{-- tombol hapus barang --}}
-                                            <form action="#" method="post"
+                                            <form action="{{ route('barang.destroy', $barang) }}" method="post"
                                                 class="d-inline">
                                                 @csrf
                                                 @method('DELETE')

@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Barang;
 use App\Models\User;
+use Illuminate\Auth\Access\Response;
 
 class BarangPolicy
 {
@@ -21,7 +22,7 @@ class BarangPolicy
      */
     public function view(User $user, Barang $barang): bool
     {
-        // ? semua role baik admin amupun user bisa melihat detail barang
+        // ? semua role baik admin maupun user bisa melihat detail barang
         return true;
     }
 
