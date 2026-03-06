@@ -61,13 +61,13 @@ class UserController extends Controller
         // ? 2. tentukan pesan error saat data yang dikirm tidak valid (tidak sesuai aturan diatas)
         $pesan = [
             //
-            'required' => 'Kolom :attribute nggak boleh kosong!!.',
-            'unique' => 'Kolom :attribute sudah ada yg pakai!!.',
-            'email' => 'Kolom:attribute pakai email yang valid dong!!.',
-            'min' => 'Kolom :attribute minimal :m karakter.',
-            'confirmed' => ':attribute tidak sama!!.',
-            'in' => 'Kolom :attribute tidak valid!!.',
-            'max' => 'Kolom :attribute maksimal :max karakter !!.',
+            'required' => 'Kolom :attribute tidak boleh kosong!',
+            'unique' => 'Kolom :attribute sudah ada yg pakai!',
+            'email' => 'Kolom:attribute pakai email yang valid!',
+            'min' => 'Kolom :attribute minimal :m karakter!',
+            'confirmed' => ':attribute tidak sama!',
+            'in' => 'Kolom :attribute tidak valid!',
+            'max' => 'Kolom :attribute maksimal :max karakter!',
         ];
 
         // ? 3. lakukan validasi data
@@ -143,13 +143,13 @@ class UserController extends Controller
         // ? 6. pesan validasi
         $pesan = [
             //
-            'required' => 'Kolom :attribute nggak boleh kosong!!.',
-            'unique' => 'Kolom :attribute sudah ada yg pakai!!.',
-            'email' => 'Kolom:attribute pakai email yang valid dong!!.',
-            'min' => 'Kolom :attribute minimal :m karakter.',
-            'confirmed' => ':attribute tidak sama!!.',
-            'in' => 'Kolom :attribute tidak valid!!.',
-            'max' => 'Kolom :attribute maksimal :max karakter !!.',
+            'required' => 'Kolom :attribute tidak boleh kosong!',
+            'unique' => 'Kolom :attribute sudah ada yg pakai!',
+            'email' => 'Kolom:attribute pakai email yang valid!',
+            'min' => 'Kolom :attribute minimal :m karakter!',
+            'confirmed' => ':attribute tidak sama!',
+            'in' => 'Kolom :attribute tidak valid!',
+            'max' => 'Kolom :attribute maksimal :max karakter!',
         ];
 
         // ? 7. validasi data dari request

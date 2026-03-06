@@ -26,7 +26,7 @@
             <div class="mb-4">
                 <label for="nama_lengkap" class="form-label">Nama Lengkap</label>
                 <input type="text" id="nama_lengkap" class="form-control @error('nama_lengkap') is-invalid @enderror"
-                    name="nama_lengkap" placeholder="Chandra Maulana" value="{{ old('nama_lengkap') }}" autofocus>
+                    name="nama_lengkap" placeholder="Isi Nama Lengkap" value="{{ old('nama_lengkap') }}" autofocus>
 
                 {{-- jika nama_lengkap tidak valid --}}
                 @error('nama_lengkap')
@@ -41,7 +41,7 @@
             <div class="mb-4">
                 <label for="username" class="form-label">Username</label>
                 <input type="text" id="username" class="form-control @error('username') is-invalid @enderror"
-                    name="username" value="{{ old('username') }}" placeholder="Chandra">
+                    name="username" value="{{ old('username') }}" placeholder="Isi Username">
 
                 {{-- jika username tidak valid --}}
                 @error('username')
@@ -56,7 +56,7 @@
             <div class="mb-4">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" id="email" class="form-control @error('email') is-invalid @enderror"
-                    name="email" value="{{ old('email') }}" placeholder="Chandra mualana">
+                    name="email" value="{{ old('email') }}" placeholder="Isi Email">
 
                 {{-- jika email tidak valid --}}
                 @error('email')
@@ -98,7 +98,7 @@
             <div class="mb-4">
                 <label for="lembaga" class="form-label">Lembaga</label>
                 <input type="text" id="lembaga" class="form-control @error('lembaga') is-invalid @enderror"
-                    placeholder="Tata Usaha / Jurusan / Lainnya" name="lembaga" value="{{ old('lembaga') }}">
+                    placeholder="Isi Lembaga" name="lembaga" value="{{ old('lembaga') }}">
 
                 {{-- jika lembaga tidak valid --}}
                 @error('lembaga')
@@ -115,7 +115,7 @@
                 <div class="input-group">
 
                     <input type="password" class="pass-input form-control @error('password') is-invalid @enderror"
-                        name="password" id="password">
+                        name="password" id="password" placeholder="Isi Password">
 
                     <span class="bi toggle-password bi-eye-slash input-group-text"></span>
                     {{-- jika password tidak valid --}}
@@ -138,7 +138,7 @@
 
                     <input type="password" id="password_confirmation"
                         class="pass-input form-control @error('password_confirmation') is-invalid @enderror"
-                        name="password_confirmation">
+                        name="password_confirmation" placeholder="Isi Konfirmasi Password">
 
                     <span class="bi toggle-password bi-eye-slash input-group-text"></span>
                 </div>
