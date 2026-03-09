@@ -30,7 +30,7 @@
     <div class="page-header">
         {{-- judul halaman --}}
         <div class="page-title">
-            <h4>{{ $title }}}}</h4>
+            <h4>{{ $title }}</h4>
             <h6>Lihat detail barang inventaris</h6>
         </div>
     </div>

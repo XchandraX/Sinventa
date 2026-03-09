@@ -139,9 +139,9 @@
                 </div>
             @else
                 <div class="table-responsive">
-                    <table class="table datanew">
+                    <table class="table datanew w-100">
 
-                        {{-- judlu tabel --}}
+                        {{-- judul tabel --}}
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -167,17 +167,13 @@
                                     <td>{{ $bast->barang->lokasi->nama_lokasi }}</td>
                                     <td>
                                         @if ($bast->barang->status_barang == 'Baik')
-                                            <span
-                                                class="btn btn-sm text-white bg-success">Baik</span>
+                                            <span class="btn btn-sm text-white bg-success">Baik</span>
                                         @elseif ($bast->barang->status_barang == 'Rusak Ringan')
-                                            <span
-                                                class="btn btn-sm text-white bg-warning">Rusak Ringan</span>
+                                            <span class="btn btn-sm text-white bg-warning">Rusak Ringan</span>
                                         @elseif ($bast->barang->status_barang == 'Rusak Berat')
-                                            <span
-                                                class="btn btn-sm text-white bg-danger">Rusak Berat</span>
+                                            <span class="btn btn-sm text-white bg-danger">Rusak Berat</span>
                                         @else
-                                            <span
-                                                class="btn btn-sm text-white bg-secondary">Hilang</span>
+                                            <span class="btn btn-sm text-white bg-secondary">Hilang</span>
                                         @endif
                                     </td>
                                     <td>
