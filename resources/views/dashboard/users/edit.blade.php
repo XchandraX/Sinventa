@@ -118,7 +118,7 @@
                     @endif
 
                     <hr>
-                    <h6 class="mb-3">Kosongkan password jika tidak ingin diubahF!</h6>
+                    <h6 class="mb-3">Kosongkan password jika tidak ingin diubah!</h6>
 
                     {{-- kolom password --}}
                     <div class="col-lg-6 col-sm-12">
@@ -146,7 +146,7 @@
                                 <input type="password"
                                     class="pass-input @error('password_confirmation') is-invalid @enderror"
                                     id="password_confirmation" name="password_confirmation"
-                                    placeholder="Masukkan password confirmation">
+                                    placeholder="Masukkan password Konfirmasi">
                                 <span class="bi toggle-password bi-eye-slash"></span>
                             </div>
 
@@ -160,6 +160,8 @@
 
                     <div class="col-12">
                         <button class="btn btn-submit me-2" type="submit">Simpan</button>
+                        <a href="{{ route('users.index') }}" class="btn btn-cancel">Batal</a>
+
                     </div>
                 </div>
             </form>

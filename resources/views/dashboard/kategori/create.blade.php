@@ -60,7 +60,7 @@
                         <div class="form-group">
                             <label for="deskripsi">Deskripsi</label>
                             <textarea class="form-control  @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi"
-                                 placeholder="Masukkan deskripsi pengguna">{{ old('deskripsi') }}</textarea>
+                                 placeholder="Masukkan deskripsi">{{ old('deskripsi') }}</textarea>
 
                             {{-- jika deskripsi tidak valid --}}
                             @error('deskripsi')

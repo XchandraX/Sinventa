@@ -33,7 +33,9 @@
         *   `IF (Database Ada)`: Tampilkan summary data (Nama Barang, Kategori, Lokasi, Status). Tersedia tombol **Show**; di dalam detail terdapat tombol **"Setujui Penyerah/Penerima"**.
         *   `ELSE`: Tampilkan pesan "Tidak ada berita acara tersedia".
 3.  **BAST (Riwayat):**
-    *   **Logic:** Tampilkan daftar berita acara yang telah disetujui. Jika kosong, tampilkan pesan "Tidak ada berita acara tersedia".
+    *   **Logic:**
+        *   `IF (Database Ada)`: Tampilkan summary data (Nama Barang, Kategori, Lokasi, Status). Tersedia tombol **Show**.
+        *   `ELSE`: Tampilkan pesan "Tidak ada berita acara tersedia".
 
 ---
 

@@ -186,12 +186,12 @@
                         {{-- isi table --}}
                         <tbody>
                             {{-- tampilkan berita acara satu persatu menggunakan perulangan --}}
-                            @foreach ($basts as $bats)
+                            @foreach ($basts as $bast)
                                 <tr>
-                                    <td>{{ $loop->iteration }}}</td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $barang->nama_barang }}</td>
                                     <td>
-                                        @if ($bats->status_serah == 'Menunggu')
+                                        @if ($bast->status_serah == 'Menunggu')
                                             <span class="btn btn-sm text-white bg-secondary">
                                                 <i class="bi bi-hourglass-split"></i>
                                             </span>
@@ -202,7 +202,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if ($bats->status_terima == 'Menunggu')
+                                        @if ($bast->status_terima == 'Menunggu')
                                             <span class="btn btn-sm text-white bg-secondary">
                                                 <i class="bi bi-hourglass-split"></i>
                                             </span>
@@ -213,7 +213,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if ($bats->status_serah == 'Disetujui' && $bats->status_terima == 'Disetujui')
+                                        @if ($bast->status_serah == 'Disetujui' && $bast->status_terima == 'Disetujui')
                                             <span class="btn btn-sm text-white bg-success">
                                                 <i class="bi bi-check-circle"></i> Disetujui
                                             </span>
@@ -228,22 +228,22 @@
                                     @if (Auth::user()->role == 'admin')
                                         <td>
                                             {{-- tampilkan tombol cetak berita acara --}}
-                                            <a href="{{ route('barang.downloadQr', $barang) }}" class="me-3">
+                                            <a href="{{ route('bast.downloadPdf', $bast) }}" class="me-3">
                                                 <i class="bi bi-download"></i>
                                             </a>
 
-                                            {{-- tombol lihat detail barang --}}
-                                            <a href="{{ route('barang.show', $barang) }}" class="me-3">
+                                            {{-- tombol lihat detail bast --}}
+                                            <a href="{{ route('bast.show', $bast) }}" class="me-3">
                                                 <i class="bi bi-eye"></i>
                                             </a>
 
-                                            {{-- tombol edit barang --}}
-                                            <a href="{{ route('barang.edit', $barang) }}" class="me-3">
+                                            {{-- tombol edit bast --}}
+                                            <a href="{{ route('bast.edit', $bast) }}" class="me-3">
                                                 <i class="bi bi-pencil-square"></i>
                                             </a>
 
-                                            {{-- tombol hapus barang --}}
-                                            <form action="{{ route('barang.destroy', $barang) }}" method="post"
+                                            {{-- tombol hapus bast --}}
+                                            <form action="{{ route('bast.destroy', $barang) }}" method="post"
                                                 class="d-inline">
                                                 @csrf
                                                 @method('DELETE')

@@ -88,7 +88,7 @@ class BastController extends Controller
         $this->authorize('create', Bast::class);
 
         return view('dashboard.bast.create', [
-            'title' => 'Buat Berita Acara Serah Terima Baru',
+            'title' => 'Tambah Berita Acara Serah Terima Baru',
             'users' => User::latest()->select('id', 'nama_lengkap')->get(),
             'barangs' => Barang::latest()->select('id', 'kode_barang', 'nama_barang')->get(),
         ]);
@@ -158,7 +158,7 @@ class BastController extends Controller
 
         // ? tampilkan view show.blade.php di folder dashboard/bast, lalu kirimkan data
         return view('dashboard.bast.show', [
-            'title' => 'Berita Acara Serah Terima', // judul halamana
+            'title' => 'Detail Berita Acara Serah Terima', // judul halamana
             'bast' => $bast,
         ]);
     }
