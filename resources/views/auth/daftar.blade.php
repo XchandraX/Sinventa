@@ -23,7 +23,7 @@
             @csrf
 
             {{-- nama lengkap --}}
-            <div class="mb-4">
+            <div class="mb-4"><div class="form-group">
                 <label for="nama_lengkap" class="form-label">Nama Lengkap</label>
                 <input type="text" id="nama_lengkap" class="form-control @error('nama_lengkap') is-invalid @enderror"
                     name="nama_lengkap" placeholder="Isi Nama Lengkap" value="{{ old('nama_lengkap') }}" autofocus>
@@ -35,10 +35,11 @@
                         {{ $message }}
                     </div>
                 @enderror
+                </div>
             </div>
 
             {{-- username --}}
-            <div class="mb-4">
+            <div class="mb-4"><div class="form-group">
                 <label for="username" class="form-label">Username</label>
                 <input type="text" id="username" class="form-control @error('username') is-invalid @enderror"
                     name="username" value="{{ old('username') }}" placeholder="Isi Username">
@@ -49,11 +50,11 @@
                         {{-- tampilkan pesan error --}}
                         {{ $message }}
                     </div>
-                @enderror
+                @enderror</div>
             </div>
 
             {{-- email --}}
-            <div class="mb-4">
+            <div class="mb-4"><div class="form-group">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" id="email" class="form-control @error('email') is-invalid @enderror"
                     name="email" value="{{ old('email') }}" placeholder="Isi Email">
@@ -64,11 +65,13 @@
                         {{-- tampilkan pesan error --}}
                         {{ $message }}
                     </div>
-                @enderror
+                @enderror</div>
             </div>
 
             {{-- role --}}
             <div class="mb-4">
+                <div class="form-group">
+
                 <label class="d-block form-label">Daftar Sebagai:</label>
 
                 {{-- admin --}}
@@ -92,10 +95,12 @@
                         {{ $message }}
                     </div>
                 @enderror
+                </div>
             </div>
 
             {{-- lembaga --}}
             <div class="mb-4">
+                <div class="form-group">
                 <label for="lembaga" class="form-label">Lembaga</label>
                 <input type="text" id="lembaga" class="form-control @error('lembaga') is-invalid @enderror"
                     placeholder="Isi Lembaga" name="lembaga" value="{{ old('lembaga') }}">
@@ -106,11 +111,12 @@
                         {{-- tampilkan pesan error --}}
                         {{ $message }}
                     </div>
-                @enderror
+                @enderror</div>
             </div>
 
             {{-- passowrd --}}
             <div class="mb-4">
+                <div class="form-group">
                 <label for="password" class="form-label">Password</label>
                 <div class="input-group">
 
@@ -128,11 +134,11 @@
                         {{ $message }}
                     </div>
                 @enderror
-
+                </div>
             </div>
 
             {{-- konfirmasi passowrd --}}
-            <div class="mb-4">
+            <div class="mb-4"><div class="form-group">
                 <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
                 <div class="input-group">
 
@@ -149,11 +155,11 @@
                         {{-- tampilkan pesan error --}}
                         {{ $message }}
                     </div>
-                @enderror
+                @enderror</div>
             </div>
 
             {{-- Kode Registrasi Universal --}}
-            <div class="mb-4">
+            <div class="mb-4"><div class="form-group">
                 <label for="reg_code" class="form-label">Kode Registrasi</label>
                 <input type="text" id="reg_code" name="reg_code"
                     class="form-control @error('reg_code') is-invalid @enderror"
@@ -163,7 +169,7 @@
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
-                @enderror
+                @enderror</div>
             </div>
 
             <hr>
@@ -180,7 +186,7 @@
 
         {{-- link menuju halam login --}}
         <div class="mt-4 text-center">
-            <span>Sudah punya akun? <a href="{{ route('login') }}">Login</a></span>
+            <span>Sudah punya akun? <a href="{{ route('login') }}" style="color: green;">Login</a></span>
         </div>
     </div>
 @endsection

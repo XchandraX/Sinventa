@@ -11,18 +11,49 @@ $(document).ready(function () {
     $("#imgInp").change(function () { readURL(this); }); if ($('.datatable').length > 0) { $('.datatable').DataTable({ "bFilter": false }); }
     setTimeout(function () { $('#global-loader'); setTimeout(function () { $("#global-loader").fadeOut("slow"); }, 100); }, 500); if ($('.datetimepicker').length > 0) { $('.datetimepicker').datetimepicker({ format: 'DD-MM-YYYY', icons: { up: "fas fa-angle-up", down: "fas fa-angle-down", next: 'fas fa-angle-right', previous: 'fas fa-angle-left' } }); }
 
-    if ($('.toggle-password').length > 0) { 
-        $(document).on('click', '.toggle-password', function () { 
+    if ($('.toggle-password').length > 0) {
+        $(document).on('click', '.toggle-password', function () {
             $(this).toggleClass("bi-eye bi-eye-slash");
             var input = $(".pass-input");
             if (input.attr("type") == "password") {
-                input.attr("type", "text"); 
-            } else { 
-                input.attr("type", "password"); 
-            } 
-        }); 
+                input.attr("type", "text");
+            } else {
+                input.attr("type", "password");
+            }
+        });
     }
-    
+
+    // Check preference tersimpan
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    }
+
+    // Toggle theme (update versi yang lebih baik)
+    function handleThemeToggle() {
+        const html = document.documentElement;
+        const currentTheme = html.getAttribute('data-theme');
+
+        if (currentTheme === 'dark') {
+            html.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
+        } else {
+            html.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+        }
+
+        // Update DataTables jika perlu
+        if ($.fn.DataTable && $.fn.DataTable.isDataTable('.datanew')) {
+            $('.datanew').DataTable().draw();
+        }
+    }
+
+    // Attach ke semua theme toggle buttons
+    $('#theme-toggle, #theme-toggle-dropdown, #theme-toggle-mobile').on('click', function (e) {
+        e.preventDefault();
+        handleThemeToggle();
+    });
+
     if ($('.toggle-passwords').length > 0) { $(document).on('click', '.toggle-passwords', function () { $(this).toggleClass("fa-eye fa-eye-slash"); var input = $(".pass-inputs"); if (input.attr("type") == "password") { input.attr("type", "text"); } else { input.attr("type", "password"); } }); }
     if ($('.toggle-passworda').length > 0) { $(document).on('click', '.toggle-passworda', function () { $(this).toggleClass("fa-eye fa-eye-slash"); var input = $(".pass-inputs"); if (input.attr("type") == "password") { input.attr("type", "text"); } else { input.attr("type", "password"); } }); }
     if ($('.select').length > 0) { $('.select').select2({ minimumResultsForSearch: -1, width: '100%' }); }

@@ -1,27 +1,80 @@
 :root {
-    /* Main Colors */
+    /* Light Mode (Default) */
     --primary: #4ade80;
-    --bg-dark: #0f172a;
-    --card-bg: #1e293b;
-    --text-main: #f8fafc;
-
-    /* Accent & Utility Colors */
+    --primary-hover: #3b9e5e;
+    
+    /* Background */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-dark: #ffffff; /* untuk kompatibilitas */
+    
+    /* Cards & Components */
+    --card-bg: #ffffff;
+    --sidebar-bg: #ffffff;
+    --header-bg: #ffffff;
+    --table-header-bg: #f8fafc;
+    --table-row-hover: #f1f5f9;
+    --hover-bg: #f1f5f9;
+    
+    /* Text */
+    --text-main: #0f172a;
+    --text-primary: #0f172a;
+    --text-secondary: #334155;
+    --text-muted: #64748b;
+    
+    /* Borders */
+    --border-color: #e2e8f0;
+    --input-border: #cbd5e1;
+    
+    /* Inputs */
+    --input-bg: #ffffff;
+    
+    /* Accent Colors */
     --blue: #3498db;
     --accent-blue: #3b82f6;
-    --gray: #3a3b3f;
-    --accent-gray: #28292d;
+    --gray: #f1f5f9;
+    --accent-gray: #e2e8f0;
     --error: #f87171;
     --green: #2ecc71;
     --red: #e74c3c;
+}
 
-    /* Semantic Aliases (for easy updates) */
-    --sidebar-bg: var(--card-bg);
-    --header-bg: var(--card-bg);
-    --border-color: #334155; /* A lighter shade for borders on dark bg */
-    --table-header-bg: #262f40; /* Slightly lighter than card-bg */
+/* Dark Mode */
+[data-theme="dark"] {
+    /* Background */
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-dark: #0f172a;
+    
+    /* Cards & Components */
+    --card-bg: #1e293b;
+    --sidebar-bg: #1e293b;
+    --header-bg: #1e293b;
+    --table-header-bg: #262f40;
     --table-row-hover: #2d3748;
-    --input-bg: #2d3748;
-    --input-border: #4a5568;
+    --hover-bg: #2d3748;
+    
+    /* Text */
+    --text-main: #f8fafc;
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    
+    /* Borders */
+    --border-color: #334155;
+    --input-border: #4b5563;
+    
+    /* Inputs */
+    --input-bg: #1e293b;
+    
+    /* Accent Colors - tetap sama */
+    --blue: #3498db;
+    --accent-blue: #3b82f6;
+    --gray: #334155;
+    --accent-gray: #4b5563;
+    --error: #f87171;
+    --green: #2ecc71;
+    --red: #e74c3c;
 }
 
 .select2-container {

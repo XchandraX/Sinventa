@@ -1,12 +1,12 @@
 {{-- ? Bagian header dashboard --}}
 <div class="header">
     <div class="header-left">
-        {{-- Logo Deashboard --}}
+        {{-- Logo Dashboard --}}
         <a href="{{ route('dashboard') }}" class="logo">
             <img src="{{ asset('assets/icon/logo.png') }}" alt="Sinvesta">
         </a>
 
-        {{-- Logo Dashbaord saat sidebar disembunyikan --}}
+        {{-- Logo Dashboard saat sidebar disembunyikan --}}
         <a href="{{ route('dashboard') }}" class="logo-small">
             <img src="{{ asset('assets/icon/favicon.png') }}" alt="Sinvesta">
         </a>
@@ -24,20 +24,27 @@
         </span>
     </a>
 
-
-
     {{-- menu bagian kanan --}}
     <ul class="nav user-menu">
-        {{-- alert pemberitahun saat ada update data (store/update/delete) --}}
+        {{-- Tombol toggle mode - ditempatkan di sini --}}
+        <li class="nav-item">
+            <button id="theme-toggle" class="theme-toggle">
+                <span class="light-icon"><i class="bi bi-moon-fill"></i></span>
+                <span class="dark-icon"><i class="bi bi-sun-fill"></i></span>
+                <span class="mode-text">Mode</span>
+            </button>
+        </li>
+
+        {{-- alert pemberitahuan saat ada update data (store/update/delete) --}}
         @session('berhasil')
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('berhasil') }}
                 <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endsession
+
         {{-- menu profil --}}
         <li class="nav-item dropdown has-arrow main-drop">
-
             {{-- tombol toggle profil --}}
             <a href="#" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
                 <span class="user-img">
@@ -49,7 +56,6 @@
             {{-- menu profil user --}}
             <div class="dropdown-menu menu-drop-user">
                 <div class="profilename">
-
                     {{-- menampilkan info user --}}
                     <div class="profileset">
                         <span class="user-img">
@@ -63,6 +69,15 @@
                     </div>
 
                     <hr class="m-0">
+
+                    {{-- Theme toggle di dropdown (opsional) --}}
+                    <div class="px-3 py-2">
+                        <button id="theme-toggle-dropdown" class="theme-toggle w-100">
+                            <span class="light-icon"><i class="bi bi-moon-fill"></i></span>
+                            <span class="dark-icon"><i class="bi bi-sun-fill"></i></span>
+                            <span class="mode-text">Ganti Mode</span>
+                        </button>
+                    </div>
 
                     {{-- tombol edit profil --}}
                     <a href="{{ route('users.edit', Auth::user()) }}" class="dropdown-item">Profil Ku</a>
@@ -79,7 +94,6 @@
 
     {{-- menu profil khusus untuk di mobile --}}
     <div class="dropdown mobile-user-menu">
-
         {{-- tombol toggle menu profil --}}
         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fa fa-ellipsis-v"></i>
@@ -87,6 +101,15 @@
 
         {{-- menu profil khusus mobile --}}
         <div class="dropdown-menu dropdown-menu-right">
+            {{-- Theme toggle untuk mobile --}}
+            <div class="px-3 py-2">
+                <button id="theme-toggle-mobile" class="theme-toggle w-100">
+                    <span class="light-icon"><i class="bi bi-moon-fill"></i></span>
+                    <span class="dark-icon"><i class="bi bi-sun-fill"></i></span>
+                    <span class="mode-text">Ganti Mode</span>
+                </button>
+            </div>
+            <div class="dropdown-divider"></div>
 
             {{-- tombol edit profil khusus mobile --}}
             <a href="{{ route('users.edit', Auth::user()) }}" class="dropdown-item">Profil Ku</a>

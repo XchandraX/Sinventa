@@ -15,11 +15,11 @@
 
         {{-- ? Jika ada session dengan nama 'berhasil' dikirim dari contorller --}}
         @session('berhasil')
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{-- ? tampilkan pesan --}}
-            {{ session('berhasil') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{-- ? tampilkan pesan --}}
+                {{ session('berhasil') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         @endsession
 
         {{-- Judul halaman login --}}
@@ -35,36 +35,39 @@
             @csrf
             {{-- username --}}
             <div class="mb-4">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" id="username" class="form-control @error('username') is-invalid @enderror"
-                    name="username" placeholder="Masukan Username Anda!">
-                {{-- jika invalid --}}
-                @error('username')
-                    {{-- tampilkan pesan errornya --}}
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
+                <div class="form-group">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" id="username" class="form-control @error('username') is-invalid @enderror"
+                        name="username" placeholder="Masukan Username Anda!">
+                    {{-- jika invalid --}}
+                    @error('username')
+                        {{-- tampilkan pesan errornya --}}
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
             </div>
 
             {{-- passowrd --}}
             <div class="mb-4">
-                <label for="password" class="form-label">Password</label>
-                <div class="input-group">
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <div class="input-group">
 
-                    <input type="password" class="pass-input form-control @error('password') is-invalid @enderror"
-                        name="password" id="password" placeholder="Masukan Password Anda!">
+                        <input type="password" class="pass-input form-control @error('password') is-invalid @enderror"
+                            name="password" id="password" placeholder="Masukan Password Anda!">
 
-                    <span class="bi toggle-password bi-eye-slash input-group-text"></span>
-                    {{-- jika password tidak valid --}}
+                        <span class="bi toggle-password bi-eye-slash input-group-text"></span>
+                        {{-- jika password tidak valid --}}
 
-                </div>
-
-                @error('password')
-                    <div id="password" class="invalid-feedback d-block">
-                        {{-- tampilkan pesan error --}}
-                        {{ $message }}
                     </div>
-                @enderror
 
+                    @error('password')
+                        <div id="password" class="invalid-feedback d-block">
+                            {{-- tampilkan pesan error --}}
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
             </div>
 
             <hr>
@@ -81,7 +84,7 @@
         {{-- link menuju halaman daftar user --}}
         <div class="mt-4 text-center">
             <span>Belum punya akun? <a href="{{ route('daftar.index') }}">Daftar</a></span>
-        </div> 
+        </div>
     </div>
 
 @endsection

@@ -1,31 +1,82 @@
 @import "../../../../css2";
 
 :root {
-    /* Main Colors */
+    /* Light Mode (Default) */
     --primary: #4ade80;
-    --bg-dark: #0f172a;
-    --card-bg: #1e293b;
-    --text-main: #f8fafc;
+    --primary-hover: #3b9e5e;
 
-    /* Accent & Utility Colors */
+    /* Background */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-dark: #ffffff;
+
+    /* Cards & Components */
+    --card-bg: #ffffff;
+    --sidebar-bg: #ffffff;
+    --header-bg: #ffffff;
+    --table-header-bg: #f8fafc;
+    --table-row-hover: #f1f5f9;
+    --hover-bg: #f1f5f9;
+
+    /* Text */
+    --text-main: #0f172a;
+    --text-primary: #0f172a;
+    --text-secondary: #334155;
+    --text-muted: #64748b;
+
+    /* Borders */
+    --border-color: #e2e8f0;
+    --input-border: #cbd5e1;
+
+    /* Inputs */
+    --input-bg: #ffffff;
+
+    /* Accent Colors */
     --blue: #3498db;
     --accent-blue: #3b82f6;
-    --gray: #3a3b3f;
-    --accent-gray: #28292d;
+    --gray: #f1f5f9;
+    --accent-gray: #e2e8f0;
     --error: #f87171;
     --green: #2ecc71;
     --red: #e74c3c;
+}
 
-    /* Semantic Aliases (for easy updates) */
-    --sidebar-bg: var(--card-bg);
-    --header-bg: var(--card-bg);
-    --border-color: #334155;
-    /* A lighter shade for borders on dark bg */
+/* Dark Mode */
+[data-theme="dark"] {
+    /* Background */
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-dark: #0f172a;
+
+    /* Cards & Components */
+    --card-bg: #1e293b;
+    --sidebar-bg: #1e293b;
+    --header-bg: #1e293b;
     --table-header-bg: #262f40;
-    /* Slightly lighter than card-bg */
     --table-row-hover: #2d3748;
-    --input-bg: #2d3748;
-    --input-border: #4a5568;
+    --hover-bg: #2d3748;
+
+    /* Text */
+    --text-main: #f8fafc;
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+
+    /* Borders */
+    --border-color: #334155;
+    --input-border: #4b5563;
+
+    /* Inputs */
+    --input-bg: #1e293b;
+
+    /* Accent Colors - tetap sama */
+    --blue: #3498db;
+    --accent-blue: #3b82f6;
+    --gray: #334155;
+    --accent-gray: #4b5563;
+    --error: #f87171;
+    --green: #2ecc71;
+    --red: #e74c3c;
 }
 
 .css-equal-content,
@@ -684,7 +735,7 @@ button:focus {
 }
 
 a {
-    color: var(--text-main);
+    color: var(--green);
     cursor: pointer;
     text-decoration: none;
     -webkit-transition: all 0.2s ease;
@@ -2130,6 +2181,7 @@ a:hover {
 }
 
 .form-group input[type="text"],
+.form-group input[type="email"],
 .form-group input[type="password"] {
     border: 1px solid var(--input-border);
     height: 40px;
@@ -3306,13 +3358,15 @@ table.dataTable>thead .sorting_desc_disabled:before {
 }
 
 .dataTables_length select {
-    color: #000000 !important;
-    /* paksa hitam */
+    color: var(--text-primary) !important;
+    background-color: var(--input-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 4px;
+    padding: 4px;
 }
 
-.dataTables_length select {
-    background-color: #ffffff !important;
-    border: 1px solid #ccc;
+.dataTables_length label {
+    color: var(--text-primary) !important;
 }
 
 .dataTables_info {
@@ -3321,6 +3375,44 @@ table.dataTable>thead .sorting_desc_disabled:before {
     padding-right: 15px;
     font-size: 12px;
     font-weight: 600;
+}
+
+.theme-toggle {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 30px;
+    padding: 5px 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-primary);
+    font-size: 14px;
+    transition: all 0.3s ease;
+    margin-right: 15px;
+    margin-top: 12px;
+}
+
+.theme-toggle:hover {
+    background: var(--hover-bg);
+}
+
+/* Default (light mode) - tampilkan bulan */
+.theme-toggle .light-icon {
+    display: none;
+}
+
+.theme-toggle .dark-icon {
+    display: inline-block;
+}
+
+/* Dark mode - tampilkan matahari */
+[data-theme="dark"] .theme-toggle .light-icon {
+    display: inline-block;
+}
+
+[data-theme="dark"] .theme-toggle .dark-icon {
+    display: none;
 }
 
 .custom-select {
@@ -8447,4 +8539,50 @@ span.select2-container.select2-container--default.select2-container--open {
     position: absolute;
     top: 50%;
     right: 10px;
+}
+
+/* Styling untuk tombol hapus (tong sampah) */
+.btn .bi-trash,
+button .bi-trash,
+.confirm-text .bi-trash,
+form button .bi-trash {
+    color: var(--red);
+    font-size: 1.2rem;
+    transition: all 0.2s ease;
+}
+
+.btn .bi-trash:hover,
+button .bi-trash:hover,
+.confirm-text .bi-trash:hover,
+form button .bi-trash:hover {
+    color: var(--red);
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+/* Pastikan button tidak memiliki background atau border yang mengganggu */
+.confirm-text.btn.p-0.m-0 {
+    background: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.confirm-text.btn.p-0.m-0:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.confirm-text.btn.p-0.m-0:active {
+    transform: translateY(1px);
+}
+
+/* Dark mode specific - jika perlu penyesuaian */
+[data-theme="dark"] .bi-trash {
+    color: var(--red);
+    /* warna merah tetap sama di dark mode */
 }
