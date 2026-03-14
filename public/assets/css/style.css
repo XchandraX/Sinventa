@@ -8541,6 +8541,10 @@ span.select2-container.select2-container--default.select2-container--open {
     right: 10px;
 }
 
+.bi-search{
+    color: var(--text-main);
+}
+
 /* Styling untuk tombol hapus (tong sampah) */
 .btn .bi-trash,
 button .bi-trash,
