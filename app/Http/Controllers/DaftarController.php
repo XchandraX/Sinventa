@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\RegistrationCode;
 // ? panggil model user agar dapat digunakan oleh function store
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class DaftarController extends Controller
 {
@@ -23,26 +24,18 @@ class DaftarController extends Controller
      * ? function store digunakan untuk menyimpan data user ke database
      * * gunakan class Request agar dapat menerima data dari view form daftar.blade.php
      */
-    public function store(Request $request) {
-        // ? 1. buat aturan validasi, agar user tidak memasukan data sembarangan
-        $aturan = [
-            // nama_lengkap wajib diisi, harus berupa text, maks kara 100
+    public function store(Request $request)
+    {
+        // 1. Validasi Input
+        $request->validate([
             'nama_lengkap' => 'required|string|max:100',
-            // username wajib diisi, harus berupa text, maks kara 50, harus unik
             'username' => 'required|string|max:50|unique:users,username',
-            // email wajib diisi, harus berupa email, maks kara 100, harus unik
             'email' => 'required|email|max:100|unique:users,email',
-            // password wajib diisi, harus berupa text, min 8 dan maks 100 kara, harus sama dengan konfirmasi password
             'password' => 'required|string|min:8|max:32|confirmed',
-            // role wajib diisi, pilihan hanya 2 'admin' atau 'user'
             'role' => 'required|in:admin,user',
-            // lembaga wajib diisi, harus berupa text, maks 100 kara
             'lembaga' => 'required|string|max:100',
-        ];
-
-        // ? 2. tentukan pesan error saat data yang dikirm tidak valid (tidak sesuai aturan diatas)
-        $pesan = [
-            // 
+            'reg_code' => 'required', // Input kode dari form
+        ], [
             'required' => 'Kolom :attribute nggak boleh kosong!!.',
             'unique' => 'Kolom :attribute sudah ada yg pakai!!.',
             'email' => 'Kolom:attribute pakai email yang valid dong!!.',
@@ -50,15 +43,30 @@ class DaftarController extends Controller
             'confirmed' => ':attribute tidak sama!!.',
             'in' => 'Kolom :attribute tidak valid!!.',
             'max' => 'Kolom :attribute maksimal :max karakter !!.',
-        ];
+        ]);
 
-        // ? 3. lakukan validasi data 
-        $validatedDate = $request->validate($aturan, $pesan);
+        // 2. Ambil kode yang sedang aktif di database
+        $currentCode = RegistrationCode::first();
 
-        // ? 4. simpan dat ayang sudah divalidasi ke database melalui model user
-        User::create($validatedDate);
+        // 3. Cek apakah kode yang diinput user cocok
+        if (! $currentCode || $request->reg_code !== $currentCode->code) {
+            return back()->withErrors(['reg_code' => 'Kode salah atau sudah kadaluarsa!'])->withInput();
+        }
 
-        // ? 5. alihkan ke halaman lgin dengan pesan sukses
-        return redirect()->route('login')->with('berhasil', 'Pendaftaran berhasil silahkan login.');
+        // 4. Jika cocok, Simpan User Baru
+        User::create([
+            'nama_lengkap' => $request->nama_lengkap,
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'role' => $request->role,
+            'lembaga' => $request->lembaga,
+        ]);
+
+        // 5. ACAK ULANG KODE (Agar pendaftar berikutnya pakai kode berbeda)
+        $newCode = substr(md5(time().rand()), 0, 6);
+        $currentCode->update(['code' => $newCode]);
+
+        return redirect()->route('login')->with('berhasil', 'Daftar berhasil! Silakan login.');
     }
 }

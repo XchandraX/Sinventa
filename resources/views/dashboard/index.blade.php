@@ -28,7 +28,7 @@
                     <div class="card-body">
                         <div class="d-flex gap-3 align-items-center">
                             <div class="p-3 bg-warning rounded-3">
-                                <i class="bi {{ $card['icon'] }}"></i>
+                                <i class="bi {{ $card['icon'] }}" style="color: var(--bg-dark);"></i>
                             </div>
                             <div>
                                 <h4 class="fw-bold mb-0">{{ $card['count'] }}</h4>

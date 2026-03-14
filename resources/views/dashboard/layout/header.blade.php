@@ -53,7 +53,7 @@
                     {{-- menampilkan info user --}}
                     <div class="profileset">
                         <span class="user-img">
-                            <i class="bi bi-person-circle"></i>
+                            <i class="bi bi-person-circle" style="color: var(--text-main);"></i>
                             <span class="status online"></span>
                         </span>
                         <div class="profilesets">

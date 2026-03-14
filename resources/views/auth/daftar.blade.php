@@ -152,6 +152,20 @@
                 @enderror
             </div>
 
+            {{-- Kode Registrasi Universal --}}
+            <div class="mb-4">
+                <label for="reg_code" class="form-label">Kode Registrasi</label>
+                <input type="text" id="reg_code" name="reg_code"
+                    class="form-control @error('reg_code') is-invalid @enderror"
+                    placeholder="Masukkan kode akses pendaftaran (Dari Admin)">
+
+                @error('reg_code')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+
             <hr>
 
             {{-- tombol daftar  --}}

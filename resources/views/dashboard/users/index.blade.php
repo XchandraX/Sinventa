@@ -42,6 +42,17 @@
                         </div>
                     </div>
 
+                    @php
+                        $activeCode = \App\Models\RegistrationCode::first();
+                    @endphp
+
+                    <div class="alert alert-info d-flex justify-content-between align-items-center">
+                        <div>
+                            <i class="bi bi-key-fill"></i> Kode Registrasi Aktif:
+                            <strong class="fs-4">{{ $activeCode ? $activeCode->code : 'Belum diatur' }}</strong>
+                        </div>
+                    </div>
+
                 </div>
 
                 {{-- table daftar user --}}
