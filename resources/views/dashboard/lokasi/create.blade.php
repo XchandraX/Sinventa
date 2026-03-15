@@ -64,6 +64,8 @@
                     {{-- tombol simpan user --}}
                     <div class="col-12">
                         <button type="submit" class="btn btn-submit me-2">Simpan</button>
+                                            <a href="{{ route('lokasi.index') }}" class="btn btn-cancel">Batal</a>
+
                     </div>
                 </div>
             </form>

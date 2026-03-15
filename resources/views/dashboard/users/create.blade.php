@@ -154,6 +154,8 @@
                     {{-- tombol simpan user --}}
                     <div class="col-12">
                         <button type="submit" class="btn btn-submit me-2">Simpan User</button>
+                                           <a href="{{ route('users.index') }}" class="btn btn-cancel">Batal</a>
+
                     </div>
                 </div>
             </form>

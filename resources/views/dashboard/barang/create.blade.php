@@ -27,9 +27,14 @@
                             ['label' => 'Nama Barang', 'id' => 'nama_barang', 'class' => 'col-12'],
                             ['label' => 'Kode Barang', 'id' => 'kode_barang', 'class' => 'col-lg-6 col-sm-6 col-12'],
                         ];
-                        
+
                         $cardsKL = [
-                            ['id' => 'kategori_id', 'items' => $kategoris, 'nama' => 'nama_kategori', 'label' => 'Kategori'],
+                            [
+                                'id' => 'kategori_id',
+                                'items' => $kategoris,
+                                'nama' => 'nama_kategori',
+                                'label' => 'Kategori',
+                            ],
                             ['id' => 'lokasi_id', 'items' => $lokasis, 'nama' => 'nama_lokasi', 'label' => 'Lokasi'],
                         ];
 
@@ -42,55 +47,47 @@
                     @endphp
 
                     {{-- kolom nama barang --}}
-                    @foreach ( $cards as $card )
-                    <div class="{{ $card['class'] }}">
-                        <div class="form-group">
-                            <label for="{{ $card['id'] }}">{{ $card['label'] }} *</label>
-                            <input 
-                            type="text"
-                            class="form-control @error($card['id']) is-invalid @enderror"
-                            id="{{ $card['id'] }}"
-                            name="{{ $card['id'] }}"
-                            value="{{ old($card['id']) }}"
-                            >
+                    @foreach ($cards as $card)
+                        <div class="{{ $card['class'] }}">
+                            <div class="form-group">
+                                <label for="{{ $card['id'] }}">{{ $card['label'] }} *</label>
+                                <input type="text" class="form-control @error($card['id']) is-invalid @enderror"
+                                    id="{{ $card['id'] }}" name="{{ $card['id'] }}" value="{{ old($card['id']) }}">
 
-                            {{-- jika tidak valid --}}
-                            @error($card['id'])
-
-                                {{-- tampilan pesan error --}}
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                                {{-- jika tidak valid --}}
+                                @error($card['id'])
+                                    {{-- tampilan pesan error --}}
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
                     @endforeach
 
                     {{-- kolom kategori / lokasi barang --}}
                     @foreach ($cardsKL as $card)
-                        
                         <div class="col-lg-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label for="{{ $card['id'] }}">{{ $card['label'] }} *</label>
-                                <select 
-                                class="select2 placeholder form-control @error($card['id']) is-invalid @enderror"
-                                id="{{ $card['id'] }}"
-                                name="{{ $card['id'] }}">
-                                <option>Pilih {{ $card['label']}}</option>
-                                {{-- ? tamplkan semua kategori/lokasi satu persatu menggunakan perulangan --}}
-                                @forelse ($card['items'] as $item)
-                                    <option value="{{ $item->id }}" {{ old($card['id']) == $item->id ? 'selected' : '' }}>
-                                        {{ $item->{$card['nama']} }}
-                                    </option>
-                                    {{-- ? jika data kategori tidak ada didatabase --}}
-                                @empty
-                                    {{-- tampilkal informasi --}}
-                                    <option disabled>Data {{$card['label']}} Tidak Ditemukan</option>
-                                @endforelse
-                            </select>
+                                <select class="select2 placeholder form-control @error($card['id']) is-invalid @enderror"
+                                    id="{{ $card['id'] }}" name="{{ $card['id'] }}">
+                                    <option>Pilih {{ $card['label'] }}</option>
+                                    {{-- ? tamplkan semua kategori/lokasi satu persatu menggunakan perulangan --}}
+                                    @forelse ($card['items'] as $item)
+                                        <option value="{{ $item->id }}"
+                                            {{ old($card['id']) == $item->id ? 'selected' : '' }}>
+                                            {{ $item->{$card['nama']} }}
+                                        </option>
+                                        {{-- ? jika data kategori tidak ada didatabase --}}
+                                    @empty
+                                        {{-- tampilkal informasi --}}
+                                        <option disabled>Data {{ $card['label'] }} Tidak Ditemukan</option>
+                                    @endforelse
+                                </select>
 
-                            {{-- jika kategori yang dipilih tidak valid --}}
-                            @error($card['id'])
-                                <div class="invalid-feedback">{{ $message}}</div>
-                            @enderror
+                                {{-- jika kategori yang dipilih tidak valid --}}
+                                @error($card['id'])
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                     @endforeach
@@ -101,16 +98,11 @@
                             <label for="status">Status Barang: *</label>
                             @foreach ($cardsSt as $card)
                                 <div class="form-check form-check-inline">
-                                    <input 
-                                    type="radio"
-                                    class="form-check-input"
-                                    name="status_barang"
-                                    id="{{ $card['id'] }}"
-                                    value="{{ $card['label'] }}"
-                                    {{ old('status_barang') == $card['label'] ? 'checked' : '' }}
-                                    >
-                                    <label 
-                                    for="{{ $card['id'] }}" class="form-check-label"> {{ $card['label'] }}</label>
+                                    <input type="radio" class="form-check-input" name="status_barang"
+                                        id="{{ $card['id'] }}" value="{{ $card['label'] }}"
+                                        {{ old('status_barang') == $card['label'] ? 'checked' : '' }}>
+                                    <label for="{{ $card['id'] }}" class="form-check-label">
+                                        {{ $card['label'] }}</label>
                                 </div>
                             @endforeach
 
@@ -121,7 +113,7 @@
                             @enderror
                         </div>
                     </div>
-                    
+
                     {{-- kolom deskripsi --}}
                     <div class="col-lg-12">
                         <div class="form-group">
@@ -138,6 +130,8 @@
 
                     <div class="col-lg-12">
                         <button class="btn btn-submit me-2" type="submit">Simpan</button>
+                        <a href="{{ route('barang.index') }}" class="btn btn-cancel">Batal</a>
+
                     </div>
                 </div>
             </form>
@@ -146,13 +140,13 @@
 @endsection
 
 @section('js')
-<script>
-    $(document).ready(function () {
-        $('.select2').select2({
-            placeholder: "Cari barang...",
-            allowClear: true,
-            width: '100%'
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2({
+                placeholder: "Cari barang...",
+                allowClear: true,
+                width: '100%'
+            });
         });
-    });
-</script>
+    </script>
 @endsection

@@ -18,7 +18,7 @@
                 ['icon' => 'bi-card-list', 'label' => 'Kategori', 'count' => $jumlah_kategori],
                 ['icon' => 'bi-buildings', 'label' => 'Lokasi', 'count' => $jumlah_lokasi],
                 ['icon' => 'bi-box-seam', 'label' => 'Barang', 'count' => $jumlah_barang],
-                ['icon' => 'bi-file-earmark-medical', 'label' => 'Berita Acara', 'count' => $jumlah_bast],
+                ['icon' => 'bi-file-earmark-medical', 'label' => 'Bast', 'count' => $jumlah_bast],
             ];
         @endphp
 
@@ -27,7 +27,7 @@
                 <div class="card h-20">
                     <div class="card-body">
                         <div class="d-flex gap-3 align-items-center">
-                            <div class="p-3 bg-warning rounded-3">
+                            <div class="p-3 bg-card rounded-3">
                                 <i class="bi {{ $card['icon'] }}" style="color: var(--bg-dark);"></i>
                             </div>
                             <div>

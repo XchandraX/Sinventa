@@ -58,7 +58,8 @@
                             <div class="form-group">
                                 <label for="{{ $card['id'] }}">{{ $card['label'] }} *</label>
                                 <input type="text" class="form-control @error($card['id']) is-invalid @enderror"
-                                    id="{{ $card['id'] }}" name="{{ $card['id'] }}" value="{{ old($card['id'], data_get($barang, $card['id'])) }}">
+                                    id="{{ $card['id'] }}" name="{{ $card['id'] }}"
+                                    value="{{ old($card['id'], data_get($barang, $card['id'])) }}">
 
                                 @error($card['id'])
                                     {{-- tampilkan pesan error --}}
@@ -133,6 +134,8 @@
 
                     <div class="col-lg-12">
                         <button class="btn btn-submit me-2" type="submit">Simpan</button>
+                        <a href="{{ route('barang.index') }}" class="btn btn-cancel">Batal</a>
+
                     </div>
                 </div>
             </form>

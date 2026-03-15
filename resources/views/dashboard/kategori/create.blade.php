@@ -29,8 +29,9 @@
                     <div class="col-lg-6 col-sm-6 col-12">
                         <div class="form-group">
                             <label for="kode_kategori">Kode Kategori</label>
-                            <input type="text" class="form-control  @error('kode_kategori') is-invalid @enderror" id="kode_kategori" name="kode_kategori"
-                                value="{{ old('kode_kategori') }}" placeholder="Masukkan Kode Kategori">
+                            <input type="text" class="form-control  @error('kode_kategori') is-invalid @enderror"
+                                id="kode_kategori" name="kode_kategori" value="{{ old('kode_kategori') }}"
+                                placeholder="Masukkan Kode Kategori">
 
                             {{-- jika kode_kategori tidak valid --}}
                             @error('kode_kategori')
@@ -44,8 +45,9 @@
                     <div class="col-lg-6 col-sm-6 col-12">
                         <div class="form-group">
                             <label for="nama_kategori">Nama Kategori</label>
-                            <input type="text" class="form-control  @error('nama_kategori') is-invalid @enderror" id="nama_kategori" name="nama_kategori"
-                                value="{{ old('nama_kategori') }}" placeholder="Masukkan Nama Kategori">
+                            <input type="text" class="form-control  @error('nama_kategori') is-invalid @enderror"
+                                id="nama_kategori" name="nama_kategori" value="{{ old('nama_kategori') }}"
+                                placeholder="Masukkan Nama Kategori">
 
                             {{-- jika nama_kategori tidak valid --}}
                             @error('nama_kategori')
@@ -60,7 +62,7 @@
                         <div class="form-group">
                             <label for="deskripsi">Deskripsi</label>
                             <textarea class="form-control  @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi"
-                                 placeholder="Masukkan deskripsi pengguna">{{ old('deskripsi') }}</textarea>
+                                placeholder="Masukkan deskripsi pengguna">{{ old('deskripsi') }}</textarea>
 
                             {{-- jika deskripsi tidak valid --}}
                             @error('deskripsi')
@@ -73,6 +75,8 @@
                     {{-- tombol simpan user --}}
                     <div class="col-12">
                         <button type="submit" class="btn btn-submit me-2">Simpan</button>
+                        <a href="{{ route('kategori.index') }}" class="btn btn-cancel">Batal</a>
+
                     </div>
                 </div>
             </form>

@@ -34,8 +34,8 @@
                                 'idD' => 'status_disetujui1',
                                 'options' => [
                                     ['label' => 'Menunggu', 'value' => 'Menunggu', 'class' => 'btn-secondary'],
-                                    ['label' => 'Disetujui', 'value' => 'Disetujui', 'class' => 'btn-success']
-                                ]
+                                    ['label' => 'Disetujui', 'value' => 'Disetujui', 'class' => 'btn-success'],
+                                ],
                             ],
                             [
                                 'class' => 'col-lg-6 col-sm-6 col-12',
@@ -49,8 +49,8 @@
                                 'idD' => 'status_disetujui2',
                                 'options' => [
                                     ['label' => 'Menunggu', 'value' => 'Menunggu', 'class' => 'btn-secondary'],
-                                    ['label' => 'Disetujui', 'value' => 'Disetujui', 'class' => 'btn-success']
-                                ]
+                                    ['label' => 'Disetujui', 'value' => 'Disetujui', 'class' => 'btn-success'],
+                                ],
                             ],
                         ];
                     @endphp
@@ -65,7 +65,8 @@
                                         name="{{ $card['id'] }}" id="{{ $card['id'] }}">
                                         <option value="">Pilih {{ $card['label'] }}</option>
                                         @foreach ($card['items'] as $item)
-                                            <option value="{{ $item->id }}" {{ old($card['id']) == $item->id ? 'selected' : '' }}>
+                                            <option value="{{ $item->id }}"
+                                                {{ old($card['id']) == $item->id ? 'selected' : '' }}>
                                                 {{ $item->{$card['nama']} }}
                                             </option>
                                         @endforeach
@@ -84,7 +85,8 @@
                                         name="{{ $card['id'] }}" id="{{ $card['id'] }}">
                                         <option value="">Pilih {{ $card['label'] }}</option>
                                         @foreach ($card['items'] as $item)
-                                            <option value="{{ $item->id }}" {{ old($card['id']) == $item->id ? 'selected' : '' }}>
+                                            <option value="{{ $item->id }}"
+                                                {{ old($card['id']) == $item->id ? 'selected' : '' }}>
                                                 {{ $item->{$card['nama']} }}
                                             </option>
                                         @endforeach
@@ -102,11 +104,9 @@
                                     <br>
                                     @foreach ($card['options'] as $index => $opt)
                                         <div class="form-check form-check-inline">
-                                            <input type="radio" class="form-check-input" 
-                                                name="{{ $card['for'] }}"
-                                                id="{{ $card['for'] . $index }}" 
-                                                value="{{ $opt['value'] }}"
-                                                {{ old($card['for'], ($card['name'] == 'Serah' ? 'Menunggu' : 'Disetujui')) == $opt['value'] ? 'checked' : '' }}>
+                                            <input type="radio" class="form-check-input" name="{{ $card['for'] }}"
+                                                id="{{ $card['for'] . $index }}" value="{{ $opt['value'] }}"
+                                                {{ old($card['for'], $card['name'] == 'Serah' ? 'Menunggu' : 'Disetujui') == $opt['value'] ? 'checked' : '' }}>
                                             <label class="form-check-label" for="{{ $card['for'] . $index }}">
                                                 <span class="btn {{ $opt['class'] }} btn-sm">{{ $opt['label'] }}</span>
                                             </label>
@@ -122,6 +122,8 @@
 
                     <div class="col-lg-12">
                         <button class="btn btn-submit me-2" type="submit">Simpan</button>
+                        <a href="{{ route('bast.index') }}" class="btn btn-cancel">Batal</a>
+
                     </div>
                 </div>
             </form>

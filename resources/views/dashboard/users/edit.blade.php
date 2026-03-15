@@ -160,6 +160,8 @@
 
                     <div class="col-12">
                         <button class="btn btn-submit me-2" type="submit">Simpan</button>
+                                            <a href="{{ route('users.index') }}" class="btn btn-cancel">Batal</a>
+
                     </div>
                 </div>
             </form>
