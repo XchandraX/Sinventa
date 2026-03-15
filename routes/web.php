@@ -80,6 +80,13 @@ Route::middleware('auth')->group(function () {
     Route::resource('/dashboard/users', UserController::class);
 
     /**
+     * ? Route untuk mengelola data kategori
+     * * karena controller yang digunakan adalah controller resource, maka method route juga pake resource
+     * * 1 route ini bisa menangani: index, create, store, show, edit, update dan destroy
+     */
+    Route::resource('/dashboard/barang', BarangController::class);
+
+    /**
      * ? Route untuk mengelola data bast
      * * karena controller yang digunakan adalah controller resource, maka method route juga pake resource
      * * 1 route ini bisa menangani permintaan: index, create, store, show, edit, update dan destroy
@@ -97,6 +104,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/bast-terima/disetujui', [BastController::class, 'bastTerimaDisetujui'])->name('bast.terima.disetujui');
 
     Route::put('/dashboard/bast-terima/{bast}/setujui', [BastController::class, 'setujuiTerima'])->name('bast.terima.setujui');
+    // ? Route untuk download QRCode Barang dari halaman show detail barang
+    Route::get('/dashboard/barang/{barang}/download-qrcode', [BarangController::class, 'downloadQr'])->name('barang.downloadQr');
 });
 
 /**
@@ -137,16 +146,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     // ? Route untuk fitur print daftar lokasi barang
     Route::get('/dashboard/print-lokasi', [LokasiController::class, 'print'])->name('lokasi.print');
-
-    /**
-     * ? Route untuk mengelola data kategori
-     * * karena controller yang digunakan adalah controller resource, maka method route juga pake resource
-     * * 1 route ini bisa menangani: index, create, store, show, edit, update dan destroy
-     */
-    Route::resource('/dashboard/barang', BarangController::class);
-
-    // ? Route untuk download QRCode Barang dari halaman show detail barang
-    Route::get('/dashboard/barang/{barang}/download-qrcode', [BarangController::class, 'downloadQr'])->name('barang.downloadQr');
 
     // ? Route untuk fitur ekspor data barang ke file dpf
     Route::get('/dashboard/expor/barang-to/pdf', [BarangController::class, 'exportToPdf'])->name('barang.exportToPdf');

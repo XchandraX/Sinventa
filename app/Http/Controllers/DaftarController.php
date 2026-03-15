@@ -34,7 +34,7 @@ class DaftarController extends Controller
             'password' => 'required|string|min:8|max:32|confirmed',
             'role' => 'required|in:admin,user',
             'lembaga' => 'required|string|max:100',
-            'reg_code' => 'required', // Input kode dari form
+            'reg_code' => 'required',
         ], [
             'required' => 'Kolom :attribute nggak boleh kosong!!.',
             'unique' => 'Kolom :attribute sudah ada yg pakai!!.',

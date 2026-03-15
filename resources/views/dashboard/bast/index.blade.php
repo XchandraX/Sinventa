@@ -120,7 +120,7 @@
 
                     {{-- tombol filter data --}}
                     <div class="col-lg-2 col-6 mb-3">
-                        <button class="btn btn-warning" type="submit"><i class="bi bi-funnel"></i></button>
+                        <button class="btn btn-card" type="submit"><i class="bi bi-funnel"></i></button>
 
                         @if (request('kategori') || request('lokasi') || request('status_barang') || request('status_bast'))
                             <a href="{{ route('bast.index') }}" class="btn btn-danger">

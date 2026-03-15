@@ -1,38 +1,39 @@
 :root {
     /* Light Mode (Default) */
-    --primary: #4ade80;
-    --primary-hover: #3b9e5e;
-    
+    --primary: #ff9f42;
+    --primary-hover: #fef7e9;
+
     /* Background */
     --bg-primary: #ffffff;
     --bg-secondary: #f8fafc;
-    --bg-dark: #ffffff; /* untuk kompatibilitas */
-    
+    --bg-dark: #ffffff;
+
     /* Cards & Components */
     --card-bg: #ffffff;
+    --card-content: #ff9f42;
     --sidebar-bg: #ffffff;
     --header-bg: #ffffff;
     --table-header-bg: #f8fafc;
     --table-row-hover: #f1f5f9;
     --hover-bg: #f1f5f9;
-    
+
     /* Text */
     --text-main: #0f172a;
     --text-primary: #0f172a;
     --text-secondary: #334155;
     --text-muted: #64748b;
-    
+
     /* Borders */
     --border-color: #e2e8f0;
     --input-border: #cbd5e1;
-    
+
     /* Inputs */
     --input-bg: #ffffff;
-    
+
     /* Accent Colors */
-    --blue: #3498db;
-    --accent-blue: #3b82f6;
-    --gray: #f1f5f9;
+    --blue: #ff9f42;
+    --accent-blue: #ffaa00;
+    --gray: #cecfcf;
     --accent-gray: #e2e8f0;
     --error: #f87171;
     --green: #2ecc71;
@@ -41,32 +42,36 @@
 
 /* Dark Mode */
 [data-theme="dark"] {
+    --primary: #4ade80;
+    --primary-hover: #3b9e5e;
+
     /* Background */
     --bg-primary: #0f172a;
     --bg-secondary: #1e293b;
     --bg-dark: #0f172a;
-    
+
     /* Cards & Components */
     --card-bg: #1e293b;
+    --card-content: #2ecc71;
     --sidebar-bg: #1e293b;
     --header-bg: #1e293b;
     --table-header-bg: #262f40;
     --table-row-hover: #2d3748;
     --hover-bg: #2d3748;
-    
+
     /* Text */
     --text-main: #f8fafc;
     --text-primary: #f8fafc;
     --text-secondary: #cbd5e1;
     --text-muted: #94a3b8;
-    
+
     /* Borders */
     --border-color: #334155;
     --input-border: #4b5563;
-    
+
     /* Inputs */
     --input-bg: #1e293b;
-    
+
     /* Accent Colors - tetap sama */
     --blue: #3498db;
     --accent-blue: #3b82f6;

@@ -8596,6 +8596,6 @@ form button .bi-trash:hover {
     /* warna merah tetap sama di dark mode */
 }
 
-.bg-card {
+.bg-card, .btn-card {
     background-color: var(--card-content);
 }

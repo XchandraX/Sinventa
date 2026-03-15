@@ -30,8 +30,13 @@
     <div class="page-header">
         {{-- judul halaman --}}
         <div class="page-title">
-            <h4>{{ $title }}}}</h4>
+            <h4>{{ $title }}</h4>
             <h6>Lihat detail barang inventaris</h6>
+        </div>
+        <div class="page-btn">
+            <a href="{{ route('barang.index') }}" class="btn btn-added">
+                Kembali
+            </a>
         </div>
     </div>
 
@@ -137,95 +142,96 @@
             @endif
         </div>
     </div>
+    
+    {{-- jika user yang login adalah role - admin --}}
+    @if (Auth::user()->role == 'admin')
+        {{-- card untuk menampilkan riwayat bast barang --}}
+        <div class="card">
+            <div class="card-body">
+                {{-- jika tiak ada berita acara untuk barang ini --}}
+                @if ($basts->isEmpty())
+                    {{-- tampilkan pesan informasi --}}
+                    <div class="card-title">
+                        Belum Ada Riwayat Serah Terima Barang untuk {{ $barang->nama_barang }} dengan
+                        Kode {{ $barang->kode_barang }}
+                    </div>
+                    {{-- jika ada berita acara untuk barang ini --}}
+                @else
+                    {{-- judul card --}}
+                    <div class="card-title">
+                        Riwayat Berita Acara Serah Terima Barang : {{ $barang->nama_barang }}
+                    </div>
 
-    {{-- card untuk menampilkan riwayat bast barang --}}
-    <div class="card">
-        <div class="card-body">
-            {{-- jika tiak ada berita acara untuk barang ini --}}
-            @if ($basts->isEmpty())
-                {{-- tampilkan pesan informasi --}}
-                <div class="card-title">
-                    Belum Ada Riwayat Serah Terima Barang untuk {{ $barang->nama_barang }} dengan
-                    Kode {{ $barang->kode_barang }}
-                </div>
-                {{-- jika ada berita acara untuk barang ini --}}
-            @else
-                {{-- judul card --}}
-                <div class="card-title">
-                    Riwayat Berita Acara Serah Terima Barang : {{ $barang->nama_barang }}
-                </div>
-
-                {{-- kolom pencarian --}}
-                <div class="table-top">
-                    <div class="search-set">
-                        <div class="search-input">
-                            <a class="btn btn-searchset"><i class="bi bi-search"></i></a>
+                    {{-- kolom pencarian --}}
+                    <div class="table-top">
+                        <div class="search-set">
+                            <div class="search-input">
+                                <a class="btn btn-searchset"><i class="bi bi-search"></i></a>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                {{-- table riwayat berita acara --}}
-                <div class="table-responsive">
-                    <table class="table datanew">
+                    {{-- table riwayat berita acara --}}
+                    <div class="table-responsive">
+                        <table class="table datanew">
 
-                        {{-- judul kolom --}}
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Nama Barang</th>
-                                <th>Penyerah</th>
-                                <th>Penerima</th>
-                                <th>Status</th>
-                                {{-- jika user yang login adalah role = admin --}}
-                                @if (Auth::user()->role == 'admin')
-                                    <th>Aksi</th>
-                                @endif
-                            </tr>
-                        </thead>
-
-                        {{-- isi table --}}
-                        <tbody>
-                            {{-- tampilkan berita acara satu persatu menggunakan perulangan --}}
-                            @foreach ($basts as $bats)
+                            {{-- judul kolom --}}
+                            <thead>
                                 <tr>
-                                    <td>{{ $loop->iteration }}}</td>
-                                    <td>{{ $barang->nama_barang }}</td>
-                                    <td>
-                                        @if ($bats->status_serah == 'Menunggu')
-                                            <span class="btn btn-sm text-white bg-secondary">
-                                                <i class="bi bi-hourglass-split"></i>
-                                            </span>
-                                        @else
-                                            <span class="btn btn-sm text-white bg-success">
-                                                <i class="bi bi-check-circle"></i>
-                                            </span>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if ($bats->status_terima == 'Menunggu')
-                                            <span class="btn btn-sm text-white bg-secondary">
-                                                <i class="bi bi-hourglass-split"></i>
-                                            </span>
-                                        @else
-                                            <span class="btn btn-sm text-white bg-success">
-                                                <i class="bi bi-check-circle"></i>
-                                            </span>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if ($bats->status_serah == 'Disetujui' && $bats->status_terima == 'Disetujui')
-                                            <span class="btn btn-sm text-white bg-success">
-                                                <i class="bi bi-check-circle"></i> Disetujui
-                                            </span>
-                                        @else
-                                            <span class="btn btn-sm text-white bg-secondary">
-                                                <i class="bi bi-hourglass-split"></i> Menunggu
-                                            </span>
-                                        @endif
-                                    </td>
-
-                                    {{-- jika user yang login adalah role - admin --}}
+                                    <th>#</th>
+                                    <th>Nama Barang</th>
+                                    <th>Penyerah</th>
+                                    <th>Penerima</th>
+                                    <th>Status</th>
+                                    {{-- jika user yang login adalah role = admin --}}
                                     @if (Auth::user()->role == 'admin')
+                                        <th>Aksi</th>
+                                    @endif
+                                </tr>
+                            </thead>
+
+                            {{-- isi table --}}
+                            <tbody>
+                                {{-- tampilkan berita acara satu persatu menggunakan perulangan --}}
+                                @foreach ($basts as $bats)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $barang->nama_barang }}</td>
+                                        <td>
+                                            @if ($bats->status_serah == 'Menunggu')
+                                                <span class="btn btn-sm text-white bg-secondary">
+                                                    <i class="bi bi-hourglass-split"></i>
+                                                </span>
+                                            @else
+                                                <span class="btn btn-sm text-white bg-success">
+                                                    <i class="bi bi-check-circle"></i>
+                                                </span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($bats->status_terima == 'Menunggu')
+                                                <span class="btn btn-sm text-white bg-secondary">
+                                                    <i class="bi bi-hourglass-split"></i>
+                                                </span>
+                                            @else
+                                                <span class="btn btn-sm text-white bg-success">
+                                                    <i class="bi bi-check-circle"></i>
+                                                </span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($bats->status_serah == 'Disetujui' && $bats->status_terima == 'Disetujui')
+                                                <span class="btn btn-sm text-white bg-success">
+                                                    <i class="bi bi-check-circle"></i> Disetujui
+                                                </span>
+                                            @else
+                                                <span class="btn btn-sm text-white bg-secondary">
+                                                    <i class="bi bi-hourglass-split"></i> Menunggu
+                                                </span>
+                                            @endif
+                                        </td>
+
+
                                         <td>
                                             {{-- tampilkan tombol cetak berita acara --}}
                                             <a href="{{ route('barang.downloadQr', $barang) }}" class="me-3">
@@ -253,13 +259,14 @@
                                                 </button>
                                             </form>
                                         </td>
-                                    @endif
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            @endif
+
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @endif
+            </div>
         </div>
-    </div>
+    @endif
 @endsection

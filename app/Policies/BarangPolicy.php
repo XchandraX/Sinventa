@@ -14,7 +14,7 @@ class BarangPolicy
     public function viewAny(User $user): bool
     {
         // ? hanya user dengan role = admin yang bisa melihat data barang
-        return $user->role == 'admin';
+        return true;
     }
 
     /**

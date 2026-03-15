@@ -3,7 +3,6 @@
 
 {{-- ? tuli kode htm luntuk halaman index user di antara section --}}
 @section('konten')
-
     {{-- ! konten utama halaman dashboard ditulis di sini --}}
     <div class="page-header">
         {{-- judul halaman --}}
@@ -11,12 +10,14 @@
             <h4>{{ $title }}</h4>
             <h6>Lihat atau cari barang inventaris</h6>
         </div>
-        {{-- tombol tambah barang baru --}}
-        <div class="page-btn">
-            <a href="{{ route('barang.create') }}" class="btn btn-added">
-                <i class="bi bi-plus-circle"></i> Tambah Barang
-            </a>
-        </div>
+        @if (Auth::user()->role == 'admin')
+            {{-- tombol tambah barang baru --}}
+            <div class="page-btn">
+                <a href="{{ route('barang.create') }}" class="btn btn-added">
+                    <i class="bi bi-plus-circle"></i> Tambah Barang
+                </a>
+            </div>
+        @endif
     </div>
 
     {{-- card list barang --}}
@@ -31,32 +32,34 @@
                     </div>
                 </div>
 
-                {{-- menu ekspor barang --}}
-                <div class="wordset">
-                    <ul>
+                @if (Auth::user()->role == 'admin')
+                    {{-- menu ekspor barang --}}
+                    <div class="wordset">
+                        <ul>
 
-                        {{-- tombol ekspor pdf --}}
-                        <li>
-                            <a href="{{ route('barang.exportToPdf') }}">
-                                <img src="{{ asset('assets/icon/pdf.svg') }}" alt="img">
-                            </a>
-                        </li>
+                            {{-- tombol ekspor pdf --}}
+                            <li>
+                                <a href="{{ route('barang.exportToPdf') }}">
+                                    <img src="{{ asset('assets/icon/pdf.svg') }}" alt="img">
+                                </a>
+                            </li>
 
-                        {{-- tombol ekspor excel --}}
-                        <li>
-                            <a href="{{ route('barang.exportToExcel') }}">
-                                <img src="{{ asset('assets/icon/excel.svg') }}" alt="img">
-                            </a>
-                        </li>
+                            {{-- tombol ekspor excel --}}
+                            <li>
+                                <a href="{{ route('barang.exportToExcel') }}">
+                                    <img src="{{ asset('assets/icon/excel.svg') }}" alt="img">
+                                </a>
+                            </li>
 
-                        {{-- tombol ekspor printer --}}
-                        <li>
-                            <a href="{{ route('barang.print') }}">
-                                <img src="{{ asset('assets/icon/printer.svg') }}" alt="img">
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                            {{-- tombol ekspor printer --}}
+                            <li>
+                                <a href="{{ route('barang.print') }}">
+                                    <img src="{{ asset('assets/icon/printer.svg') }}" alt="img">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                @endif
             </div>
 
             {{-- form filter data --}}
@@ -110,7 +113,7 @@
                     <div class="col-lg-2 col-6 mb-3">
 
                         {{-- tombol cari data berdasrkan filter yang dipilih --}}
-                        <button class="btn btn-warning" type="submit"><i class="bi bi-funnel"></i></button>
+                        <button class="btn btn-card" type="submit"><i class="bi bi-funnel"></i></button>
 
                         {{-- jika ada request filter data --}}
                         @if (request('kategori') || request('lokasi') || request('status'))
@@ -182,21 +185,23 @@
                                             <i class="bi bi-eye"></i>
                                         </a>
 
-                                        {{-- tombol edit barang --}}
-                                        <a href="{{ route('barang.edit', $barang) }}" class="me-3">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
+                                        @if (Auth::user()->role == 'admin')
+                                            {{-- tombol edit barang --}}
+                                            <a href="{{ route('barang.edit', $barang) }}" class="me-3">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
 
-                                        {{-- tombol hapus barang --}}
-                                        <form action="{{ route('barang.destroy', $barang) }}" method="post"
-                                            class="d-inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="confirm-text btn p-0 m-0" type="submit"
-                                                onclick="return confirm('Yakin ingin menghapus barang {{ $barang->nama_barang }}?')">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </form>
+                                            {{-- tombol hapus barang --}}
+                                            <form action="{{ route('barang.destroy', $barang) }}" method="post"
+                                                class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="confirm-text btn p-0 m-0" type="submit"
+                                                    onclick="return confirm('Yakin ingin menghapus barang {{ $barang->nama_barang }}?')">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

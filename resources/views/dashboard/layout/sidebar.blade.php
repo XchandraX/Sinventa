@@ -140,6 +140,14 @@
                             <i class="bi bi-speedometer2"></i>
                             <span>Dashboard</span>
                         </a>
+
+                    </li>
+                    <li>
+                        <a href="{{ route('barang.index') }}"
+                                    class="{{ Request::is('dashboard/barang') ? 'active' : '' }}">
+                            <i class="bi bi-box-seam"></i>
+                            <span>Barang</span>
+                        </a>
                     </li>
 
                     {{-- menu halaman berita acara sebagai penyerah --}}
@@ -154,7 +162,8 @@
                                     class="{{ Request::is('dashboard/bast-serah/menunggu') ? 'active' : '' }}">Menunggu
                                     Disetujui</a></li>
                             <li><a href="{{ route('bast.serah.disetujui') }}"
-                                    class="{{ Request::is('dashboard/bast-serah/disetujui') ? 'active' : '' }}">Riwayat BAST</a></li>
+                                    class="{{ Request::is('dashboard/bast-serah/disetujui') ? 'active' : '' }}">Riwayat
+                                    BAST</a></li>
                         </ul>
                     </li>
 
@@ -167,9 +176,11 @@
                         </a>
                         <ul>
                             <li><a href="{{ route('bast.terima.menunggu') }}"
-                                    class="{{ Request::is('dashboard/bast-terima/menunggu') ? 'active' : '' }}">Menunggu Disetujui</a></li>
+                                    class="{{ Request::is('dashboard/bast-terima/menunggu') ? 'active' : '' }}">Menunggu
+                                    Disetujui</a></li>
                             <li><a href="{{ route('bast.terima.disetujui') }}"
-                                    class="{{ Request::is('dashboard/bast-terima/disetujui') ? 'active' : '' }}">Riwayat BAST</a></li>
+                                    class="{{ Request::is('dashboard/bast-terima/disetujui') ? 'active' : '' }}">Riwayat
+                                    BAST</a></li>
                         </ul>
                     </li>
                 </ul>
