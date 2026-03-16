@@ -164,7 +164,7 @@ class UserController extends Controller
         $user->update($validatedDate);
 
         // ? 10. kembali ke halaman edit user sambil kirim pesan konfirmasi berhasil
-        return redirect()->route('users.edit', $user)->with('berhasil', 'Yeaay! Data Pengguna berhasil diperbarui.');
+        return redirect()->route('users.index', $user)->with('berhasil', 'Yeaay! Data Pengguna berhasil diperbarui.');
 
     }
 
