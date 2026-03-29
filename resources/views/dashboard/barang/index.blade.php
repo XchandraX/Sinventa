@@ -53,7 +53,7 @@
 
                             {{-- tombol ekspor printer --}}
                             <li>
-                                <a href="{{ route('barang.print') }}">
+                                <a href="{{ route('barang.print') }}" target="_blank">
                                     <img src="{{ asset('assets/icon/printer.svg') }}" alt="img">
                                 </a>
                             </li>

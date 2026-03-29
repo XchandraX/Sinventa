@@ -91,7 +91,7 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         // ? alihkan ke halaman login
-        return redirect()->route('login');
+        return redirect()->route('/');
     }
 
 

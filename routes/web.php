@@ -24,17 +24,22 @@ use Illuminate\Support\Facades\Route;
  * ! "Guest" = "Tamu" artinya orang yang belum masuk / belum login ke sistem
  */
 Route::middleware('guest')->group(function () {
+
+    Route::get('/', function () {
+        return view('index');
+    })->name('/');
+
     /**
      * ? Route untuk menampilkan halaman form login
      * * Panggil AuthController lalu menjalankan function 'index'
      */
-    Route::get('/', [AuthController::class, 'index'])->name('login');
+    Route::get('/login', [AuthController::class, 'index'])->name('login');
 
     /**
      * ? Route untu menampilkan halaman form pendaftaran user
      * * Panggil DaftarController lalu menjalankan function 'index'
      */
-    Route::get('/chx1xhc', [DaftarController::class, 'index'])->name('daftar.index');
+    Route::get('/register', [DaftarController::class, 'index'])->name('daftar.index');
 
     /**
      * ? Route untuk simpan data user ke database (store)
@@ -92,7 +97,7 @@ Route::middleware('auth')->group(function () {
      * * 1 route ini bisa menangani permintaan: index, create, store, show, edit, update dan destroy
      */
     Route::resource('/dashboard/bast', BastController::class);
-    
+
     Route::get('/dashboard/bast-serah/menunggu', [BastController::class, 'bastSerahMenunggu'])->name('bast.serah.menunggu');
 
     Route::get('/dashboard/bast-serah/disetujui', [BastController::class, 'bastSerahDisetujui'])->name('bast.serah.disetujui');

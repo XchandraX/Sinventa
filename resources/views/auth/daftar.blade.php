@@ -184,9 +184,10 @@
         </form>
         {{-- form pendaftaran selesai --}}
 
+
         {{-- link menuju halam login --}}
         <div class="mt-4 text-center">
-            <span>Sudah punya akun? <a href="{{ route('login') }}" style="color: green;">Login</a></span>
+            <span>Sudah punya akun? <a href="{{ route('login') }}">Login</a></span>
         </div>
     </div>
 @endsection

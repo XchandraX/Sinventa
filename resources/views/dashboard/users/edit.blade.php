@@ -118,7 +118,7 @@
                     @endif
 
                     <hr>
-                    <h6 class="mb-3">Kosongkan password jika tidak ingin diubahF!</h6>
+                    <h6 class="mb-3">Kosongkan password jika tidak ingin diubah!</h6>
 
                     {{-- kolom password --}}
                     <div class="col-lg-6 col-sm-12">
