@@ -27,34 +27,64 @@
 
 <body>
     <main>
-        <div class="header"
-            style="position: sticky; background: var(--header-bg); border-bottom: 1px solid var(--border-color);">
-            <div class="header-left">
-                {{-- Logo Dashboard --}}
-                <a href="{{ url('/') }}" class="logo">
-                    <img src="{{ asset('assets/icon/logo.png') }}" alt="Sinvesta">
-                </a>
 
-                {{-- Logo Dashboard saat sidebar disembunyikan --}}
-                <a href="{{ url('/') }}" class="logo-small">
-                    <img src="{{ asset('assets/icon/favicon.png') }}" alt="Sinvesta">
+        <div class="header"
+            style="position: sticky; top: 0; background: var(--header-bg); border-bottom: 1px solid var(--border-color); z-index: 1000;">
+
+            <div class="header-left">
+                <a href="{{ url('/') }}" class="logo">
+                    <img src="{{ asset('assets/icon/SMKM2KNG.png') }}" alt="Sinvesta">
                 </a>
             </div>
 
-            {{-- menu bagian kanan untuk guest --}}
-            <ul class="nav user-menu">
-                {{-- Tombol toggle mode --}}
+            <!-- MENU DESKTOP -->
+            <ul class="nav user-menu align-items-center">
+
+                <!-- Mode -->
                 <li class="nav-item">
-                    <button id="theme-toggle" class="theme-toggle">
+                    <button id="theme-toggle" class="theme-toggle d-flex align-items-center">
+                        <span class="light-icon"><i class="bi bi-moon-fill"></i></span>
+                        <span class="dark-icon"><i class="bi bi-sun-fill"></i></span>
+                        <span class="mode-text ms-1">Mode</span>
+                    </button>
+                </li>
+
+                <li class="nav-item">
+                    <button class="theme-toggle d-flex align-items-center">
+                        <a href="{{ url('/') }}">
+                            <i class="bi bi-house-door me-1"></i>
+                            <span>Beranda</span>
+                        </a>
+                    </button>
+                </li>
+
+            </ul>
+
+            <!-- HAMBURGER MOBILE -->
+            <div class="dropdown mobile-user-menu d-md-none">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                    <i class="bi bi-list fs-4"></i>
+                </a>
+
+                <div class="dropdown-menu dropdown-menu-end p-2">
+
+                    <!-- Mode -->
+                    <button id="theme-toggle-mobile" class="theme-toggle w-100 mb-2">
                         <span class="light-icon"><i class="bi bi-moon-fill"></i></span>
                         <span class="dark-icon"><i class="bi bi-sun-fill"></i></span>
                         <span class="mode-text">Mode</span>
                     </button>
-                </li>
-            </ul>
 
+                    <!-- Beranda -->
+                    <a href="{{ url('/') }}" class="dropdown-item">
+                        <i class="bi bi-house-door me-2"></i>Beranda
+                    </a>
+
+                </div>
+            </div>
 
         </div>
+
         <section class="p-0 d-flex align-items-center position-relative overflow-hidden">
             <div class="container-fluid">
                 <div class="row">

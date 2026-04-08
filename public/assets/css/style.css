@@ -101,7 +101,7 @@
 }
 
 .css-equal-content {
-    color: red;
+    color: var(--bg-primary);
     float: left;
 }
 
@@ -3389,25 +3389,36 @@ table.dataTable>thead .sorting_desc_disabled:before {
     font-size: 12px;
     font-weight: 600;
 }
-
 .theme-toggle {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 30px;
-    padding: 5px 12px;
+    padding: 6px 15px; /* Sedikit lebih lebar agar proporsional */
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 8px;
     color: var(--text-primary);
     font-size: 14px;
-    transition: all 0.3s ease;
+    font-weight: 500; /* Agar teks lebih jelas */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     margin-right: 15px;
     margin-top: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Shadow tipis */
 }
 
 .theme-toggle:hover {
     background: var(--hover-bg);
+    transform: translateY(-1px); /* Efek melayang halus */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.theme-toggle i {
+    transition: transform 0.4s ease; /* Transisi untuk ikon di dalam */
+}
+
+.theme-toggle:hover i {
+    transform: rotate(15deg); /* Ikon sedikit miring saat di-hover */
 }
 
 /* Default (light mode) - tampilkan bulan */
@@ -3416,17 +3427,41 @@ table.dataTable>thead .sorting_desc_disabled:before {
 }
 
 .theme-toggle .dark-icon {
-    display: inline-block;
+    display: inline-flex; /* Menggunakan flex agar ikon di tengah */
+    align-items: center;
+    color: #4361ee; /* Warna biru khas malam/bulan */
 }
 
 /* Dark mode - tampilkan matahari */
 [data-theme="dark"] .theme-toggle .light-icon {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    color: #fbbc05; /* Warna kuning matahari */
 }
 
 [data-theme="dark"] .theme-toggle .dark-icon {
     display: none;
 }
+
+/* Mode HP */
+@media (max-width: 768px) {
+    .theme-toggle {
+        background: none;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        margin: 0;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .theme-toggle:hover {
+        background: none;
+        transform: none;
+        box-shadow: none;
+    }
+}
+
 
 .custom-select {
     min-width: 80px;

@@ -146,7 +146,7 @@
         <div class="header-left">
             {{-- Logo Dashboard --}}
             <a href="{{ url('/') }}" class="logo">
-                <img src="{{ asset('assets/icon/logo.png') }}" alt="Sinvesta">
+                <img src="{{ asset('assets/icon/SMKM2KNG.png') }}" alt="Sinvesta">
             </a>
 
             {{-- Logo Dashboard saat sidebar disembunyikan --}}
@@ -220,8 +220,6 @@
     <div class="page-wrapper {{ !Auth::check() ? 'm-0 p-0' : '' }}">
         <div class="container py-4">
 
-
-
             {{-- Hero Section --}}
             <div class="row mb-5">
                 <div class="col-12">
@@ -230,48 +228,15 @@
                             <i class="bi bi-box-seam me-2"></i>SINVESTA
                         </h1>
                         <p class="lead mb-4 text-muted">Sistem Inventaris Sarana dan Prasarana Sekolah</p>
-                        <p class="mb-4">Demo interaktif pengelolaan aset sekolah yang modern, efisien, dan mudah
-                            digunakan.</p>
+
                         <div class="d-flex flex-wrap gap-3 justify-content-center">
                             <a href="{{ route('login') }}" class="btn btn-demo">
-                                <i class="bi bi-box-arrow-in-right me-2"></i>Login Sebagai Petugas
+                                <i class="bi bi-box-arrow-in-right me-2"></i>Login
                             </a>
                             <a href="{{ route('daftar.index') }}" class="btn btn-demo">
-                                <i class="bi bi-box-arrow-in-right me-2"></i>Login Sebagai Petugas
+                                <i class="bi bi-box-arrow-in-right me-2"></i>Daftar
                             </a>
                         </div>
-                    </div>
-                </div>
-            </div>
-
-            {{-- Statistik Ringkas --}}
-            <div class="row mb-5 g-4">
-                <div class="col-md-3 col-6">
-                    <div class="guest-stat-card p-3 text-center">
-                        <i class="bi bi-cpu stat-icon" style="color: var(--primary);"></i>
-                        <h3 class="fw-bold mt-2 mb-0">124</h3>
-                        <p class="text-muted small mb-0">Total Aset</p>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6">
-                    <div class="guest-stat-card p-3 text-center">
-                        <i class="bi bi-check-circle-fill stat-icon" style="color: #2ecc71;"></i>
-                        <h3 class="fw-bold mt-2 mb-0">98</h3>
-                        <p class="text-muted small mb-0">Tersedia</p>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6">
-                    <div class="guest-stat-card p-3 text-center">
-                        <i class="bi bi-person-check stat-icon" style="color: #f1c40f;"></i>
-                        <h3 class="fw-bold mt-2 mb-0">18</h3>
-                        <p class="text-muted small mb-0">Dipinjam</p>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6">
-                    <div class="guest-stat-card p-3 text-center">
-                        <i class="bi bi-tools stat-icon" style="color: #e74c3c;"></i>
-                        <h3 class="fw-bold mt-2 mb-0">8</h3>
-                        <p class="text-muted small mb-0">Perawatan</p>
                     </div>
                 </div>
             </div>
@@ -323,83 +288,65 @@
                                 <table class="table table-guest align-middle mb-0">
                                     <thead>
                                         <tr>
-                                            <th>Kode Barang</th>
+                                            <th>#</th>
+                                            <th>Kode</th>
                                             <th>Nama Barang</th>
                                             <th>Kategori</th>
                                             <th>Kondisi</th>
-                                            <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><span
-                                                    class="badge bg-light text-dark border px-3 py-2 rounded-pill">LAB-001</span>
+                                            <td>1</td>
+                                            <td><span>LAB-001</span>
                                             </td>
                                             <td class="fw-semibold">PC All-in-One Core i5</td>
                                             <td>Komputer</td>
-                                            <td><span
-                                                    class="badge-condition bg-success bg-opacity-10 text-success">Baik</span>
-                                            </td>
-                                            <td><span class="badge-status-available px-3 py-1 rounded-pill"><i
-                                                        class="bi bi-check-circle-fill me-1 small"></i>Tersedia</span>
+                                            <td><span class="btn btn-sm text-white bg-success">Baik</span>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><span
-                                                    class="badge bg-light text-dark border px-3 py-2 rounded-pill">PRJ-045</span>
+                                            <td>2</td>
+                                            <td><span>PRJ-045</span>
                                             </td>
                                             <td class="fw-semibold">Proyektor Epson EB-X41</td>
                                             <td>Elektronik</td>
-                                            <td><span
-                                                    class="badge-condition bg-warning bg-opacity-10 text-warning">Kurang
+                                            <td><span class="btn btn-sm text-white bg-warning">Kurang
                                                     Baik</span></td>
-                                            <td><span class="badge-status-maintenance px-3 py-1 rounded-pill"><i
-                                                        class="bi bi-tools me-1 small"></i>Perawatan</span></td>
                                         </tr>
                                         <tr>
-                                            <td><span
-                                                    class="badge bg-light text-dark border px-3 py-2 rounded-pill">MES-032</span>
+                                            <td>3</td>
+                                            <td><span>MES-032</span>
                                             </td>
                                             <td class="fw-semibold">Meja Siswa 2 Dudukan</td>
                                             <td>Furniture</td>
-                                            <td><span
-                                                    class="badge-condition bg-success bg-opacity-10 text-success">Baik</span>
+                                            <td><span class="btn btn-sm text-white bg-success">Baik</span>
                                             </td>
-                                            <td><span class="badge-status-borrowed px-3 py-1 rounded-pill"><i
-                                                        class="bi bi-person-check me-1 small"></i>Dipinjam</span></td>
                                         </tr>
                                         <tr>
-                                            <td><span
-                                                    class="badge bg-light text-dark border px-3 py-2 rounded-pill">LAB-022</span>
+                                            <td>4</td>
+                                            <td><span>LAB-022</span>
                                             </td>
                                             <td class="fw-semibold">Monitor LED 21 Inch</td>
                                             <td>Komputer</td>
-                                            <td><span
-                                                    class="badge-condition bg-success bg-opacity-10 text-success">Baik</span>
-                                            </td>
-                                            <td><span class="badge-status-available px-3 py-1 rounded-pill"><i
-                                                        class="bi bi-check-circle-fill me-1 small"></i>Tersedia</span>
+                                            <td><span class="btn btn-sm text-white bg-success">Baik</span>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><span
-                                                    class="badge bg-light text-dark border px-3 py-2 rounded-pill">SPK-011</span>
+                                            <td>5</td>
+                                            <td><span>SPK-011</span>
                                             </td>
                                             <td class="fw-semibold">Speaker Aktif 15 Watt</td>
                                             <td>Elektronik</td>
-                                            <td><span
-                                                    class="badge-condition bg-danger bg-opacity-10 text-danger">Rusak</span>
+                                            <td><span class="btn btn-sm text-white bg-danger">Rusak</span>
                                             </td>
-                                            <td><span class="badge-status-maintenance px-3 py-1 rounded-pill"><i
-                                                        class="bi bi-tools me-1 small"></i>Perawatan</span></td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                         <div class="card-footer bg-transparent border-0 text-center py-3">
-                            <small class="text-muted">*Data di atas merupakan contoh. Untuk pengelolaan penuh, silakan
-                                login sebagai petugas.</small>
+                            <small class="text-muted">*Data di atas merupakan contoh.</small>
                         </div>
                     </div>
                 </div>
@@ -410,11 +357,11 @@
                 <div class="col-12 text-center">
                     <div class="p-4 rounded-3"
                         style="background: var(--bg-secondary); border: 1px solid var(--border-color);">
-                        <h4 class="fw-bold">Tertarik Mengelola Inventaris Sekolah?</h4>
-                        <p class="text-muted mb-3">Demo ini menunjukkan kemudahan dalam memantau dan mengelola aset
-                            sekolah.</p>
-                        <a href="{{ route('login') }}" class="btn btn-demo">
-                            <i class="bi bi-key me-2"></i>Coba Sekarang (Login Demo)
+                        <h4 class="fw-bold">Siap Mengelola Inventaris Sekolah?</h4>
+                        <p class="text-muted mb-3">Masuk ke sistem untuk akses penuh fitur manajemen aset dan
+                            pelaporan.</p>
+                        <a href="{{ route('login') }}" class="btn btn-demo px-4 py-2 fw-semibold">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>Masuk ke Dashboard
                         </a>
                     </div>
                 </div>

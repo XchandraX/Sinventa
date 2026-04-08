@@ -22,154 +22,129 @@
             {{-- csrf token untuk keamanan --}}
             @csrf
 
-            {{-- nama lengkap --}}
-            <div class="mb-4"><div class="form-group">
-                <label for="nama_lengkap" class="form-label">Nama Lengkap</label>
-                <input type="text" id="nama_lengkap" class="form-control @error('nama_lengkap') is-invalid @enderror"
-                    name="nama_lengkap" placeholder="Isi Nama Lengkap" value="{{ old('nama_lengkap') }}" autofocus>
+            @php
+                $cards = [
+                    ['id' => 'name', 'label' => 'Nama Lengkap', 'place' => 'Isi Nama Lengkap'],
+                    ['id' => 'username', 'label' => 'Username', 'place' => 'Isi UserName'],
+                    ['id' => 'email', 'label' => 'Email', 'place' => 'Isi Email'],
+                ];
+                $cards2 = [
+                    ['id' => 'password', 'label' => 'Password', 'place' => 'Isi Password'],
+                    [
+                        'id' => 'password_confirmation',
+                        'label' => 'Konfirmasi Password',
+                        'place' => 'Isi Konfirmasi Password',
+                    ],
+                ];
+            @endphp
 
-                {{-- jika nama_lengkap tidak valid --}}
-                @error('nama_lengkap')
-                    <div class="invalid-feedback" id="nama_lengkap">
-                        {{-- tampilkan pesan error --}}
-                        {{ $message }}
+            @foreach ($cards as $card)
+                <div class="mb-4">
+                    <div class="form-group">
+                        <label for="{{ $card['id'] }}" class="form-label">{{ $card['label'] }}</label>
+                        <input type="text" id="{{ $card['id'] }}"
+                            class="form-control @error($card['id']) is-invalid @enderror" name="{{ $card['id'] }}"
+                            placeholder="{{ $card['place'] }}" value="{{ old($card['id']) }}" autofocus>
+
+                        {{-- jika"{{ $card['id'] }}"tidak valid --}}
+                        @error($card['id'])
+                            <div class="invalid-feedback" id="{{ $card['id'] }}">
+                                {{-- tampilkan pesan error --}}
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
-                @enderror
                 </div>
-            </div>
+            @endforeach
 
-            {{-- username --}}
-            <div class="mb-4"><div class="form-group">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" id="username" class="form-control @error('username') is-invalid @enderror"
-                    name="username" value="{{ old('username') }}" placeholder="Isi Username">
-
-                {{-- jika username tidak valid --}}
-                @error('username')
-                    <div class="invalid-feedback" id="username">
-                        {{-- tampilkan pesan error --}}
-                        {{ $message }}
-                    </div>
-                @enderror</div>
-            </div>
-
-            {{-- email --}}
-            <div class="mb-4"><div class="form-group">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" id="email" class="form-control @error('email') is-invalid @enderror"
-                    name="email" value="{{ old('email') }}" placeholder="Isi Email">
-
-                {{-- jika email tidak valid --}}
-                @error('email')
-                    <div class="invalid-feedback" id="email">
-                        {{-- tampilkan pesan error --}}
-                        {{ $message }}
-                    </div>
-                @enderror</div>
-            </div>
 
             {{-- role --}}
             <div class="mb-4">
                 <div class="form-group">
 
-                <label class="d-block form-label">Daftar Sebagai:</label>
+                    <label class="d-block form-label">Daftar Sebagai:</label>
 
-                {{-- admin --}}
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="role" id="role_admin" value="admin"
-                        @if (old('role' == 'admin')) checked @endif>
-                    <label for="role_admin" class="form-check-label">Admin</label>
-                </div>
-
-                {{-- user --}}
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="role" id="role_user" value="user"
-                        @if (old('role' == 'user')) checked @endif>
-                    <label for="role_user" class="form-check-label">User</label>
-                </div>
-
-                {{-- jika role tidak valid --}}
-                @error('role')
-                    <div id="role" class="text-danger">
-                        {{-- tampilkan pesan error --}}
-                        {{ $message }}
+                    {{-- admin --}}
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="role" id="role_admin" value="admin"
+                            @if (old('role' == 'admin')) checked @endif>
+                        <label for="role_admin" class="form-check-label">Admin</label>
                     </div>
-                @enderror
+
+                    {{-- user --}}
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="role" id="role_user" value="user"
+                            @if (old('role' == 'user')) checked @endif>
+                        <label for="role_user" class="form-check-label">User</label>
+                    </div>
+
+                    {{-- jika role tidak valid --}}
+                    @error('role')
+                        <div id="role" class="text-danger">
+                            {{-- tampilkan pesan error --}}
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
             </div>
 
             {{-- lembaga --}}
             <div class="mb-4">
                 <div class="form-group">
-                <label for="lembaga" class="form-label">Lembaga</label>
-                <input type="text" id="lembaga" class="form-control @error('lembaga') is-invalid @enderror"
-                    placeholder="Isi Lembaga" name="lembaga" value="{{ old('lembaga') }}">
+                    <label for="lembaga" class="form-label">Lembaga</label>
+                    <input type="text" id="lembaga" class="form-control @error('lembaga') is-invalid @enderror"
+                        placeholder="Isi Lembaga" name="lembaga" value="{{ old('lembaga') }}">
 
-                {{-- jika lembaga tidak valid --}}
-                @error('lembaga')
-                    <div id="lembaga" class="invalid-feedback">
-                        {{-- tampilkan pesan error --}}
-                        {{ $message }}
-                    </div>
-                @enderror</div>
-            </div>
-
-            {{-- passowrd --}}
-            <div class="mb-4">
-                <div class="form-group">
-                <label for="password" class="form-label">Password</label>
-                <div class="input-group">
-
-                    <input type="password" class="pass-input form-control @error('password') is-invalid @enderror"
-                        name="password" id="password" placeholder="Isi Password">
-
-                    <span class="bi toggle-password bi-eye-slash input-group-text"></span>
-                    {{-- jika password tidak valid --}}
-
-                </div>
-
-                @error('password')
-                    <div id="password" class="invalid-feedback d-block">
-                        {{-- tampilkan pesan error --}}
-                        {{ $message }}
-                    </div>
-                @enderror
+                    {{-- jika lembaga tidak valid --}}
+                    @error('lembaga')
+                        <div id="lembaga" class="invalid-feedback">
+                            {{-- tampilkan pesan error --}}
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
             </div>
 
-            {{-- konfirmasi passowrd --}}
-            <div class="mb-4"><div class="form-group">
-                <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
-                <div class="input-group">
+            @foreach ($cards2 as $card)
+                <div class="mb-4">
+                    <div class="form-group">
+                        <label for="{{ $card['id'] }}" class="form-label">{{ $card['label'] }}</label>
 
-                    <input type="password" id="password_confirmation"
-                        class="pass-input form-control @error('password_confirmation') is-invalid @enderror"
-                        name="password_confirmation" placeholder="Isi Konfirmasi Password">
+                        <div class="input-group">
+                            <input type="text" id="{{ $card['id'] }}"
+                                class="form-control @error($card['id']) is-invalid @enderror" name="{{ $card['id'] }}"
+                                placeholder="{{ $card['place'] }}" value="{{ old($card['id']) }}">
+                            <span class="bi toggle-password bi-eye-slash input-group-text"></span>
+                        </div>
 
-                    <span class="bi toggle-password bi-eye-slash input-group-text"></span>
-                </div>
-
-                {{-- jika tidak valid --}}
-                @error('password_confirmation')
-                    <div id="password_confirmation" class="invalid-feedback d-block">
-                        {{-- tampilkan pesan error --}}
-                        {{ $message }}
+                        {{-- jika password tidak valid --}}
+                        {{-- jika"{{ $card['id'] }}"tidak valid --}}
+                        @error($card['id'])
+                            <div class="invalid-feedback" id="{{ $card['id'] }}">
+                                {{-- tampilkan pesan error --}}
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
-                @enderror</div>
-            </div>
+                </div>
+            @endforeach
+
+
 
             {{-- Kode Registrasi Universal --}}
-            <div class="mb-4"><div class="form-group">
-                <label for="reg_code" class="form-label">Kode Registrasi</label>
-                <input type="text" id="reg_code" name="reg_code"
-                    class="form-control @error('reg_code') is-invalid @enderror"
-                    placeholder="Masukkan kode akses pendaftaran (Dari Admin)">
+            <div class="mb-4">
+                <div class="form-group">
+                    <label for="reg_code" class="form-label">Kode Registrasi</label>
+                    <input type="text" id="reg_code" name="reg_code"
+                        class="form-control @error('reg_code') is-invalid @enderror"
+                        placeholder="Masukkan kode akses pendaftaran (Dari Admin)">
 
-                @error('reg_code')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror</div>
+                    @error('reg_code')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
             </div>
 
             <hr>

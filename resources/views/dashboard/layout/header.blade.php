@@ -3,7 +3,7 @@
     <div class="header-left">
         {{-- Logo Dashboard --}}
         <a href="{{ route('dashboard') }}" class="logo">
-            <img src="{{ asset('assets/icon/logo.png') }}" alt="Sinvesta">
+            <img src="{{ asset('assets/icon/SMKM2KNG.png') }}" alt="Sinvesta">
         </a>
 
         {{-- Logo Dashboard saat sidebar disembunyikan --}}
