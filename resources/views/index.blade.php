@@ -166,54 +166,40 @@
                 </button>
             </li>
 
-            {{-- menu login/register --}}
-            <li class="nav-item dropdown has-arrow main-drop">
-                <a href="#" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
-                    <span class="user-img">
-                        <i class="bi bi-person-circle"></i>
-                        <span class="status online"></span>
-                    </span>
-                    <span class="ms-2 d-none d-md-inline">Tamu</span>
-                </a>
-
-                <div class="dropdown-menu menu-drop-user dropdown-menu-end">
-                    <div class="px-3 py-2 border-bottom">
-                        <small class="text-muted">Akses Terbatas</small>
-                    </div>
-                    <a href="{{ route('login') }}" class="dropdown-item">
-                        <i class="bi bi-box-arrow-in-right me-2"></i>Login Petugas
+            <li class="nav-item">
+                <button class="theme-toggle d-flex align-items-center">
+                    <a href="{{ route('login') }}">
+                        <i class="bi bi-box-arrow-in-right me-1"></i>
+                        <span>Login</span>
                     </a>
-                    <a href="#" class="dropdown-item" onclick="return false;">
-                        <i class="bi bi-info-circle me-2"></i>Mode Demo
-                    </a>
-                </div>
+                </button>
             </li>
+
         </ul>
 
         {{-- menu profil khusus untuk di mobile --}}
-        <div class="dropdown mobile-user-menu">
-            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa fa-ellipsis-v"></i>
-            </a>
+        <!-- HAMBURGER MOBILE -->
+            <div class="dropdown mobile-user-menu d-md-none">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                    <i class="bi bi-list fs-4"></i>
+                </a>
 
-            <div class="dropdown-menu dropdown-menu-right">
-                {{-- Theme toggle untuk mobile --}}
-                <div class="px-3 py-2 border-bottom">
-                    <button id="theme-toggle-mobile" class="theme-toggle w-100">
+                <div class="dropdown-menu dropdown-menu-end p-2">
+
+                    <!-- Mode -->
+                    <button id="theme-toggle-mobile" class="theme-toggle w-100 mb-2">
                         <span class="light-icon"><i class="bi bi-moon-fill"></i></span>
                         <span class="dark-icon"><i class="bi bi-sun-fill"></i></span>
-                        <span class="mode-text">Ganti Mode</span>
+                        <span class="mode-text">Mode</span>
                     </button>
-                </div>
 
-                <a href="{{ route('login') }}" class="dropdown-item">
-                    <i class="bi bi-box-arrow-in-right me-2"></i>Login Petugas
-                </a>
-                <a href="#" class="dropdown-item" onclick="return false;">
-                    <i class="bi bi-info-circle me-2"></i>Tentang Demo
-                </a>
+                    <!-- Beranda -->
+                    <a href="{{ route('login') }}" class="dropdown-item">
+                        <i class="bi bi-box-arrow-in-right me-2"></i>Login
+                    </a>
+
+                </div>
             </div>
-        </div>
     </div>
 
 
