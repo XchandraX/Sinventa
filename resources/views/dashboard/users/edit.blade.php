@@ -146,7 +146,7 @@
                                 <input type="password"
                                     class="pass-input @error('password_confirmation') is-invalid @enderror"
                                     id="password_confirmation" name="password_confirmation"
-                                    placeholder="Masukkan password confirmation">
+                                    placeholder="Masukkan password Konfirmasi">
                                 <span class="bi toggle-password bi-eye-slash"></span>
                             </div>
 

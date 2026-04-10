@@ -8,7 +8,7 @@
     {{-- judul halaman --}}
     <div class="page-header">
         <div class="page-title">
-            <h4>List Pengguna</h4>
+            <h4>Daftar Pengguna</h4>
             <h6>Lihat atau cari pengguna</h6>
         </div>
 

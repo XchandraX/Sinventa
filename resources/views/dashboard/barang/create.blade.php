@@ -118,7 +118,7 @@
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label for="deskripsi">Deskripsi</label>
-                            <textarea name="deskripsi" id="deskripsi" class="form-control @error('deskripsi') is-invalid @enderror">{{ old('deskripsi') }}</textarea>
+                            <textarea name="deskripsi" id="deskripsi"  class="form-control @error('deskripsi') is-invalid @enderror" placeholder="Masukkan deskripsi">{{ old('deskripsi') }}</textarea>
 
                             {{-- jika kolom deskripsi tidak valid --}}
                             @error('deskripsi')

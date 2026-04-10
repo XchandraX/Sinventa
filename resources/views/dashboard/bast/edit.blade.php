@@ -4,7 +4,7 @@
     <div class="page-header">
         <div class="page-titile">
             <h4>{{ $title }}</h4>
-            <h6>Ubah Berita Acara</h6>
+            <h6>Edit Berita Acara</h6>
         </div>
     </div>
 

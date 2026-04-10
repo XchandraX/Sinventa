@@ -16,7 +16,7 @@
                     @php
                         $cards = [
                             [
-                                'class' => 'col-lg-8 col-12',
+                                'class' => 'col-lg-12 col-12',
                                 'id' => 'barang_id',
                                 'items' => $barangs,
                                 'label' => 'Barang',

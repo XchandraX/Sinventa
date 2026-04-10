@@ -7,7 +7,7 @@
     {{-- judul halaman --}}
     <div class="page-header">
         <div class="page-title">
-            <h4>Pengguna</h4>
+            <h4>Tambah Pengguna</h4>
             <h6>Menambahkan Pengguna Baru</h6>
         </div>
     </div>
@@ -78,7 +78,7 @@
                             <label for="lembaga">Nama Lembaga</label>
                             <input type="text" class="form-control  @error('lembaga') is-invalid @enderror"
                                 id="lembaga" name="lembaga" value="{{ old('lembaga') }}"
-                                placeholder="Masukkan nama lembaga pengguna">
+                                placeholder="Masukkan lembaga pengguna">
 
                             {{-- jika lembaga tidak valid --}}
                             @error('lembaga')
@@ -134,12 +134,12 @@
                     {{-- kolom password_confirmation --}}
                     <div class="col-lg-6 col-sm-12">
                         <div class="form-group">
-                            <label for="password_confirmation">Password_confirmation</label>
+                            <label for="password_confirmation">Password Konfirmasi</label>
                             <div class="pass-group">
                                 <input type="password"
                                     class="pass-input @error('password_confirmation') is-invalid @enderror"
                                     id="password_confirmation" name="password_confirmation"
-                                    placeholder="Masukkan password confirmation">
+                                    placeholder="Masukkan password Konfirmasi">
                                 <span class="bi toggle-password bi-eye-slash"></span>
                             </div>
 

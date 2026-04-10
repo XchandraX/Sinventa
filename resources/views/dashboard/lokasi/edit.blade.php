@@ -30,27 +30,27 @@
                     @php
                         $cards = [
                             ['id' => 'kode_lokasi', 'label' => 'Kode Lokasi'],
-                            ['id' => 'nama_lokasi', 'label' => 'Nama Lokasi']
-                            ]
+                            ['id' => 'nama_lokasi', 'label' => 'Nama Lokasi'],
+                        ];
                     @endphp
 
                     @foreach ($cards as $card)
-                        
-                    {{-- kolom kode dan nama lokasi --}}
-                    <div class="col-lg-6 col-sm-6 col-12">
-                        <div class="form-group">
-                            <label for="{{ $card['id'] }}">{{ $card['label'] }} *</label>
-                            <input type="text" class="form-control  @error($card['id']) is-invalid @enderror" id="{{ $card['id'] }}" name="{{ $card['id'] }}"
-                                value="{{ old($card['id'], $lokasi->{$card['id']} ?? '') }}" placeholder="Masukkan {{ $card['label'] }}">
+                        {{-- kolom kode dan nama lokasi --}}
+                        <div class="col-lg-6 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label for="{{ $card['id'] }}">{{ $card['label'] }} *</label>
+                                <input type="text" class="form-control  @error($card['id']) is-invalid @enderror"
+                                    id="{{ $card['id'] }}" name="{{ $card['id'] }}"
+                                    value="{{ old($card['id'], $lokasi->{$card['id']} ?? '') }}"
+                                    placeholder="Masukkan {{ $card['label'] }}">
 
-                            {{-- jika kode_lokasi tidak valid --}}
-                            @error($card['id'])
-                                {{-- tampilkan pesan error --}}
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                                {{-- jika kode_lokasi tidak valid --}}
+                                @error($card['id'])
+                                    {{-- tampilkan pesan error --}}
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
-
                     @endforeach
 
 
@@ -59,7 +59,7 @@
                         <div class="form-group">
                             <label for="deskripsi">Deskripsi</label>
                             <textarea class="form-control  @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi"
-                                 placeholder="Masukkan deskripsi pengguna">{{ old('deskripsi', $lokasi->deskripsi) }}</textarea>
+                                placeholder="Masukkan deskripsi pengguna">{{ old('deskripsi', $lokasi->deskripsi) }}</textarea>
 
                             {{-- jika deskripsi tidak valid --}}
                             @error('deskripsi')

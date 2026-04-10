@@ -84,7 +84,7 @@
                     {{-- kolom filter berdasarkan lokasi --}}
                     <div class="col-lg-4 col-6 mb-3">
                         <select name="lokasi" id="lokasi_id" class="select2 placeholder form-control">
-                            <option value="">Semua lokasi</option>
+                            <option value="">Semua Lokasi</option>
                             @forelse ($lokasis as $lokasi)
                                 <option value="{{ $lokasi->id }}"
                                     {{ request('lokasi') == $lokasi->id ? 'selected' : '' }}>

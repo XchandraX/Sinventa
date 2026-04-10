@@ -234,22 +234,22 @@
 
                                         <td>
                                             {{-- tampilkan tombol cetak berita acara --}}
-                                            <a href="{{ route('barang.downloadQr', $barang) }}" class="me-3">
+                                            <a href="{{ route('bast.downloadPdf', $bast) }}" class="me-3">
                                                 <i class="bi bi-download"></i>
                                             </a>
 
-                                            {{-- tombol lihat detail barang --}}
-                                            <a href="{{ route('barang.show', $barang) }}" class="me-3">
+                                            {{-- tombol lihat detail bast --}}
+                                            <a href="{{ route('bast.show', $bast) }}" class="me-3">
                                                 <i class="bi bi-eye"></i>
                                             </a>
 
-                                            {{-- tombol edit barang --}}
-                                            <a href="{{ route('barang.edit', $barang) }}" class="me-3">
+                                            {{-- tombol edit bast --}}
+                                            <a href="{{ route('bast.edit', $bast) }}" class="me-3">
                                                 <i class="bi bi-pencil-square"></i>
                                             </a>
 
-                                            {{-- tombol hapus barang --}}
-                                            <form action="{{ route('barang.destroy', $barang) }}" method="post"
+                                            {{-- tombol hapus bast --}}
+                                            <form action="{{ route('bast.destroy', $barang) }}" method="post"
                                                 class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
