@@ -3390,78 +3390,71 @@ table.dataTable>thead .sorting_desc_disabled:before {
     font-weight: 600;
 }
 .theme-toggle {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 30px;
-    padding: 6px 15px; /* Sedikit lebih lebar agar proporsional */
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding: 8px;
+    margin: 10px;
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 8px;
     color: var(--text-primary);
     font-size: 14px;
-    font-weight: 500; /* Agar teks lebih jelas */
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    margin-right: 15px;
-    margin-top: 12px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Shadow tipis */
+    transition: opacity 0.2s;
 }
 
-.theme-toggle:hover {
-    background: var(--hover-bg);
-    transform: translateY(-1px); /* Efek melayang halus */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.theme-toggle i {
-    transition: transform 0.4s ease; /* Transisi untuk ikon di dalam */
-}
-
-.theme-toggle:hover i {
-    transform: rotate(15deg); /* Ikon sedikit miring saat di-hover */
-}
-
-/* Default (light mode) - tampilkan bulan */
-.theme-toggle .light-icon {
-    display: none;
-}
-
-.theme-toggle .dark-icon {
-    display: inline-flex; /* Menggunakan flex agar ikon di tengah */
-    align-items: center;
-    color: #4361ee; /* Warna biru khas malam/bulan */
-}
-
-/* Dark mode - tampilkan matahari */
-[data-theme="dark"] .theme-toggle .light-icon {
-    display: inline-flex;
-    align-items: center;
-    color: #fbbc05; /* Warna kuning matahari */
-}
-
-[data-theme="dark"] .theme-toggle .dark-icon {
-    display: none;
-}
-
-/* Mode HP */
-@media (max-width: 768px) {
+/* --- TABLET / LAPTOP (Min-width: 769px) --- */
+/* Di sini kita tambahkan dekorasi seperti border dan hover effect */
+@media (min-width: 769px) {
     .theme-toggle {
-        background: none;
-        border: none;
-        box-shadow: none;
-        padding: 0;
-        margin: 0;
-        font-size: 14px;
-        cursor: pointer;
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 30px;
+        padding: 6px 15px;
+        margin-right: 15px;
+        margin-top: 12px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        font-weight: 500;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .theme-toggle:hover {
-        background: none;
-        transform: none;
-        box-shadow: none;
+        background: var(--hover-bg);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .theme-toggle:hover i {
+        transform: rotate(15deg);
     }
 }
 
+/* --- DESKTOP BESAR (Min-width: 1200px) --- */
+/* Opsional: Jika ingin ukuran sedikit lebih besar di monitor lebar */
+@media (min-width: 1200px) {
+    .theme-toggle {
+        padding: 8px 20px;
+        font-size: 15px;
+    }
+}
+
+/* --- LOGIC ICON (Berlaku global) --- */
+.theme-toggle i { transition: transform 0.4s ease; }
+
+/* Light Mode: Tampilkan Bulan */
+.theme-toggle .light-icon { display: none; }
+.theme-toggle .dark-icon {
+    display: inline-flex;
+    color: #4361ee;
+}
+
+/* Dark Mode: Tampilkan Matahari */
+[data-theme="dark"] .theme-toggle .light-icon {
+    display: inline-flex;
+    color: #fbbc05;
+}
+[data-theme="dark"] .theme-toggle .dark-icon { display: none; }
 
 .custom-select {
     min-width: 80px;
@@ -7912,7 +7905,6 @@ span.select2-container.select2-container--default.select2-container--open {
 .owl-product {
     padding-top: 35px;
 }
-
 .owl-product .owl-nav {
     margin-top: 10px;
     position: absolute;
