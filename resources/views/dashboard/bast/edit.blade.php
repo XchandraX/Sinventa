@@ -66,7 +66,8 @@
                                             {{-- Perbaikan: $bast->{$card['id']} --}}
                                             <option value="{{ $item->id }}"
                                                 {{ old($card['id'], $bast->{$card['id']}) == $item->id ? 'selected' : '' }}>
-                                                {{ $item->{$card['nama']} }}
+                                                {{ $item->{$card['nama']} }} -
+                                                {{ $item->kode_barang }}
                                             </option>
                                         @endforeach
                                     </select>

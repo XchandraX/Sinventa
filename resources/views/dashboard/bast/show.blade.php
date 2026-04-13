@@ -179,17 +179,17 @@
                 <form action="{{ route('bast.serah.setujui', $bast) }}" method="POST" class="d-inline">
                     @csrf
                     @method('PUT')
-                    <button type="submit" class="btn btn-success" 
+                    <button type="submit" class="btn btn-success"
                         onclick="return confirm('Anda akan menyetujui Berita Acara ini sebagai pihak Penyerah! Lanjutkan?')">
                         <i class="bi bi-check-circle">Setujui Penyerah</i>
                     </button>
                 </form>
             @endif
             @if (auth()->user()->id == $bast->user_terima_id && $bast->status_terima == 'Menunggu')
-                <form action="#" method="POST" class="d-inline">
+                <form action="{{ route('bast.terima.setujui', $bast) }}" method="POST" class="d-inline">
                     @csrf
                     @method('PATCH')
-                    <button type="submit" class="btn btn-success" 
+                    <button type="submit" class="btn btn-success"
                         onclick="return confirm('Anda akan menyetujui Berita Acara ini sebagai pihak Penerima! Lanjutkan?')">
                         <i class="bi bi-check-circle">Setujui Penerima</i>
                     </button>

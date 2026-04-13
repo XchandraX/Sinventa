@@ -67,7 +67,8 @@
                                         @foreach ($card['items'] as $item)
                                             <option value="{{ $item->id }}"
                                                 {{ old($card['id']) == $item->id ? 'selected' : '' }}>
-                                                {{ $item->{$card['nama']} }}
+                                                {{ $item->{$card['nama']} }} -
+                                                {{ $item->kode_barang }}
                                             </option>
                                         @endforeach
                                     </select>
