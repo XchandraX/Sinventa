@@ -56,13 +56,12 @@ class BastController extends Controller
         // ? jika ada filter status bast data yang dipilih, tambahkan kondisi ke query tersebut
         if ($request->filled('status_bast')) {
             match ($request->status_bast) {
-                'Disetujui' => $query
-                    ->where('status_serah', 'Disetujui')
+                'Disetujui' => $query->where('status_serah', 'Disetujui')
                     ->where('status_terima', 'Disetujui'),
-
                 'Menunggu' => $query->where(fn ($q) => $q->where('status_serah', 'Menunggu')
-                    ->orWhere('status_terima', 'Menunggu')
-                ),
+                    ->orWhere('status_terima', 'Menunggu')),
+                'Dibatalkan' => $query->where(fn ($q) => $q->where('status_serah', 'Dibatalkan')
+                    ->orWhere('status_terima', 'Dibatalkan')),
             };
         }
 
@@ -103,9 +102,9 @@ class BastController extends Controller
         $aturan = [
             'barang_id' => 'required|exists:barangs,id',
             'user_serah_id' => 'required|exists:users,id',
-            'status_serah' => 'required|in:Menunggu,Disetujui',
+            'status_serah' => 'required|in:Menunggu,Disetujui,Dibatalkan',
             'user_terima_id' => 'required|exists:users,id',
-            'status_terima' => 'required|in:Menunggu,Disetujui',
+            'status_terima' => 'required|in:Menunggu,Disetujui,Dibatalkan',
         ];
 
         // ? 2. membuat pesan custom validasi
@@ -189,9 +188,9 @@ class BastController extends Controller
         $aturan = [
             'barang_id' => 'required|exists:barangs,id',
             'user_serah_id' => 'required|exists:users,id',
-            'status_serah' => 'required|in:Menunggu,Disetujui',
+            'status_serah' => 'required|in:Menunggu,Disetujui,Dibatalkan',
             'user_terima_id' => 'required|exists:users,id',
-            'status_terima' => 'required|in:Menunggu,Disetujui',
+            'status_terima' => 'required|in:Menunggu,Disetujui,Dibatalkan',
         ];
 
         // ? 2. membuat pesan custom validasi
@@ -338,7 +337,7 @@ class BastController extends Controller
     {
         $basts = Bast::with(['barang.kategori', 'barang.lokasi', 'userSerah', 'userTerima'])
             ->where('user_serah_id', Auth::id())
-            ->where('status_serah', 'Disetujui')
+            ->whereIn('status_serah', ['Disetujui', 'Dibatalkan'])
             ->latest()
             ->get();
 
@@ -355,6 +354,17 @@ class BastController extends Controller
 
         $bast->update([
             'status_serah' => 'Disetujui',
+        ]);
+
+        return redirect()->route('bast.show', $bast);
+    }
+
+    public function cancelSerah(Bast $bast)
+    {
+        $this->authorize('cancelSerah', $bast);
+
+        $bast->update([
+            'status_serah' => 'Dibatalkan',
         ]);
 
         return redirect()->route('bast.show', $bast);
@@ -377,8 +387,8 @@ class BastController extends Controller
     public function bastTerimaDisetujui()
     {
         $basts = Bast::with(['barang.kategori', 'barang.lokasi', 'userSerah', 'userTerima'])
-            ->where('user_serah_id', Auth::id())
-            ->where('status_terima', 'Disetujui')
+            ->where('user_terima_id', Auth::id())
+            ->whereIn('status_terima', ['Disetujui', 'Dibatalkan'])
             ->latest()->get();
 
         return view('dashboard.bast.basts', [
@@ -394,6 +404,17 @@ class BastController extends Controller
 
         $bast->update([
             'status_terima' => 'Disetujui',
+        ]);
+
+        return redirect()->route('bast.show', $bast);
+    }
+
+    public function cancelTerima(Bast $bast)
+    {
+        $this->authorize('cancelTerima', $bast);
+
+        $bast->update([
+            'status_terima' => 'Dibatalkan',
         ]);
 
         return redirect()->route('bast.show', $bast);

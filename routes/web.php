@@ -104,11 +104,16 @@ Route::middleware('auth')->group(function () {
 
     Route::put('/dashboard/bast-serah/{bast}/setujui', [BastController::class, 'setujuiSerah'])->name('bast.serah.setujui');
 
+    Route::put('/dashboard/bast-serah/{bast}/cancel', [BastController::class, 'cancelSerah'])->name('bast.serah.cancel');
+
     Route::get('/dashboard/bast-terima/menunggu', [BastController::class, 'bastTerimaMenunggu'])->name('bast.terima.menunggu');
 
     Route::get('/dashboard/bast-terima/disetujui', [BastController::class, 'bastTerimaDisetujui'])->name('bast.terima.disetujui');
 
     Route::put('/dashboard/bast-terima/{bast}/setujui', [BastController::class, 'setujuiTerima'])->name('bast.terima.setujui');
+
+    Route::put('/dashboard/bast-terima/{bast}/cancel', [BastController::class, 'cancelTerima'])->name('bast.terima.cancel');
+
     // ? Route untuk download QRCode Barang dari halaman show detail barang
     Route::get('/dashboard/barang/{barang}/download-qrcode', [BarangController::class, 'downloadQr'])->name('barang.downloadQr');
 });

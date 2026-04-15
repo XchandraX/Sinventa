@@ -180,6 +180,9 @@
                                         @if ($bast->status_serah == 'Menunggu')
                                             <span class="btn btn-sm text-white bg-secondary"><i
                                                     class="bi bi-hourglass-split"></i></span>
+                                        @elseif($bast->status_serah == 'Dibatalkan')
+                                            <span class="btn btn-sm text-white bg-danger"><i
+                                                    class="bi bi-x-circle"></i></span> {{ $bast->status_serah }}
                                         @else
                                             <span class="btn btn-sm text-white bg-success"><i
                                                     class="bi bi-check-circle"></i></span>
@@ -190,6 +193,9 @@
                                         @if ($bast->status_terima == 'Menunggu')
                                             <span class="btn btn-sm text-white bg-secondary"><i
                                                     class="bi bi-hourglass-split"></i></span>
+                                        @elseif($bast->status_terima == 'Dibatalkan')
+                                            <span class="btn btn-sm text-white bg-danger"><i
+                                                    class="bi bi-x-circle"></i></span> {{ $bast->status_terima }}
                                         @else
                                             <span class="btn btn-sm text-white bg-success"><i
                                                     class="bi bi-check-circle"></i></span>
@@ -200,6 +206,18 @@
                                         @if ($bast->status_serah == 'Disetujui' && $bast->status_terima == 'Disetujui')
                                             <span class="btn btn-sm text-white bg-success"><i
                                                     class="bi bi-check-circle"></i></span> Disetujui
+                                        @elseif($bast->status_serah == 'Disetujui' && $bast->status_terima == 'Dibatalkan')
+                                            <span class="btn btn-sm text-white bg-danger"><i
+                                                    class="bi bi-x-circle"></i></span> Dibatalkan
+                                        @elseif($bast->status_serah == 'Menunggu' && $bast->status_terima == 'Dibatalkan')
+                                            <span class="btn btn-sm text-white bg-danger"><i
+                                                    class="bi bi-x-circle"></i></span> Dibatalkan
+                                        @elseif($bast->status_serah == 'Dibatalkan' && $bast->status_terima == 'Disetujui')
+                                            <span class="btn btn-sm text-white bg-danger"><i
+                                                    class="bi bi-x-circle"></i></span> Dibatalkan
+                                        @elseif($bast->status_serah == 'Dibatalkan' && $bast->status_terima == 'Menunggu')
+                                            <span class="btn btn-sm text-white bg-danger"><i
+                                                    class="bi bi-x-circle"></i></span> Dibatalkan
                                         @else
                                             <span class="btn btn-sm text-white bg-secondary"><i
                                                     class="bi bi-hourglass-split"></i></span> Menunggu

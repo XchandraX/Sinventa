@@ -36,6 +36,7 @@
                                 'options' => [
                                     ['label' => 'Menunggu', 'value' => 'Menunggu', 'class' => 'btn-secondary'],
                                     ['label' => 'Disetujui', 'value' => 'Disetujui', 'class' => 'btn-success'],
+                                    ['label' => 'Dibatalkan', 'value' => 'Dibatalkan', 'class' => 'btn-danger'],
                                 ],
                             ],
                             [
@@ -49,6 +50,7 @@
                                 'options' => [
                                     ['label' => 'Menunggu', 'value' => 'Menunggu', 'class' => 'btn-secondary'],
                                     ['label' => 'Disetujui', 'value' => 'Disetujui', 'class' => 'btn-success'],
+                                    ['label' => 'Dibatalkan', 'value' => 'Dibatalkan', 'class' => 'btn-danger'],
                                 ],
                             ],
                         ];

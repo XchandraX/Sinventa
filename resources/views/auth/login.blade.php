@@ -38,7 +38,7 @@
                 <div class="form-group">
                     <label for="username" class="form-label">Username</label>
                     <input type="text" id="username" class="form-control @error('username') is-invalid @enderror"
-                        name="username" placeholder="Masukan Username Anda!">
+                        name="username" placeholder="Masukan Username Anda!" value="{{ old('username') }}">
                     {{-- jika invalid --}}
                     @error('username')
                         {{-- tampilkan pesan errornya --}}

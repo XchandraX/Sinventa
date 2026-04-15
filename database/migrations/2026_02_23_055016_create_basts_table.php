@@ -27,10 +27,10 @@ return new class extends Migration
             $table->foreignId('user_terima_id')->constrained('users')->onDelete('cascade');
 
             // untuk menyimpan status serah | menunggu / Disetujui, selain itu error
-            $table->enum('status_serah', ['Menunggu', 'Disetujui'])->default('Menunggu');
+            $table->enum('status_serah', ['Menunggu', 'Disetujui', 'Dibatalkan'])->default('Menunggu');
 
             // untuk menyimpan status serah | menunggu / Disetujui, selain itu error
-            $table->enum('status_terima', ['Menunggu', 'Disetujui'])->default('Menunggu');
+            $table->enum('status_terima', ['Menunggu', 'Disetujui', 'Dibatalkan'])->default('Menunggu');
 
             // untuk menyimpan path file pdf hasil export
             $table->string('file_export')->nullable();

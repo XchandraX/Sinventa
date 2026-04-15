@@ -168,9 +168,9 @@
                 <form action="{{ route('bast.destroy', $bast) }}" class="d-inline" method="POST">
                     @csrf
                     @method('DELETE')
-                    <button class="btn btn-danger" type="submit"
+                    <button class="btn btn-danger" type="submit" 
                         onclick="return confirm('Yakin ingin menghapus Berita Acara ini?')">
-                        <i class="bi bi-trash"></i>
+                        <i class="bi bi-trash" style="color: var(--text-secondary)"></i>
                     </button>
                 </form>
             @endif
@@ -185,13 +185,33 @@
                     </button>
                 </form>
             @endif
+            @if (auth()->user()->id == $bast->user_serah_id && $bast->status_serah == 'Menunggu')
+                <form action="{{ route('bast.serah.cancel', $bast) }}" method="POST" class="d-inline">
+                    @csrf
+                    @method('PUT')
+                    <button type="submit" class="btn btn-danger"
+                        onclick="return confirm('Anda akan Membatalkan Berita Acara ini sebagai pihak Penyerah! Lanjutkan?')">
+                        <i class="bi bi-x-circle">Batalkan Penyerah</i>
+                    </button>
+                </form>
+            @endif
             @if (auth()->user()->id == $bast->user_terima_id && $bast->status_terima == 'Menunggu')
                 <form action="{{ route('bast.terima.setujui', $bast) }}" method="POST" class="d-inline">
                     @csrf
-                    @method('PATCH')
+                    @method('PUT')
                     <button type="submit" class="btn btn-success"
                         onclick="return confirm('Anda akan menyetujui Berita Acara ini sebagai pihak Penerima! Lanjutkan?')">
                         <i class="bi bi-check-circle">Setujui Penerima</i>
+                    </button>
+                </form>
+            @endif
+            @if (auth()->user()->id == $bast->user_terima_id && $bast->status_terima == 'Menunggu')
+                <form action="{{ route('bast.terima.cancel', $bast) }}" method="POST" class="d-inline">
+                    @csrf
+                    @method('PUT')
+                    <button type="submit" class="btn btn-danger"
+                        onclick="return confirm('Anda akan Membatalkan Berita Acara ini sebagai pihak Penerima! Lanjutkan?')">
+                        <i class="bi bi-x-circle">Batalkan Penerima</i>
                     </button>
                 </form>
             @endif

@@ -15,6 +15,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+
+        $this->call([
+            RegistrationCodeSeeder::class,
+        ]);
         // User::factory(10)->create();
 
         User::factory()->create([
@@ -23,7 +27,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'chx28@gmail.com',
             'role' => 'admin',
             'lembaga' => 'Siswa',
-            'password' => 'admin28'
+            'password' => 'admin123',
 
         ]);
     }

@@ -80,10 +80,27 @@ class BastPolicy
         && $bast->status_serah === 'Menunggu';
     }
 
+
+    public function cancelSerah(User $user, Bast $bast)
+    {
+        // ? hanya user penyerah dibast tersebut dan status bast = menunggu
+        // ? yang bisa melakuakn approvel sebagai user penyerah
+        return $user->id === $bast->user_serah_id
+        && $bast->status_serah === 'Menunggu';
+    }
+
     /**
      * ? menentukan siapa saja yang bisa menyetujui Bast sebagai user penerima
      */
     public function approveTerima(User $user, Bast $bast)
+    {
+        // ? hanya user penerima dibast tersebut dan status bast = menunggu
+        // ? yang bisa melakuakn approvel sebagai user penerima
+        return $user->id === $bast->user_terima_id
+            && $bast->status_terima === 'Menunggu';
+    }
+
+    public function cancelTerima(User $user, Bast $bast)
     {
         // ? hanya user penerima dibast tersebut dan status bast = menunggu
         // ? yang bisa melakuakn approvel sebagai user penerima

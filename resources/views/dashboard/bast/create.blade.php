@@ -32,6 +32,7 @@
                                 'for' => 'status_serah',
                                 'idM' => 'status_menunggu1',
                                 'idD' => 'status_disetujui1',
+                                'idC' => 'status_dibatalkan1',
                                 'options' => [
                                     ['label' => 'Menunggu', 'value' => 'Menunggu', 'class' => 'btn-secondary'],
                                     ['label' => 'Disetujui', 'value' => 'Disetujui', 'class' => 'btn-success'],
@@ -47,6 +48,7 @@
                                 'for' => 'status_terima',
                                 'idM' => 'status_menunggu2',
                                 'idD' => 'status_disetujui2',
+                                'idC' => 'status_dibatalkan2',
                                 'options' => [
                                     ['label' => 'Menunggu', 'value' => 'Menunggu', 'class' => 'btn-secondary'],
                                     ['label' => 'Disetujui', 'value' => 'Disetujui', 'class' => 'btn-success'],
@@ -107,12 +109,13 @@
                                         <div class="form-check form-check-inline">
                                             <input type="radio" class="form-check-input" name="{{ $card['for'] }}"
                                                 id="{{ $card['for'] . $index }}" value="{{ $opt['value'] }}"
-                                                {{ old($card['for'], $card['name'] == 'Serah' ? 'Menunggu' : 'Disetujui') == $opt['value'] ? 'checked' : '' }}>
+                                                {{ old($card['for']) == $opt['value'] ? 'checked' : ($loop->first ? 'checked' : '') }}>
                                             <label class="form-check-label" for="{{ $card['for'] . $index }}">
                                                 <span class="btn {{ $opt['class'] }} btn-sm">{{ $opt['label'] }}</span>
                                             </label>
                                         </div>
                                     @endforeach
+
                                     @error($card['for'])
                                         <div class="text-danger small">{{ $message }}</div>
                                     @enderror

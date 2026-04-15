@@ -24,7 +24,7 @@
 
             @php
                 $cards = [
-                    ['id' => 'name', 'label' => 'Nama Lengkap', 'place' => 'Isi Nama Lengkap'],
+                    ['id' => 'nama_lengkap', 'label' => 'Nama Lengkap', 'place' => 'Isi Nama Lengkap'],
                     ['id' => 'username', 'label' => 'Username', 'place' => 'Isi UserName'],
                     ['id' => 'email', 'label' => 'Email', 'place' => 'Isi Email'],
                 ];
@@ -67,14 +67,14 @@
                     {{-- admin --}}
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="role" id="role_admin" value="admin"
-                            @if (old('role' == 'admin')) checked @endif>
+                            @if (old('role' == 'admin' ? 'checked' : '' )) checked @endif>
                         <label for="role_admin" class="form-check-label">Admin</label>
                     </div>
 
                     {{-- user --}}
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="role" id="role_user" value="user"
-                            @if (old('role' == 'user')) checked @endif>
+                            @if (old('role' == 'user' ? 'checked' : '' )) checked @endif>
                         <label for="role_user" class="form-check-label">User</label>
                     </div>
 

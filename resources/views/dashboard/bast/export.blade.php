@@ -113,6 +113,8 @@
                     <td class="text-center">
                     @if ($bast->status_serah === 'Disetujui' && $bast->status_terima === 'Disetujui')
                         Disetujui
+                    @elseif ($bast->status_serah === 'Dibatalkan' && $bast->status_terima === 'Dibatalkan')
+                        Dibatalkan
                     @else
                         Menunggu
                     @endif

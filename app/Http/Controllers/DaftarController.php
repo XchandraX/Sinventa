@@ -34,7 +34,7 @@ class DaftarController extends Controller
             'password' => 'required|string|min:8|max:32|confirmed',
             'role' => 'required|in:admin,user',
             'lembaga' => 'required|string|max:100',
-            'reg_code' => 'required',
+            'reg_code' => 'required|exists:registration_codes,code',
         ], [
             'required' => 'Kolom :attribute nggak boleh kosong!!.',
             'unique' => 'Kolom :attribute sudah ada yg pakai!!.',
@@ -43,6 +43,8 @@ class DaftarController extends Controller
             'confirmed' => ':attribute tidak sama!!.',
             'in' => 'Kolom :attribute tidak valid!!.',
             'max' => 'Kolom :attribute maksimal :max karakter !!.',
+            'reg_code.exists' => 'Kode registrasi tidak valid atau tidak terdaftar.',
+            'reg_code.required' => 'Kode registrasi wajib diisi.',
         ]);
 
         // 2. Ambil kode yang sedang aktif di database

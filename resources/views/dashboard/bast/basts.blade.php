@@ -69,17 +69,25 @@
                                             @if ($bast->status_serah == 'Menunggu')
                                                 <span class="btn btn-sm text-white bg-secondary"><i
                                                         class="bi bi-hourglass-split"></i></span> {{ $bast->status_serah }}
+                                            @elseif($bast->status_serah == 'Dibatalkan')
+                                                <span class="btn btn-sm text-white bg-danger"><i
+                                                        class="bi bi-x-circle"></i></span> {{ $bast->status_serah }}
                                             @else
                                                 <span class="btn btn-sm text-white bg-success"><i
-                                                        class="bi bi-check-circle-fill"></i></span> {{ $bast->status_serah }}
+                                                        class="bi bi-check-circle-fill"></i></span>
+                                                {{ $bast->status_serah }}
                                             @endif
                                         @else
                                             @if ($bast->status_terima == 'Menunggu')
                                                 <span class="btn btn-sm text-white bg-secondary"><i
-                                                        class="bi bi-hourglass-split"></i></span> {{ $bast->status_serah }}
+                                                        class="bi bi-hourglass-split"></i></span> {{ $bast->status_terima }}
+                                            @elseif($bast->status_terima == 'Dibatalkan')
+                                                <span class="btn btn-sm text-white bg-danger"><i
+                                                        class="bi bi-x-circle"></i></span> {{ $bast->status_terima }}
                                             @else
                                                 <span class="btn btn-sm text-white bg-success"><i
-                                                        class="bi bi-check-circle-fill"></i></span> {{ $bast->status_serah }}
+                                                        class="bi bi-check-circle-fill"></i></span>
+                                                {{ $bast->status_serah }}
                                             @endif
                                         @endif
                                     </td>
