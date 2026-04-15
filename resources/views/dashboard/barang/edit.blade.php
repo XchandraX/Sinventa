@@ -11,6 +11,11 @@
             <h4>{{ $title }}</h4>
             <h6>Perbarui Data Barang</h6>
         </div>
+         <div class="page-btn">
+            <a href="{{ route('barang.index') }}" class="btn btn-added">
+                <i class="bi bi-arrow-left-square"></i>
+            </a>
+        </div>
     </div>
 
     {{-- card form edit barang baru --}}

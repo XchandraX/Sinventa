@@ -100,7 +100,7 @@
                                         <form action="{{ route('lokasi.destroy', $lokasi) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="confirm-text btn p-0 m-0"
+                                            <button type="submit" class="confirm-text btn"
                                                 onclick="return confirm('Apakah Anda yakin ingin menghapus data lokasi {{ $lokasi->nama_lokasi }} ini?')">
                                                 <i class="bi bi-trash"></i>
                                             </button>

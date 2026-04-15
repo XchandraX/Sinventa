@@ -31,6 +31,20 @@
             <h4>{{ $title }}</h4>
             <h6>Lihat detail {{ $title }}</h6>
         </div>
+        @if (auth()->user()->role == 'admin')
+            <div class="page-btn">
+            <a href="{{ route('bast.index') }}" class="btn btn-added">
+                <i class="bi bi-arrow-left-square"></i>
+            </a>
+        </div>
+        @else
+            <div class="page-btn">
+            <a href="{{ url()->previous() }}" class="btn btn-added">
+                <i class="bi bi-arrow-left-square"></i>
+            </a>
+        </div>
+        @endif
+         
     </div>
 
     <div class="card">
@@ -135,6 +149,10 @@
                                     <span class="btn btn-sm text-white bg-secondary">
                                         <i class="bi bi-hourglass-split"></i> Menunggu
                                     </span>
+                                @elseif($bast->{$card['if']} == 'Dibatalkan')
+                                    <span class="btn btn-sm text-white bg-danger">
+                                        <i class="bi bi-x-circle"></i> Dibatalkan
+                                    </span>
                                 @else
                                     <span class="btn btn-sm text-white bg-success">
                                         <i class="bi bi-check-circle"></i> Disetujui
@@ -168,7 +186,7 @@
                 <form action="{{ route('bast.destroy', $bast) }}" class="d-inline" method="POST">
                     @csrf
                     @method('DELETE')
-                    <button class="btn btn-danger" type="submit" 
+                    <button class="btn btn-danger" type="submit"
                         onclick="return confirm('Yakin ingin menghapus Berita Acara ini?')">
                         <i class="bi bi-trash" style="color: var(--text-secondary)"></i>
                     </button>

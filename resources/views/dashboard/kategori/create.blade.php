@@ -10,6 +10,11 @@
             <h4>{{ $title }}</h4>
             <h6>Buat Kategori Barang Baru</h6>
         </div>
+         <div class="page-btn">
+            <a href="{{ route('kategori.index') }}" class="btn btn-added">
+                <i class="bi bi-arrow-left-square"></i>
+            </a>
+        </div>
     </div>
 
     {{-- card form tambah data --}}

@@ -35,7 +35,7 @@
         </div>
         <div class="page-btn">
             <a href="{{ route('barang.index') }}" class="btn btn-added">
-                Kembali
+                <i class="bi bi-arrow-left-square"></i>
             </a>
         </div>
     </div>
@@ -136,13 +136,13 @@
                     @method('DELETE')
                     <button class="btn btn-danger" type="submit"
                         onclick="return confirm('Yakin ingin menghapus barang {{ $barang->nama_barang }}?')">
-                        <i class="bi bi-trash"></i>
+                        <i class="bi bi-trash" style="color: var(--text-secondary)"></i>
                     </button>
                 </form>
             @endif
         </div>
     </div>
-    
+
     {{-- jika user yang login adalah role - admin --}}
     @if (Auth::user()->role == 'admin')
         {{-- card untuk menampilkan riwayat bast barang --}}
@@ -193,12 +193,12 @@
                             {{-- isi table --}}
                             <tbody>
                                 {{-- tampilkan berita acara satu persatu menggunakan perulangan --}}
-                                @foreach ($basts as $bats)
+                                @foreach ($basts as $bast)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $barang->nama_barang }}</td>
                                         <td>
-                                            @if ($bats->status_serah == 'Menunggu')
+                                            @if ($bast->status_serah == 'Menunggu')
                                                 <span class="btn btn-sm text-white bg-secondary">
                                                     <i class="bi bi-hourglass-split"></i>
                                                 </span>
@@ -209,7 +209,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            @if ($bats->status_terima == 'Menunggu')
+                                            @if ($bast->status_terima == 'Menunggu')
                                                 <span class="btn btn-sm text-white bg-secondary">
                                                     <i class="bi bi-hourglass-split"></i>
                                                 </span>
@@ -220,10 +220,25 @@
                                             @endif
                                         </td>
                                         <td>
-                                            @if ($bats->status_serah == 'Disetujui' && $bats->status_terima == 'Disetujui')
+                                            @if ($bast->status_serah == 'Disetujui' && $bast->status_terima == 'Disetujui')
                                                 <span class="btn btn-sm text-white bg-success">
                                                     <i class="bi bi-check-circle"></i> Disetujui
                                                 </span>
+                                            @elseif($bast->status_serah == 'Disetujui' && $bast->status_terima == 'Dibatalkan')
+                                                <span class="btn btn-sm text-white bg-danger"><i
+                                                        class="bi bi-x-circle"></i></span> Dibatalkan
+                                            @elseif($bast->status_serah == 'Menunggu' && $bast->status_terima == 'Dibatalkan')
+                                                <span class="btn btn-sm text-white bg-danger"><i
+                                                        class="bi bi-x-circle"></i></span> Dibatalkan
+                                            @elseif($bast->status_serah == 'Dibatalkan' && $bast->status_terima == 'Disetujui')
+                                                <span class="btn btn-sm text-white bg-danger"><i
+                                                        class="bi bi-x-circle"></i></span> Dibatalkan
+                                            @elseif($bast->status_serah == 'Dibatalkan' && $bast->status_terima == 'Menunggu')
+                                                <span class="btn btn-sm text-white bg-danger"><i
+                                                        class="bi bi-x-circle"></i></span> Dibatalkan
+                                            @elseif($bast->status_serah == 'Dibatalkan' && $bast->status_terima == 'Dibatalkan')
+                                                <span class="btn btn-sm text-white bg-danger"><i
+                                                        class="bi bi-x-circle"></i></span> Dibatalkan
                                             @else
                                                 <span class="btn btn-sm text-white bg-secondary">
                                                     <i class="bi bi-hourglass-split"></i> Menunggu
@@ -253,7 +268,7 @@
                                                 class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="confirm-text btn p-0 m-0" type="submit"
+                                                <button class="confirm-text btn" type="submit"
                                                     onclick="return confirm('Yakin ingin menghapus berita acara {{ $barang->kode_barang }}?')">
                                                     <i class="bi bi-trash"></i>
                                                 </button>

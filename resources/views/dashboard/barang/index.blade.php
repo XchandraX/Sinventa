@@ -196,7 +196,7 @@
                                                 class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="confirm-text btn p-0 m-0" type="submit"
+                                                <button class="confirm-text btn" type="submit"
                                                     onclick="return confirm('Yakin ingin menghapus barang {{ $barang->nama_barang }}?')">
                                                     <i class="bi bi-trash"></i>
                                                 </button>

@@ -10,6 +10,11 @@
             <h4>Tambah Pengguna</h4>
             <h6>Menambahkan Pengguna Baru</h6>
         </div>
+        <div class="page-btn">
+            <a href="{{ route('users.index') }}" class="btn btn-added">
+                <i class="bi bi-arrow-left-square"> </i>
+            </a>
+        </div>
     </div>
 
     {{-- card form tambah user --}}
@@ -154,7 +159,7 @@
                     {{-- tombol simpan user --}}
                     <div class="col-12">
                         <button type="submit" class="btn btn-submit me-2">Simpan User</button>
-                                           <a href="{{ route('users.index') }}" class="btn btn-cancel">Batal</a>
+                        <a href="{{ route('users.index') }}" class="btn btn-cancel">Batal</a>
 
                     </div>
                 </div>

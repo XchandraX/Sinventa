@@ -218,6 +218,9 @@
                                         @elseif($bast->status_serah == 'Dibatalkan' && $bast->status_terima == 'Menunggu')
                                             <span class="btn btn-sm text-white bg-danger"><i
                                                     class="bi bi-x-circle"></i></span> Dibatalkan
+                                        @elseif($bast->status_serah == 'Dibatalkan' && $bast->status_terima == 'Dibatalkan')
+                                            <span class="btn btn-sm text-white bg-danger"><i
+                                                    class="bi bi-x-circle"></i></span> Dibatalkan
                                         @else
                                             <span class="btn btn-sm text-white bg-secondary"><i
                                                     class="bi bi-hourglass-split"></i></span> Menunggu
@@ -240,10 +243,11 @@
                                         </a>
 
                                         {{-- tombol hapus berita acara --}}
-                                        <form action="{{ route('bast.destroy', $bast) }}" method="post" class="d-inline">
+                                        <form action="{{ route('bast.destroy', $bast) }}" method="post"
+                                            class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="confirm-text btn p-0 m-0" type="submit"
+                                            <button class="confirm-text btn" type="submit"
                                                 onclick="return confirm('Yakin ingin menghapus berita acara ini?')">
                                                 <i class="bi bi-trash"></i>
                                             </button>

@@ -1,59 +1,186 @@
+{{-- resources/views/errors/404.blade.php --}}
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>403 - Tidak Diizinkan</title>
+    <title>404 - Halaman Tidak Ditemukan</title>
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
+        /* Gaya tambahan khusus untuk halaman error */
+        .error-page-custom {
+            background-color: var(--bg-dark);
+            min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .error-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 48px 32px;
             text-align: center;
-        }
-        .error-container {
             max-width: 500px;
-            padding: 40px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
         }
-        h1 {
-            font-size: 72px;
-            color: #dc3545;
+
+        .error-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.1);
+        }
+
+        .error-code {
+            font-size: 96px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent-blue) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
             margin: 0;
+            line-height: 1;
         }
-        h2 {
-            color: #343a40;
-            margin-top: 0;
+
+        .error-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 24px 0 12px;
         }
-        p {
-            color: #6c757d;
-            margin-bottom: 30px;
+
+        .error-message {
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            line-height: 1.6;
         }
-        a {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
+
+        .error-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-error {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
             text-decoration: none;
-            border-radius: 5px;
-            transition: background 0.3s;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
         }
-        a:hover {
-            background-color: #0056b3;
+
+        .btn-error-primary {
+            background: var(--primary);
+            color: var(--bg-dark);
+        }
+
+        .btn-error-primary:hover {
+            background: var(--accent-blue);
+            color: var(--bg-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-error-secondary {
+            background: transparent;
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-error-secondary:hover {
+            background: var(--hover-bg);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .icon-search {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 16px;
+            color: var(--primary);
+            opacity: 0.8;
+        }
+
+        /* Animasi floating untuk icon */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .error-card .icon-search svg {
+            animation: float 3s ease-in-out infinite;
         }
     </style>
 </head>
 <body>
-    <div class="error-container">
-        <h1>404</h1>
-        <h2>Halaman Tidak Ada</h2>
-        <a href="{{ url('/dashboard') }}">Kembali ke Dashboard</a>
+    <div class="error-page-custom">
+        <div class="error-card">
+            <div class="icon-search">
+                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.3-4.3"></path>
+                    <path d="M11 8v6M8 11h6"/>
+                </svg>
+            </div>
+            <h1 class="error-code">404</h1>
+            <h2 class="error-title">Halaman Tidak Ditemukan</h2>
+            <p class="error-message">
+                Maaf, halaman yang Anda cari tidak dapat ditemukan.<br>
+                URL mungkin salah atau halaman telah dipindahkan.
+            </p>
+            <div class="error-actions">
+                <a href="javascript:history.back()" class="btn-error btn-error-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    Kembali
+                </a>
+                <a href="{{ url('/') }}" class="btn-error btn-error-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2h-5v-7H9v7H4a2 2 0 0 1-2-2z"/>
+                    </svg>
+                    Beranda
+                </a>
+            </div>
+        </div>
     </div>
+
+    <!-- Dark Mode Script (sinkron dengan tema yang sudah ada) -->
+    <script>
+        // Fungsi untuk membaca tema yang tersimpan
+        function getCurrentTheme() {
+            return localStorage.getItem('theme') || 'light';
+        }
+
+        // Fungsi untuk menerapkan tema
+        function applyTheme(theme) {
+            const root = document.documentElement;
+            if (theme === 'dark') {
+                root.setAttribute('data-theme', 'dark');
+            } else {
+                root.removeAttribute('data-theme');
+            }
+        }
+
+        // Inisialisasi tema saat halaman dimuat
+        const savedTheme = getCurrentTheme();
+        applyTheme(savedTheme);
+
+        // Mendengarkan perubahan tema dari storage (jika ada tab lain yang berubah)
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'theme') {
+                applyTheme(e.newValue || 'light');
+            }
+        });
+    </script>
 </body>
 </html>

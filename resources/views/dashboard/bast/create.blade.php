@@ -6,6 +6,11 @@
             <h4>{{ $title }}</h4>
             <h6>Buat Berita Acara Baru</h6>
         </div>
+         <div class="page-btn">
+            <a href="{{ route('bast.index') }}" class="btn btn-added">
+                <i class="bi bi-arrow-left-square"></i>
+            </a>
+        </div>
     </div>
 
     <div class="card">
