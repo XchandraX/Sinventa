@@ -70,15 +70,6 @@
 
                     <hr class="m-0">
 
-                    {{-- Theme toggle di dropdown (opsional) --}}
-                    <div class="px-3 py-2">
-                        <button id="theme-toggle-dropdown" class="theme-toggle w-100">
-                            <span class="light-icon"><i class="bi bi-moon-fill"></i></span>
-                            <span class="dark-icon"><i class="bi bi-sun-fill"></i></span>
-                            <span class="mode-text">Ganti Mode</span>
-                        </button>
-                    </div>
-
                     {{-- tombol edit profil --}}
                     <a href="{{ route('users.edit', Auth::user()) }}" class="dropdown-item">Profil Ku</a>
 
