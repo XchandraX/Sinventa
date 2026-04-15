@@ -1,34 +1,29 @@
 <?php
+// database/seeders/DatabaseSeeder.php
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
     /**
      * Seed the application's database.
      */
     public function run(): void
     {
-
-        $this->call([
-            RegistrationCodeSeeder::class,
+        // Panggil semua seeder dengan urutan yang benar
+         $this->call([
+            RegistrationCodeSeeder::class,  // Tidak ada foreign key
+            KategoriSeeder::class,          // Tidak ada foreign key
+            LokasiSeeder::class,            // Tidak ada foreign key
+            UserSeeder::class,              // Tidak ada foreign key ke tabel lain
+            BarangSeeder::class,            // Bergantung pada Kategori & Lokasi
+            BastSeeder::class,              // Bergantung pada Barang & User
         ]);
-        // User::factory(10)->create();
 
-        User::factory()->create([
-            'nama_lengkap' => 'Chandra Maulana',
-            'username' => 'Chandrx28',
-            'email' => 'chx28@gmail.com',
-            'role' => 'admin',
-            'lembaga' => 'Siswa',
-            'password' => 'admin123',
-
-        ]);
+        // Gunakan factory untuk generate data tambahan (opsional)
+        // \App\Models\User::factory(10)->create();
+        // \App\Models\Barang::factory(50)->create();
     }
 }
