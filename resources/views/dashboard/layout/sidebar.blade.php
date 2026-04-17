@@ -6,7 +6,7 @@
         <div id="sidebar-menu" class="sidebar-menu">
 
             {{-- jika user yang login adalah admin --}}
-            @if (Auth::user()->role == 'admin')
+            @if (Auth::user()->role == 'admin' || Auth::user()->role == 'root')
                 {{-- tampilkan menu khusus untuk admin --}}
                 <ul>
 

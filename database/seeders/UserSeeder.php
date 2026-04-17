@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
                 'nama_lengkap' => 'Chandra Maulana',
                 'username' => 'Chandrx28',
                 'email' => 'chandra@sinvesta.com',
-                'role' => 'admin',
+                'role' => 'root',
                 'lembaga' => 'Siswa Rpl',
                 'password' => Hash::make('admin123'),
                 'email_verified_at' => now(),

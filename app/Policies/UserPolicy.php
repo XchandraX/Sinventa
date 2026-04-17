@@ -3,7 +3,6 @@
 namespace App\Policies;
 
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class UserPolicy
 {
@@ -13,7 +12,7 @@ class UserPolicy
     public function viewAny(User $user): bool
     {
         // ? yang bisa melihat semua role user (index) hanya admin
-        return $user->role === 'admin';
+        return in_array($user->role, ['admin', 'root']);
     }
 
     /**
@@ -21,14 +20,14 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-        
+
         // ? yang bisa melihat semua data detail user (show) hanya admin
-        if ($user->role === 'admin') {
-            return true; 
+        if (in_array($user->role, ['admin', 'root'])) {
+            return true;
         }
 
         // ? Pengguna hanya dapat melihat profilnya sendiri
-        return $user->id === $model->id; 
+        return $user->id === $model->id;
     }
 
     /**
@@ -36,8 +35,8 @@ class UserPolicy
      */
     public function create(User $user): bool
     {
-        // ? yang bisa membuat data user (create) hanya admin
-         return $user->role === 'admin';
+        // ? yang bisa membuat data user (create) hanya root
+        return $user->role === 'root';
     }
 
     /**
@@ -45,9 +44,9 @@ class UserPolicy
      */
     public function update(User $user, User $model): bool
     {
-        // ? hanya admin yang bisa mengubah data semua user
-        if ($user->role === 'admin') {
-            return true; 
+        // ? hanya root yang bisa mengubah data semua user
+        if ($user->role === 'root') {
+            return true;
         }
 
         // ? Pengguna hanya dapat mengubah profilnya sendiri
@@ -59,8 +58,8 @@ class UserPolicy
      */
     public function delete(User $user, User $model): bool
     {
-        // ? hanya admin yang bisa menghapus data user
-        return $user->role === 'admin';
+        // ? hanya root yang bisa menghapus data user
+        return $user->role === 'root';
     }
 
     /**

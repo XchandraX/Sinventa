@@ -67,7 +67,9 @@
                                 <th>Username</th>
                                 <th>Lembaga</th>
                                 <th>Role</th>
-                                <th>Aksi</th>
+                                @if (Auth::user()->role == 'root')
+                                    <th>Aksi</th>
+                                @endif
                             </tr>
                         </thead>
 
@@ -81,19 +83,25 @@
                                     <td>{{ $user->username }}</td>
                                     <td>{{ $user->lembaga }}</td>
                                     <td>{{ $user->role }}</td>
-                                    <td>
-                                        <a href="{{ route('users.edit', $user) }}" class="me-3">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
-                                        <form action="{{ route('users.destroy', $user) }}" method="POST" class="d-inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="confirm-text btn"
-                                                onclick="return confirm('Apakah Anda yakin ingin menghapus data user {{ $user->username }} ini?')">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </form>
-                                    </td>
+
+                                    @if (Auth::user()->role == 'root')
+                                        <td>
+                                            <a href="{{ route('users.edit', $user) }}" class="me-3">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+                                            <form action="{{ route('users.destroy', $user) }}" method="POST"
+                                                class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="confirm-text btn"
+                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus data user {{ $user->username }} ini?')">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    @endif
+
+
                                 </tr>
                             @endforeach
                         </tbody>
