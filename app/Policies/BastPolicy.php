@@ -13,7 +13,7 @@ class BastPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->role === 'admin';
+        return in_array($user->role, ['admin', 'root']);
     }
 
     /**
@@ -32,7 +32,7 @@ class BastPolicy
     public function create(User $user): bool
     {
         // ? hanya admin yang bisa membuka halaman buat bast baru
-        return $user->role === 'admin';
+        return in_array($user->role, ['admin', 'root']);
     }
 
     /**
@@ -41,7 +41,7 @@ class BastPolicy
     public function update(User $user, Bast $bast): bool
     {
         // ? hanya admin yang bisa membuka halaman edit bast
-        return $user->role === 'admin';
+        return in_array($user->role, ['admin', 'root']);
     }
 
     /**
@@ -50,7 +50,7 @@ class BastPolicy
     public function delete(User $user, Bast $bast): bool
     {
         // ? hanya admin yang bisa menghapus bast
-        return $user->role === 'admin';
+        return in_array($user->role, ['admin', 'root']);
     }
 
     /**

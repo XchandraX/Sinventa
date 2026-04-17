@@ -74,7 +74,7 @@ class UserSeeder extends Seeder
                 'username' => 'dewi.lestari',
                 'email' => 'dewi@sinvesta.com',
                 'role' => 'user',
-                'lembaga' => 'PT Sinvesta Media',
+                'lembaga' => 'Siswa Tkj',
                 'password' => Hash::make('admin123'),
                 'email_verified_at' => now(),
                 'created_at' => now(),

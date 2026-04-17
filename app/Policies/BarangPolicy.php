@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Barang;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class BarangPolicy
 {
@@ -13,7 +12,7 @@ class BarangPolicy
      */
     public function viewAny(User $user): bool
     {
-        // ? hanya user dengan role = admin yang bisa melihat data barang
+        // ?semua role baik admin maupun user bisa melihat data barang
         return true;
     }
 
@@ -32,7 +31,8 @@ class BarangPolicy
     public function create(User $user): bool
     {
         // ? hanya user dengan role = admin yang bisa membuat data barang
-        return $user->role == 'admin';
+        return in_array($user->role, ['admin', 'root']);
+
     }
 
     /**
@@ -41,7 +41,8 @@ class BarangPolicy
     public function update(User $user, Barang $barang): bool
     {
         // ? hanya user dengan role = admin yang bisa memperbarui data barang
-        return $user->role == 'admin';
+        return in_array($user->role, ['admin', 'root']);
+
     }
 
     /**
@@ -50,7 +51,8 @@ class BarangPolicy
     public function delete(User $user, Barang $barang): bool
     {
         // ? hanya user dengan role = admin yang bisa Menghapus data barang
-        return $user->role == 'admin';
+        return in_array($user->role, ['admin', 'root']);
+
     }
 
     /**

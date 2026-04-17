@@ -4,10 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
-
-// ? panggil class facades Auth agar dapat digunakan di function handle
 use Illuminate\Support\Facades\Auth;
+// ? panggil class facades Auth agar dapat digunakan di function handle
+use Symfony\Component\HttpFoundation\Response;
 
 class UserMiddleware
 {
@@ -23,11 +22,17 @@ class UserMiddleware
          * ? jika user belum login
          * ? atau lore user tidak sama dengan role yg ditentukan di middleware group
          */
-        if(! Auth::check() || Auth::user()->role !== $role) {
-            // ? alihkan user ke halaman abort 403
+        if (! Auth::check()) {
             abort(403);
         }
 
-        return $next($request);
+        $userRole = Auth::user()->role;
+
+        // Izinkan jika role cocok ATAU jika user adalah root
+        if ($userRole === $role || $userRole === 'root') {
+            return $next($request);
+        }
+
+        abort(403);
     }
 }
