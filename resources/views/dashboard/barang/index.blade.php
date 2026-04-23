@@ -10,7 +10,7 @@
             <h4>{{ $title }}</h4>
             <h6>Lihat atau cari barang inventaris</h6>
         </div>
-        @if (Auth::user()->role == 'admin')
+        @if (Auth::user()->role == 'admin' || Auth::user()->role == 'root')
             {{-- tombol tambah barang baru --}}
             <div class="page-btn">
                 <a href="{{ route('barang.create') }}" class="btn btn-added">
@@ -32,7 +32,7 @@
                     </div>
                 </div>
 
-                @if (Auth::user()->role == 'admin')
+                @if (Auth::user()->role == 'admin' || Auth::user()->role == 'root')
                     {{-- menu ekspor barang --}}
                     <div class="wordset">
                         <ul>
@@ -185,7 +185,7 @@
                                             <i class="bi bi-eye"></i>
                                         </a>
 
-                                        @if (Auth::user()->role == 'admin')
+                                        @if (Auth::user()->role == 'admin' || Auth::user()->role == 'root')
                                             {{-- tombol edit barang --}}
                                             <a href="{{ route('barang.edit', $barang) }}" class="me-3">
                                                 <i class="bi bi-pencil-square"></i>

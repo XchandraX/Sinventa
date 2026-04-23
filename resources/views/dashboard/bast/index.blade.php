@@ -182,7 +182,7 @@
                                                     class="bi bi-hourglass-split"></i></span>
                                         @elseif($bast->status_serah == 'Dibatalkan')
                                             <span class="btn btn-sm text-white bg-danger"><i
-                                                    class="bi bi-x-circle"></i></span> {{ $bast->status_serah }}
+                                                    class="bi bi-x-circle"></i></span>
                                         @else
                                             <span class="btn btn-sm text-white bg-success"><i
                                                     class="bi bi-check-circle"></i></span>
@@ -195,7 +195,7 @@
                                                     class="bi bi-hourglass-split"></i></span>
                                         @elseif($bast->status_terima == 'Dibatalkan')
                                             <span class="btn btn-sm text-white bg-danger"><i
-                                                    class="bi bi-x-circle"></i></span> {{ $bast->status_terima }}
+                                                    class="bi bi-x-circle"></i></span>
                                         @else
                                             <span class="btn btn-sm text-white bg-success"><i
                                                     class="bi bi-check-circle"></i></span>
@@ -227,27 +227,43 @@
                                         @endif
                                     </td>
                                     <td>
-                                        {{-- tombol download dokumen berita acara --}}
-                                        <a href="{{ route('bast.downloadPdf', $bast) }}" class="me-3">
-                                            <i class="bi bi-download"></i>
-                                        </a>
+                                        {{-- Cek apakah status dibatalkan (baik dari sisi penyerah maupun penerima) --}}
+                                        @php
+                                            $isDibatalkan =
+                                                $bast->status_serah == 'Dibatalkan' ||
+                                                $bast->status_terima == 'Dibatalkan';
+                                        @endphp
 
-                                        {{-- tombol lihat detail berita acara --}}
-                                        <a href="{{ route('bast.show', $bast) }}" class="me-3">
+                                        @if ($isDibatalkan)
+                                            {{-- Jika dibatalkan: Tampilkan ikon silang merah dan nonaktifkan klik --}}
+                                            <span class="me-3 text-danger" style="cursor: not-allowed;"
+                                                title="Dokumen dibatalkan, tidak dapat diunduh">
+                                                <i class="bi bi-x-circle"></i>
+                                            </span>
+                                        @else
+                                            {{-- Jika tidak dibatalkan: Tampilkan tombol download normal --}}
+                                            <a href="{{ route('bast.downloadPdf', $bast) }}" class="me-3"
+                                                title="Unduh Berita Acara">
+                                                <i class="bi bi-download"></i>
+                                            </a>
+                                        @endif
+
+                                        {{-- Tombol lihat detail (tetap ada) --}}
+                                        <a href="{{ route('bast.show', $bast) }}" class="me-3" title="Lihat Detail">
                                             <i class="bi bi-eye"></i>
                                         </a>
 
-                                        {{-- tombol edit berita acara --}}
-                                        <a href="{{ route('bast.edit', $bast) }}" class="me-3">
+                                        {{-- Tombol edit (opsional: biasanya jika sudah dibatalkan tidak boleh diedit lagi) --}}
+                                        <a href="{{ route('bast.edit', $bast) }}" class="me-3" title="Edit">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
 
-                                        {{-- tombol hapus berita acara --}}
+                                        {{-- Tombol hapus --}}
                                         <form action="{{ route('bast.destroy', $bast) }}" method="post"
                                             class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="confirm-text btn" type="submit"
+                                            <button class="confirm-text btn p-0" type="submit"
                                                 onclick="return confirm('Yakin ingin menghapus berita acara ini?')">
                                                 <i class="bi bi-trash"></i>
                                             </button>

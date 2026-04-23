@@ -1,45 +1,45 @@
 @import "../../../../css2";
 
 :root {
-    /* Light Mode (Default) */
-    --primary: #ff9f42;
-    --primary-hover: #fef7e9;
+  /* Light Mode (Soft & Fresh) */
+  --primary: #059669;          /* Emerald/Sage Green (Lebih nyambung ke Dark Mode) */
+  --primary-hover: #ecfdf5;    /* Hijau sangat pucat untuk hover */
 
-    /* Background */
-    --bg-primary: #ffffff;
-    --bg-secondary: #f8fafc;
-    --bg-dark: #ffffff;
+  /* Background */
+  --bg-primary: #fbfbfc;       /* Putih bersih dengan sedikit sentuhan dingin */
+  --bg-secondary: #ffffff;     
+  --bg-dark: #f3f4f6;          
 
-    /* Cards & Components */
-    --card-bg: #ffffff;
-    --card-content: #ff9f42;
-    --sidebar-bg: #ffffff;
-    --header-bg: #ffffff;
-    --table-header-bg: #f8fafc;
-    --table-row-hover: #f1f5f9;
-    --hover-bg: #f1f5f9;
+  /* Cards & Components */
+  --card-bg: #ffffff;
+  --card-content: #059669;     
+  --sidebar-bg: #ffffff;
+  --header-bg: #ffffff;
+  --table-header-bg: #f8fafc;
+  --table-row-hover: #f1f5f9;
+  --hover-bg: #f1f5f9;
 
-    /* Text */
-    --text-main: #0f172a;
-    --text-primary: #0f172a;
-    --text-secondary: #334155;
-    --text-muted: #64748b;
+  /* Text */
+  --text-main: #334155;        /* Slate yang lebih soft, tidak terlalu hitam */
+  --text-primary: #1e293b;     
+  --text-secondary: #64748b;   
+  --text-muted: #94a3b8;       
 
-    /* Borders */
-    --border-color: #e2e8f0;
-    --input-border: #cbd5e1;
+  /* Borders */
+  --border-color: #f1f5f9;     /* Border lebih tipis/samar agar clean */
+  --input-border: #e2e8f0;
 
-    /* Inputs */
-    --input-bg: #ffffff;
+  /* Inputs */
+  --input-bg: #ffffff;
 
-    /* Accent Colors */
-    --blue: #ff9f42;
-    --accent-blue: #ffaa00;
-    --gray: #cecfcf;
-    --accent-gray: #e2e8f0;
-    --error: #f87171;
-    --green: #2ecc71;
-    --red: #e74c3c;
+  /* Accent Colors */
+  --blue: #3b82f6;             
+  --accent-blue: #60a5fa;
+  --gray: #cecfcf;
+  --accent-gray: #e2e8f0;
+  --error: #f87171;
+  --green: #10b981;
+  --red: #ef4444;
 }
 
 /* Dark Mode */

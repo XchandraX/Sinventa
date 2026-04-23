@@ -124,7 +124,7 @@
             </a>
 
             {{-- jika user yang login adalah role = admin --}}
-            @if (Auth::user()->role == 'admin')
+            @if (Auth::user()->role == 'admin' || Auth::user()->role == 'root')
                 {{-- tampilkan tombol edit --}}
                 <a href="{{ route('barang.edit', $barang) }}" class="btn btn-primary">
                     <i class="bi bi-pencil-square"></i>
@@ -144,7 +144,7 @@
     </div>
 
     {{-- jika user yang login adalah role - admin --}}
-    @if (Auth::user()->role == 'admin')
+    @if (Auth::user()->role == 'admin' || Auth::user()->role == 'root')
         {{-- card untuk menampilkan riwayat bast barang --}}
         <div class="card">
             <div class="card-body">
@@ -184,7 +184,7 @@
                                     <th>Penerima</th>
                                     <th>Status</th>
                                     {{-- jika user yang login adalah role = admin --}}
-                                    @if (Auth::user()->role == 'admin')
+                                    @if (Auth::user()->role == 'admin' || Auth::user()->role == 'root')
                                         <th>Aksi</th>
                                     @endif
                                 </tr>

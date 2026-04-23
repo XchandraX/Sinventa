@@ -1,104 +1,76 @@
 <?php
-// database/seeders/BastSeeder.php
 
 namespace Database\Seeders;
 
+use App\Models\Bast;
+use App\Models\User;
+use App\Models\Barang;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
+use Riskihajar\Terbilang\Facades\Terbilang;
 
 class BastSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        Schema::disableForeignKeyConstraints();
-        DB::table('basts')->truncate();
-        Schema::enableForeignKeyConstraints();
+        // 1. Bersihkan folder storage agar bersih
+        Storage::deleteDirectory('bast-pdf');
+        Storage::makeDirectory('bast-pdf');
 
-        // Data BAST harus sesuai dengan data yang ada di BarangSeeder dan UserSeeder
-        $basts = [
-            // Barang BRG-001 (Monitor LED) diserahkan oleh Budi ke Siti
-            [
-                'barang_id' => 1,        // BRG-001: Monitor LED
-                'user_serah_id' => 2,    // Budi Santoso (user_serah)
-                'user_terima_id' => 3,   // Siti Rahayu (user_terima)
-                'status_serah' => 'Disetujui',
-                'status_terima' => 'Disetujui',
-                'file_export' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            // Barang BRG-002 (Keyboard) diserahkan oleh Siti ke Anto
-            [
-                'barang_id' => 2,        // BRG-002: Keyboard Mechanical
-                'user_serah_id' => 3,    // Siti Rahayu
-                'user_terima_id' => 4,   // Anto Wijaya
-                'status_serah' => 'Disetujui',
-                'status_terima' => 'Menunggu',
-                'file_export' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            // Barang BRG-004 (Kursi) diserahkan oleh Dewi ke Budi
-            [
-                'barang_id' => 4,        // BRG-004: Kursi Kantor
-                'user_serah_id' => 5,    // Dewi Lestari
-                'user_terima_id' => 2,   // Budi Santoso
-                'status_serah' => 'Disetujui',
-                'status_terima' => 'Disetujui',
-                'file_export' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            // Barang BRG-007 (PC Desktop) diserahkan oleh Anto ke Dewi
-            [
-                'barang_id' => 7,        // BRG-007: PC Desktop Core i5
-                'user_serah_id' => 4,    // Anto Wijaya
-                'user_terima_id' => 5,   // Dewi Lestari
-                'status_serah' => 'Menunggu',
-                'status_terima' => 'Menunggu',
-                'file_export' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            // Barang BRG-010 (Router) diserahkan oleh Chandra ke Budi
-            [
-                'barang_id' => 10,       // BRG-010: Router MikroTik
-                'user_serah_id' => 1,    // Chandra Maulana (admin)
-                'user_terima_id' => 2,   // Budi Santoso
-                'status_serah' => 'Disetujui',
-                'status_terima' => 'Disetujui',
-                'file_export' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            // Barang BRG-013 (Whiteboard) diserahkan oleh Siti ke Anto
-            [
-                'barang_id' => 13,       // BRG-013: Whiteboard
-                'user_serah_id' => 3,    // Siti Rahayu
-                'user_terima_id' => 4,   // Anto Wijaya
-                'status_serah' => 'Dibatalkan',
-                'status_terima' => 'Menunggu',
-                'file_export' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            // Barang BRG-014 (Proyektor) diserahkan oleh Chandra ke Dewi
-            [
-                'barang_id' => 14,       // BRG-014: Proyektor Epson
-                'user_serah_id' => 1,    // Chandra Maulana
-                'user_terima_id' => 5,   // Dewi Lestari
-                'status_serah' => 'Disetujui',
-                'status_terima' => 'Menunggu',
-                'file_export' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
+        // 2. Daftar variasi skenario status (Serah - Terima)
+        $skenarioStatus = [
+            ['serah' => 'Disetujui', 'terima' => 'Disetujui'],   // Selesai
+            ['serah' => 'Disetujui', 'terima' => 'Menunggu'],    // Menunggu Konfirmasi Penerima
+            ['serah' => 'Menunggu', 'terima' => 'Disetujui'],    // Menunggu Konfirmasi Penerima
+            ['serah' => 'Menunggu',  'terima' => 'Menunggu'],    // Draft / Baru Dibuat
+            ['serah' => 'Dibatalkan', 'terima' => 'Menunggu'],   // Dibatalkan Pengirim
+            ['serah' => 'Menunggu', 'terima' => 'Dibatalkan'],   // Dibatalkan Pengirim
+            ['serah' => 'Disetujui', 'terima' => 'Dibatalkan'],  // Ditolak Penerima
         ];
 
-        DB::table('basts')->insert($basts);
+        for ($i = 1; $i <= 30; $i++) {
+            // Rotasi ID agar sinkron dengan User & Barang Seeder (1-14)
+            $barangId = ($i % 14) ?: 14;
+            $userSerahId = ($i % 14) ?: 1;
+            $userTerimaId = (($i + 2) % 14) ?: 2; // +2 agar user serah & terima tidak sama
+
+            // Ambil status secara acak dari skenario di atas
+            $status = $skenarioStatus[array_rand($skenarioStatus)];
+
+            // 3. Simpan data ke Database
+            $bast = Bast::create([
+                'barang_id'      => $barangId,
+                'user_serah_id'  => $userSerahId,
+                'user_terima_id' => $userTerimaId,
+                'status_serah'   => $status['serah'],
+                'status_terima'  => $status['terima'],
+                'file_export'    => null, // Diupdate setelah PDF dibuat
+                'created_at'     => now()->subDays(30 - $i)->addHours($i),
+                'updated_at'     => now()->subDays(30 - $i)->addHours($i),
+            ]);
+
+            // 4. Logika Pembuatan PDF (Sama dengan Controller)
+            $tanggal = Carbon::parse($bast->created_at);
+            
+            $pdf = Pdf::loadView('dashboard.bast.dokumen', [
+                'bast'            => $bast,
+                'hari'            => strtoupper($tanggal->translatedFormat('l')),
+                'tanggal'         => strtoupper(Terbilang::make($tanggal->day)),
+                'bulan'           => strtoupper($tanggal->translatedFormat('F')),
+                'tahun_terbilang' => strtoupper(Terbilang::make($tanggal->year)),
+            ])->setPaper('a4', 'portrait');
+
+            // 5. Simpan file PDF ke storage
+            $filename = 'Bast-' . $bast->id . '.pdf';
+            $path = 'bast-pdf/' . $filename;
+            Storage::put($path, $pdf->output());
+
+            // 6. Update database dengan path file yang benar
+            $bast->update([
+                'file_export' => $path,
+            ]);
+        }
     }
 }

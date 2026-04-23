@@ -2,12 +2,12 @@
 <div class="header">
     <div class="header-left">
         {{-- Logo Dashboard --}}
-        <a href="{{ route('dashboard') }}" class="logo">
+        <a href="{{ route('dashboard') }}" class="logo justify-center items-center w-full">
             <img src="{{ asset('assets/icon/SMKM2KNG.png') }}" alt="Sinvesta">
         </a>
 
         {{-- Logo Dashboard saat sidebar disembunyikan --}}
-        <a href="{{ route('dashboard') }}" class="logo-small">
+        <a href="{{ route('dashboard') }}" class="logo-small justify-center items-center w-full">
             <img src="{{ asset('assets/icon/favicon.png') }}" alt="Sinvesta">
         </a>
 

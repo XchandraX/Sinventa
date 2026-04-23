@@ -13,6 +13,6 @@ class RegistrationCodeSeeder extends Seeder
     public function run(): void
     {
         //
-        RegistrationCode::create(['code' => 'Chx76']);
+        RegistrationCode::create(['code' => 'admin28']);
     }
 }

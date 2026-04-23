@@ -179,27 +179,27 @@
 
         {{-- menu profil khusus untuk di mobile --}}
         <!-- HAMBURGER MOBILE -->
-            <div class="dropdown mobile-user-menu d-md-none">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                    <i class="bi bi-list fs-4"></i>
+        <div class="dropdown mobile-user-menu d-md-none">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                <i class="bi bi-list fs-4"></i>
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-end p-2">
+
+                <!-- Mode -->
+                <button id="theme-toggle-mobile" class="theme-toggle w-100 mb-2">
+                    <span class="light-icon"><i class="bi bi-moon-fill"></i></span>
+                    <span class="dark-icon"><i class="bi bi-sun-fill"></i></span>
+                    <span class="mode-text">Mode</span>
+                </button>
+
+                <!-- Beranda -->
+                <a href="{{ route('login') }}" class="dropdown-item">
+                    <i class="bi bi-box-arrow-in-right me-2"></i>Login
                 </a>
 
-                <div class="dropdown-menu dropdown-menu-end p-2">
-
-                    <!-- Mode -->
-                    <button id="theme-toggle-mobile" class="theme-toggle w-100 mb-2">
-                        <span class="light-icon"><i class="bi bi-moon-fill"></i></span>
-                        <span class="dark-icon"><i class="bi bi-sun-fill"></i></span>
-                        <span class="mode-text">Mode</span>
-                    </button>
-
-                    <!-- Beranda -->
-                    <a href="{{ route('login') }}" class="dropdown-item">
-                        <i class="bi bi-box-arrow-in-right me-2"></i>Login
-                    </a>
-
-                </div>
             </div>
+        </div>
     </div>
 
 
@@ -216,12 +216,13 @@
                         <p class="lead mb-4 text-muted">Sistem Inventaris Sarana dan Prasarana Sekolah</p>
 
                         <div class="d-flex flex-wrap gap-3 justify-content-center">
-                            <a href="{{ route('login') }}" class="btn btn-demo">
-                                <i class="bi bi-box-arrow-in-right me-2"></i>Login
-                            </a>
                             <a href="{{ route('daftar.index') }}" class="btn btn-demo">
                                 <i class="bi bi-box-arrow-in-right me-2"></i>Daftar
                             </a>
+                            <a href="{{ route('login') }}" class="btn btn-demo">
+                                <i class="bi bi-box-arrow-in-right me-2"></i>Login
+                            </a>
+
                         </div>
                     </div>
                 </div>
