@@ -75,7 +75,9 @@
                                             <option value="{{ $item->id }}"
                                                 {{ old($card['id']) == $item->id ? 'selected' : '' }}>
                                                 {{ $item->{$card['nama']} }} -
-                                                {{ $item->kode_barang }}
+                                                {{ $item->kode_barang }} - 
+                                                {{ $item->kategori->kode_kategori ?? 'Tanpa Kategori'}} -
+                                                {{ $item->lokasi->kode_lokasi ?? 'Lokasi Tidak Set'}} 
                                             </option>
                                         @endforeach
                                     </select>

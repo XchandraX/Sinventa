@@ -88,8 +88,12 @@ class BastController extends Controller
 
         return view('dashboard.bast.create', [
             'title' => 'Tambah Berita Acara Serah Terima Baru',
-            'users' => User::latest()->select('id', 'nama_lengkap')->get(),
-            'barangs' => Barang::latest()->select('id', 'kode_barang', 'nama_barang')->get(),
+            'users' => User::select('id', 'nama_lengkap')->latest()->get(),
+            // Pastikan kategori_id ikut di-select agar relasi kategori bisa dipanggil
+            'barangs' => Barang::with('kategori', 'lokasi')
+                ->select('id', 'kode_barang', 'nama_barang', 'kategori_id', 'lokasi_id')
+                ->latest()
+                ->get(),
         ]);
     }
 
