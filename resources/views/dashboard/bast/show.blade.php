@@ -31,7 +31,7 @@
             <h4>{{ $title }}</h4>
             <h6>Lihat detail {{ $title }}</h6>
         </div>
-        @if (auth()->user()->role == 'admin')
+        @if (auth()->user()->role == 'admin' || auth()->user()->role == 'root')
             <div class="page-btn">
             <a href="{{ route('bast.index') }}" class="btn btn-added">
                 <i class="bi bi-arrow-left-square"></i>
@@ -173,7 +173,7 @@
 
         {{-- card footer --}}
         <div class="card-footer">
-            @if (auth()->user()->role == 'admin')
+            @if (auth()->user()->role == 'admin' || auth()->user()->role == 'root')
                 <a href="{{ route('bast.downloadPdf', $bast) }}" class="btn btn-secondary" target="_blank">
                     <i class="bi bi-download"></i>
                 </a>

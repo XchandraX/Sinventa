@@ -227,7 +227,6 @@
                                         @endif
                                     </td>
                                     <td>
-                                        {{-- Cek apakah status dibatalkan (baik dari sisi penyerah maupun penerima) --}}
                                         @php
                                             $isDibatalkan =
                                                 $bast->status_serah == 'Dibatalkan' ||
