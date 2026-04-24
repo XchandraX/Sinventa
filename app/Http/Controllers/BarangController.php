@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\BarangExport;
 // ! panggil class modul yang dibutuhkan di function
 use App\Models\Barang;
 use App\Models\Bast;
@@ -190,83 +189,69 @@ class BarangController extends Controller
         return redirect()->route('barang.index')->with('berhasil', 'Barang berhasil dihapus');
     }
 
-    /**
-     * ? download QRCode barang
-     */
+    // app/Http/Controllers/BarangController.php
+
+    // Update method downloadQr - gunakan route publik
     public function downloadQr(Barang $barang)
     {
-        // ? Buat file QrCode dengan format .svg
+        // Gunakan route publik, bukan route yang memerlukan auth
         $qr = QrCode::format('svg')
             ->size(300)
-            ->generate(route('barang.show', $barang)); // ! yang dibuat menjadi QrCode adalah link detail barang
+            ->generate(route('public.barang.show', $barang->id)); // ← ubah ke route publik
 
-        // ? tentukan nama file QrCode menggunak kode_barang
-        $filename = 'qroce-'.$barang->kode_barang.'.svg';
+        $filename = 'qr-code-'.$barang->kode_barang.'.svg';
 
-        // ? download qr yg sudah dibuat
         return Response::make($qr, 200, [
             'Content-Type' => 'image/svg+xml',
             'Content-Disposition' => "attachment; filename=\"$filename\"",
         ]);
     }
 
+    // Update method exportToPdf - gunakan route publik
     public function exportToPdf()
     {
-        // ? amibl semua data barang, urutkan dari paling baru
         $barangs = Barang::with(['kategori', 'lokasi'])->latest()->get();
 
-        // ? buat QrCode untuk masing-masing barang menggunakan perualanga
         foreach ($barangs as $barang) {
             $barang->qr_base64 = base64_encode(
-                QrCode::format('svg') // buat dalam format svg
-                    ->size(80) // ukuran 80
-                    ->generate(route('barang.show', $barang)
-                    )
+                QrCode::format('svg')
+                    ->size(80)
+                    ->generate(route('public.barang.show', $barang->id)) // ← ubah ke route publik
             );
         }
 
-        // ? buat file pdf dari view export.blade.php di folder barang
         $pdf = Pdf::loadView('dashboard.barang.export', [
-            'title' => 'Daftar Barang Inventaris', // ? kirim judul halamannay
-            'barangs' => $barangs, // ? dan data barang
+            'title' => 'Daftar Barang Inventaris',
+            'barangs' => $barangs,
         ])->setPaper('a4', 'portrait');
 
-        // ? download PDF
         return $pdf->download('daftar_barang_inventaris.pdf');
     }
 
-    public function exportToExcel()
-    {
-        // ? download excel berdasarkan konfigurasi yang ada di file BarangExport.php
-        return Excel::download(new BarangExport, 'daftar_barang_inventaris.xlsx');
-    }
-
+    // Update method print - gunakan route publik
     public function print()
     {
-        // ? amibl semua data barang, urutkan dari paling baru
         $barangs = Barang::with(['kategori', 'lokasi'])->latest()->get();
 
-        // ? buat QrCode untuk masing-masing barang menggunakan perualanga
         foreach ($barangs as $barang) {
             $barang->qr_base64 = base64_encode(
-                QrCode::format('svg') // buat dalam format svg
-                    ->size(80) // ukuran 80
-                    ->generate(route('barang.show', $barang)
-                    )
+                QrCode::format('svg')
+                    ->size(80)
+                    ->generate(route('public.barang.show', $barang->id)) // ← ubah ke route publik
             );
         }
 
-        // ? jalankan view export.blade.php sambil kirim data:
         return view('dashboard.barang.export', [
             'title' => 'Daftar Barang',
             'barangs' => $barangs,
         ]);
     }
+
     public function printBarang(Barang $barang)
-{
-    return view('dashboard.barang.print', [
-        'barang' => $barang,
-        'title'  => 'Cetak Detail Barang'
-    ]);
-}
+    {
+        return view('dashboard.barang.print', [
+            'barang' => $barang,
+            'title' => 'Cetak Detail Barang',
+        ]);
+    }
 }

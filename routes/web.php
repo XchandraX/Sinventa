@@ -4,6 +4,8 @@
 use App\Http\Controllers\AuthController;
 // ! Panggil class DaftarController agar bisa digunakan oleh route
 use App\Http\Controllers\BarangController;
+// ! Panggil class DaftarController agar bisa digunakan oleh route
+use App\Http\Controllers\PublicBarangController;
 // ! Panggil class DashboardController agar bisa digunakan oleh route
 use App\Http\Controllers\BastController;
 // ! Panggil class UserController agar bisa digunakan oleh route
@@ -17,7 +19,9 @@ use App\Http\Controllers\LokasiController;
 // ! Panggil class BastController agar bisa digunakan oleh route
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\URL;
 
+Route::get('/public/barang/{id}', [App\Http\Controllers\PublicBarangController::class, 'show'])->name('public.barang.show');
 /**
  * ? fungsi Group Middlweare "Guest"
  * * Digunakan khusus untuk menangani permintaan dari user yang belum melakukan autentikasi (login)

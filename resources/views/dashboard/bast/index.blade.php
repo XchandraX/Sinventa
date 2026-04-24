@@ -114,6 +114,7 @@
                             <option value="Disetujui" {{ request('status_bast') == 'Disetujui' ? 'selected' : '' }}>
                                 Disetujui</option>
                             <option value="Menunggu" {{ request('status_bast') == 'Menunggu' ? 'selected' : '' }}>Menunggu
+                            <option value="Dibatalkan" {{ request('status_bast') == 'Dibatalkan' ? 'selected' : '' }}>Dibatalkan
                             </option>
                         </select>
                     </div>

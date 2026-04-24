@@ -94,20 +94,19 @@
                     </div>
                 </div>
 
+                {{-- Di file show.blade.php, update bagian QR Code --}}
                 <div class="col-lg-4 col-12">
                     <div>QR Code Barang:</div>
                     <div class="bar-code-view">
-                        {{-- generate QRCode dari data link detail barang --}}
                         <div class="bar-code">
-                            {!! QrCode::size(100)->generate(route('barang.show', $barang)) !!}
+                            {!! QrCode::size(100)->generate(route('public.barang.show', $barang->id)) !!}
+                            {{-- ↑ ubah ke route publik --}}
                         </div>
 
-                        {{-- tombol cetak QRcode --}}
                         <a class="btn btn-secondary mx-0" onclick="window.print()">
                             <i class="bi bi-printer"></i>
                         </a>
 
-                        {{-- tombol download QRCode --}}
                         <a href="{{ route('barang.downloadQr', $barang) }}" class="btn btn-primary">
                             <i class="bi bi-download"></i>
                         </a>

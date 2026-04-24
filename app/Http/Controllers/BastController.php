@@ -54,14 +54,22 @@ class BastController extends Controller
         }
 
         // ? jika ada filter status bast data yang dipilih, tambahkan kondisi ke query tersebut
+        // Filter status BAST
         if ($request->filled('status_bast')) {
             match ($request->status_bast) {
                 'Disetujui' => $query->where('status_serah', 'Disetujui')
                     ->where('status_terima', 'Disetujui'),
-                'Menunggu' => $query->where(fn ($q) => $q->where('status_serah', 'Menunggu')
-                    ->orWhere('status_terima', 'Menunggu')),
-                'Dibatalkan' => $query->where(fn ($q) => $q->where('status_serah', 'Dibatalkan')
-                    ->orWhere('status_terima', 'Dibatalkan')),
+
+                'Menunggu' => $query->where(function ($q) {
+                    $q->where('status_serah', 'Menunggu')
+                        ->orWhere('status_terima', 'Menunggu');
+                })->whereNotIn('status_serah', ['Dibatalkan'])
+                    ->whereNotIn('status_terima', ['Dibatalkan']),
+
+                'Dibatalkan' => $query->where(function ($q) {
+                    $q->where('status_serah', 'Dibatalkan')
+                        ->orWhere('status_terima', 'Dibatalkan');
+                })
             };
         }
 
@@ -286,7 +294,7 @@ class BastController extends Controller
             $bast->qr_base64 = base64_encode(
                 QrCode::format('svg') // buat dalam format svg
                     ->size(70) // ukuran 80
-                    ->generate(route('bast.show', $bast->barang)
+                    ->generate(route('public.barang.show', $barang->id)
                     )
             );
         }
@@ -317,7 +325,7 @@ class BastController extends Controller
             $bast->qr_base64 = base64_encode(
                 QrCode::format('svg') // buat dalam format svg
                     ->size(80) // ukuran 80
-                    ->generate(route('bast.show', $bast->barang)
+                    ->generate(route('public.barang.show', $barang->id)
                     )
             );
         }
