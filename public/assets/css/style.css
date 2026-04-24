@@ -1,45 +1,56 @@
 @import "../../../../css2";
 
 :root {
-  /* Light Mode (Soft & Fresh) */
-  --primary: #059669;          /* Emerald/Sage Green (Lebih nyambung ke Dark Mode) */
-  --primary-hover: #ecfdf5;    /* Hijau sangat pucat untuk hover */
+  /* Light Mode (Warm & Elegant) */
+  --primary: #0d9488;          /* Teal yang lebih berkarakter (bukan hijau biasa) */
+  --primary-hover: #ccfbf1;    /* Teal sangat soft untuk hover */
+  --primary-soft: #f0fdfa;     /* Background primary yang soft */
 
-  /* Background */
-  --bg-primary: #fbfbfc;       /* Putih bersih dengan sedikit sentuhan dingin */
+  /* Background - lebih hangat */
+  --bg-primary: #fefcf5;       /* Krim hangat (tidak putih dingin) */
   --bg-secondary: #ffffff;     
-  --bg-dark: #f3f4f6;          
+  --bg-dark: #f7f5ee;          /* Lebih warm dari f3f4f6 */
 
   /* Cards & Components */
   --card-bg: #ffffff;
-  --card-content: #059669;     
-  --sidebar-bg: #ffffff;
+  --card-border: #f0ede5;      /* Border hangat */
+  --card-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03);
+  
+  --sidebar-bg: #fefcf5;
   --header-bg: #ffffff;
-  --table-header-bg: #f8fafc;
-  --table-row-hover: #f1f5f9;
-  --hover-bg: #f1f5f9;
+  --table-header-bg: #faf8f2;
+  --table-row-hover: #fefaf0;
+  --hover-bg: #fefaf0;
 
-  /* Text */
-  --text-main: #334155;        /* Slate yang lebih soft, tidak terlalu hitam */
-  --text-primary: #1e293b;     
-  --text-secondary: #64748b;   
-  --text-muted: #94a3b8;       
+  /* Text - kontras lebih baik */
+  --text-main: #2c3e4e;        /* Deep slate dengan sentuhan blue (lebih enak dibaca) */
+  --text-primary: #1a2a36;     
+  --text-secondary: #5a6e7c;   /* Lebih gelap dari sebelumnya */
+  --text-muted: #8a9aa8;       
+  --text-placeholder: #b9c4cc;
 
   /* Borders */
-  --border-color: #f1f5f9;     /* Border lebih tipis/samar agar clean */
-  --input-border: #e2e8f0;
+  --border-color: #e8e2d4;     /* Warm border */
+  --input-border: #e2dac8;
 
   /* Inputs */
   --input-bg: #ffffff;
+  --input-focus-ring: rgba(13, 148, 136, 0.15);
 
-  /* Accent Colors */
+  /* Accent Colors - lebih hidup */
   --blue: #3b82f6;             
   --accent-blue: #60a5fa;
-  --gray: #cecfcf;
-  --accent-gray: #e2e8f0;
-  --error: #f87171;
+  --gray: #cdc6b8;
+  --accent-gray: #e5ddd0;
+  --error: #f97316;            /* Orange error (lebih soft dari merah) */
+  --error-bg: #fff7ed;
   --green: #10b981;
   --red: #ef4444;
+  
+  /* Spesial untuk highlight */
+  --warning: #f59e0b;
+  --success: #0d9488;
+  --info: #3b82f6;
 }
 
 /* Dark Mode */
@@ -8738,4 +8749,95 @@ form button .bi-trash:hover {
 /* Menengahkan konten secara vertikal jika halaman kosong */
 .guest-hero {
     margin-top: 50px; /* Jarak dari atas agar tidak terlalu mepet header */
+}
+
+/* ============================================
+   SWEETALERT2 DARK MODE CUSTOMIZATION
+   ============================================ */
+
+/* Light Mode (default) sudah ok */
+
+/* Dark Mode */
+[data-theme="dark"] .swal2-popup {
+    background: var(--card-bg) !important;
+    color: var(--text-main) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+[data-theme="dark"] .swal2-title {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .swal2-html-container,
+[data-theme="dark"] .swal2-text {
+    color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .swal2-input,
+[data-theme="dark"] .swal2-textarea,
+[data-theme="dark"] .swal2-select {
+    background-color: var(--input-bg) !important;
+    color: var(--text-main) !important;
+    border: 1px solid var(--input-border) !important;
+}
+
+[data-theme="dark"] .swal2-input:focus,
+[data-theme="dark"] .swal2-textarea:focus {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.2) !important;
+}
+
+[data-theme="dark"] .swal2-confirm {
+    background-color: var(--primary) !important;
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .swal2-cancel {
+    background-color: var(--gray) !important;
+    color: var(--text-main) !important;
+}
+
+[data-theme="dark"] .swal2-deny {
+    background-color: var(--red) !important;
+}
+
+[data-theme="dark"] .swal2-close {
+    color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .swal2-close:hover {
+    color: var(--red) !important;
+}
+
+[data-theme="dark"] .swal2-footer {
+    border-top-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .swal2-loader {
+    border-color: var(--primary) transparent var(--primary) transparent !important;
+}
+
+/* Toast notification dark mode */
+[data-theme="dark"] .swal2-toast {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-theme="dark"] .swal2-toast .swal2-title {
+    color: var(--text-main) !important;
+}
+
+[data-theme="dark"] .swal2-toast .swal2-html-container {
+    color: var(--text-secondary) !important;
+}
+
+/* Loading spinner dark mode */
+[data-theme="dark"] .swal2-popup.swal2-toast .swal2-loader {
+    border-color: var(--primary) transparent var(--primary) transparent !important;
+}
+
+/* Timer progress bar */
+[data-theme="dark"] .swal2-timer-progress-bar {
+    background: var(--primary) !important;
 }

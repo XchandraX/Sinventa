@@ -190,19 +190,19 @@
                                             <a href="{{ route('barang.edit', $barang) }}" class="me-3">
                                                 <i class="bi bi-pencil-square"></i>
                                             </a>
-
-                                            {{-- tombol hapus barang --}}
+                                            {{-- Tombol hapus --}}
                                             <form action="{{ route('barang.destroy', $barang) }}" method="post"
                                                 class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="confirm-text btn" type="submit"
-                                                    onclick="return confirm('Yakin ingin menghapus barang {{ $barang->nama_barang }}?')">
+                                                <button class="confirm-text btn p-0 btn-delete" type="submit"
+                                                    data-nama="{{ $barang->nama_barang }}"
+                                                    data-title="Hapus Berita Acara?">
                                                     <i class="bi bi-trash"></i>
                                                 </button>
                                             </form>
                                         @endif
-                                        
+
                                     </td>
                                 </tr>
                             @endforeach

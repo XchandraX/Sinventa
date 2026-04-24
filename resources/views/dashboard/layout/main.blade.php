@@ -33,6 +33,10 @@
     <link rel="stylesheet" href="{{ asset('assets/css/vendor/fontawesome/css/fontawesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/vendor/fontawesome/css/all.min.css') }}">
 
+    {{-- ? SweetAlert2 CSS --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+
     {{-- ? memanggil file CSS TEMA DASHBOARD --}}
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
@@ -68,6 +72,7 @@
     {{-- ? JAVASCRIPT JQUERY 3.6.0 --}}
     <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
 
+
     {{-- ? JAVASCRIPT FEATHER --}}
     <script src="{{ asset('assets/js/feather.min.js') }}"></script>
 
@@ -87,6 +92,171 @@
     {{-- ? JAVASCRIPT TEMA DASHBOARD --}}
     <script src="{{ asset('assets/js/script.js') }}"></script>
 
+    {{-- ? di dalam tag <head> atau sebelum @yield('js') --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {{-- Script Global untuk Semua Halaman --}}
+    <script>
+        $(document).ready(function() {
+            // ============================================
+            // 1. SWEETALERT UNTUK SEMUA TOMBOL HAPUS
+            // ============================================
+            // Tombol dengan class 'btn-delete' atau form dengan class 'delete-form'
+            $('.btn-delete, .delete-btn').click(function(e) {
+                e.preventDefault();
+
+                let form = $(this).closest('form');
+                let namaItem = $(this).data('nama') || 'item ini';
+                let title = $(this).data('title') || 'Hapus Data?';
+                let confirmText = $(this).data('confirm-text') || 'Ya, hapus!';
+                let cancelText = $(this).data('cancel-text') || 'Batal';
+
+                Swal.fire({
+                    title: title,
+                    html: `Apakah Anda yakin ingin menghapus <strong>${namaItem}</strong>?`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: confirmText,
+                    cancelButtonText: cancelText,
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Tampilkan loading
+                        Swal.fire({
+                            title: 'Menghapus...',
+                            text: 'Mohon tunggu',
+                            allowOutsideClick: false,
+                            didOpen: () => {
+                                Swal.showLoading();
+                            }
+                        });
+                        form.submit();
+                    }
+                });
+            });
+
+            // ============================================
+            // 2. SWEETALERT UNTUK SUBMIT FORM (SETUJUI/BATALKAN)
+            // ============================================
+            $('.confirm-submit').click(function(e) {
+                e.preventDefault();
+
+                let form = $(this).closest('form');
+                let message = $(this).data('message') || 'Lanjutkan aksi ini?';
+                let confirmText = $(this).data('confirm-text') || 'Ya, lanjutkan!';
+                let icon = $(this).data('icon') || 'question';
+
+                Swal.fire({
+                    title: 'Konfirmasi',
+                    text: message,
+                    icon: icon,
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: confirmText,
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: 'Memproses...',
+                            allowOutsideClick: false,
+                            didOpen: () => {
+                                Swal.showLoading();
+                            }
+                        });
+                        form.submit();
+                    }
+                });
+            });
+
+            // ============================================
+            // 3. NOTIFIKASI TOAST (OTOMATIS HILANG)
+            // ============================================
+            @if (session('success'))
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: '{{ session('success') }}',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true
+                });
+            @endif
+
+            @if (session('error'))
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'error',
+                    title: '{{ session('error') }}',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true
+                });
+            @endif
+
+            @if (session('warning'))
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'warning',
+                    title: '{{ session('warning') }}',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true
+                });
+            @endif
+        });
+
+        // ============================================
+        // 4. FUNGSI GLOBAL UNTUK PANGGIL MANUAL
+        // ============================================
+        function showAlert(title, message, icon = 'success') {
+            Swal.fire(title, message, icon);
+        }
+
+        function showToast(message, icon = 'success') {
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: icon,
+                title: message,
+                showConfirmButton: false,
+                timer: 3000
+            });
+        }
+
+        function confirmAction(url, method, message, callback) {
+            Swal.fire({
+                title: 'Konfirmasi',
+                text: message,
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Ya',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            _method: method
+                        },
+                        success: function(response) {
+                            if (callback) callback(response);
+                            else showToast(response.message || 'Berhasil!');
+                        },
+                        error: function() {
+                            showToast('Terjadi kesalahan!', 'error');
+                        }
+                    });
+                }
+            });
+        }
+    </script>
     {{-- ? @yield() ini berfungsi untuk menambahkan javascript dari file view lain jika dibutuhkan --}}
     @yield('js')
 </body>

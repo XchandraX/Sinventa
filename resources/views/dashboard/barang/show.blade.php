@@ -133,8 +133,8 @@
                 <form action="{{ route('barang.destroy', $barang) }}" class="d-inline" method="POST">
                     @csrf
                     @method('DELETE')
-                    <button class="btn btn-danger" type="submit"
-                        onclick="return confirm('Yakin ingin menghapus barang {{ $barang->nama_barang }}?')">
+                    <button class="btn btn-danger btn-delete" type="submit"
+                         data-nama="{{ $barang->nama_barang }}" data-title="Hapus Berita Acara?">
                         <i class="bi bi-trash" style="color: var(--text-secondary)"></i>
                     </button>
                 </form>
@@ -263,12 +263,13 @@
                                             </a>
 
                                             {{-- tombol hapus bast --}}
-                                            <form action="{{ route('bast.destroy', $barang) }}" method="post"
+                                            <form action="{{ route('barang.destroy', $barang) }}" method="post"
                                                 class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="confirm-text btn" type="submit"
-                                                    onclick="return confirm('Yakin ingin menghapus berita acara {{ $barang->kode_barang }}?')">
+                                                <button class="confirm-text btn p-0 btn-delete" type="submit"
+                                                    data-nama="{{ $barang->nama_barang }}"
+                                                    data-title="Hapus Berita Acara?">
                                                     <i class="bi bi-trash"></i>
                                                 </button>
                                             </form>

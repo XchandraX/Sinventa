@@ -33,18 +33,18 @@
         </div>
         @if (auth()->user()->role == 'admin' || auth()->user()->role == 'root')
             <div class="page-btn">
-            <a href="{{ route('bast.index') }}" class="btn btn-added">
-                <i class="bi bi-arrow-left-square"></i>
-            </a>
-        </div>
+                <a href="{{ route('bast.index') }}" class="btn btn-added">
+                    <i class="bi bi-arrow-left-square"></i>
+                </a>
+            </div>
         @else
             <div class="page-btn">
-            <a href="{{ url()->previous() }}" class="btn btn-added">
-                <i class="bi bi-arrow-left-square"></i>
-            </a>
-        </div>
+                <a href="{{ url()->previous() }}" class="btn btn-added">
+                    <i class="bi bi-arrow-left-square"></i>
+                </a>
+            </div>
         @endif
-         
+
     </div>
 
     <div class="card">
@@ -186,8 +186,8 @@
                 <form action="{{ route('bast.destroy', $bast) }}" class="d-inline" method="POST">
                     @csrf
                     @method('DELETE')
-                    <button class="btn btn-danger" type="submit"
-                        onclick="return confirm('Yakin ingin menghapus Berita Acara ini?')">
+                    <button class="btn btn-danger btn-delete" type="submit"
+                         data-nama="{{ $bast->barang->nama_barang }}" data-title="Hapus Berita Acara?">
                         <i class="bi bi-trash" style="color: var(--text-secondary)"></i>
                     </button>
                 </form>

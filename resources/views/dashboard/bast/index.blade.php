@@ -114,7 +114,8 @@
                             <option value="Disetujui" {{ request('status_bast') == 'Disetujui' ? 'selected' : '' }}>
                                 Disetujui</option>
                             <option value="Menunggu" {{ request('status_bast') == 'Menunggu' ? 'selected' : '' }}>Menunggu
-                            <option value="Dibatalkan" {{ request('status_bast') == 'Dibatalkan' ? 'selected' : '' }}>Dibatalkan
+                            <option value="Dibatalkan" {{ request('status_bast') == 'Dibatalkan' ? 'selected' : '' }}>
+                                Dibatalkan
                             </option>
                         </select>
                     </div>
@@ -263,8 +264,9 @@
                                             class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="confirm-text btn p-0" type="submit"
-                                                onclick="return confirm('Yakin ingin menghapus berita acara ini?')">
+                                            <button class="confirm-text btn p-0 btn-delete" type="submit"
+                                                data-nama="{{ $bast->barang->nama_barang }}"
+                                                data-title="Hapus Berita Acara?">
                                                 <i class="bi bi-trash"></i>
                                             </button>
                                         </form>

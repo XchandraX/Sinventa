@@ -89,12 +89,12 @@
                                             <a href="{{ route('users.edit', $user) }}" class="me-3">
                                                 <i class="bi bi-pencil-square"></i>
                                             </a>
-                                            <form action="{{ route('users.destroy', $user) }}" method="POST"
+                                            <form action="{{ route('users.destroy', $user) }}" method="post"
                                                 class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="confirm-text btn"
-                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus data user {{ $user->username }} ini?')">
+                                                <button class="confirm-text btn p-0 btn-delete" type="submit"
+                                                    data-nama="{{ $user->username }}" data-title="Hapus Berita Acara?">
                                                     <i class="bi bi-trash"></i>
                                                 </button>
                                             </form>
