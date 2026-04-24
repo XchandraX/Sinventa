@@ -262,4 +262,11 @@ class BarangController extends Controller
             'barangs' => $barangs,
         ]);
     }
+    public function printBarang(Barang $barang)
+{
+    return view('dashboard.barang.print', [
+        'barang' => $barang,
+        'title'  => 'Cetak Detail Barang'
+    ]);
+}
 }

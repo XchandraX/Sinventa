@@ -97,10 +97,10 @@
                         </a>
                         <ul>
                             <li><a href="{{ route('bast.index') }}"
-                                    class="{{ Request::is('dashboard/bast' ? 'active' : '') }}">List Berita Acara</a>
+                                    class="{{ Request::is('dashboard/bast') ? 'active' : '' }}">List Berita Acara</a>
                             </li>
                             <li><a href="{{ route('bast.create') }}"
-                                    class="{{ Request::is('dashboard/bast/create' ? 'active' : '') }}">Buat Berita
+                                    class="{{ Request::is('dashboard/bast/create') ? 'active' : '' }}">Buat Berita
                                     Acara</a></li>
                         </ul>
                     </li>

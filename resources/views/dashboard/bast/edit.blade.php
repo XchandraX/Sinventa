@@ -132,7 +132,7 @@
                     @endforeach
 
                     <div class="col-lg-12">
-                        <button class="btn btn-submit me-2" type="submit">Simpan Perubahan</button>
+                        <button class="btn btn-submit me-2" type="submit">Update</button>
                         <a href="{{ route('bast.index') }}" class="btn btn-cancel">Batal</a>
                     </div>
                 </div>

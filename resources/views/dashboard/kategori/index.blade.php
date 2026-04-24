@@ -58,7 +58,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('kategori.print') }}">
+                                <a href="{{ route('kategori.print') }}" target='_blank'>
                                     <img src="{{ asset('assets/icon/printer.svg') }}" alt="img">
                                 </a>
                             </li>

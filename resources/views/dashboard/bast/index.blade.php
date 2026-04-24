@@ -43,7 +43,7 @@
 
 
                         <li>
-                            <a href="{{ route('bast.print') }}">
+                            <a href="{{ route('bast.print') }}" target='_blank'>
                                 <img src="{{ asset('assets/icon/printer.svg') }}" alt="img">
                             </a>
                         </li>

@@ -21,7 +21,7 @@ class BastPolicy
      */
     public function view(User $user, Bast $bast): bool
     {
-        return $user->role == 'admin'
+        return in_array($user->role, ['admin', 'root'])
             || $user->id === $bast->user_serah_id // ? atau user yang jadi user penyerah
             || $user->id === $bast->user_terima_id;// ? atau user yang jadi user penerima
     }

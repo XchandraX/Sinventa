@@ -119,7 +119,7 @@
         <div class="card-footer">
 
             {{-- tombol cetak detail barang --}}
-            <a href="{{ route('barang.print', $barang) }}" class="btn btn-secondary" target="_blank">
+            <a href="{{ route('barang.print.barang', $barang) }}" class="btn btn-secondary" target="_blank">
                 <i class="bi bi-printer"></i>
             </a>
 

@@ -166,6 +166,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     // ? Route untuk fitur cetak daftar barang
     Route::get('/dashboard/print-barang', [Barangcontroller::class, 'print'])->name('barang.print');
 
+    // ? Route untuk fitur cetak daftar satu barang
+    Route::get('/barang/{barang}/print', [BarangController::class, 'printBarang'])->name('barang.print.barang');
+
     // ? route untuk fitur download dockumen BAST dalam format PDF
     Route::get('/dashboard/bast{bast}/download-pdf', [BastController::class, 'downloadPdf'])->name('bast.downloadPdf');
 

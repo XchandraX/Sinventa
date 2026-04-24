@@ -104,9 +104,9 @@ class BastController extends Controller
         // ? 1. membuat aturan validasi data
         $aturan = [
             'barang_id' => 'required|exists:barangs,id',
-            'user_serah_id' => 'required|exists:users,id',
+            'user_serah_id' => 'required|exists:users,id|different:user_terima_id',
             'status_serah' => 'required|in:Menunggu,Disetujui,Dibatalkan',
-            'user_terima_id' => 'required|exists:users,id',
+            'user_terima_id' => 'required|exists:users,id|different:user_serah_id',
             'status_terima' => 'required|in:Menunggu,Disetujui,Dibatalkan',
         ];
 
@@ -115,6 +115,8 @@ class BastController extends Controller
             'required' => ':Attribute wajib diisi!',
             'in' => 'Attribute tidak valid!',
             'exists' => 'Attribute tidak ditemukan di database!',
+            'user_terima_id.different' => 'Penerima tidak boleh sama dengan Penyerah!',
+            'user_serah_id.different' => 'Penerima tidak boleh sama dengan Penerima!',
         ];
 
         // ? 3. aturan agar valid
@@ -193,9 +195,9 @@ class BastController extends Controller
         // ? 1. membuat aturan validasi data
         $aturan = [
             'barang_id' => 'required|exists:barangs,id',
-            'user_serah_id' => 'required|exists:users,id',
+            'user_serah_id' => 'required|exists:users,id|different:user_terima_id',
             'status_serah' => 'required|in:Menunggu,Disetujui,Dibatalkan',
-            'user_terima_id' => 'required|exists:users,id',
+            'user_terima_id' => 'required|exists:users,id|different:user_serah_id',
             'status_terima' => 'required|in:Menunggu,Disetujui,Dibatalkan',
         ];
 
@@ -204,6 +206,8 @@ class BastController extends Controller
             'required' => ':Attribute wajib diisi!',
             'in' => 'Attribute tidak valid!',
             'exists' => 'Attribute tidak ditemukan di database!',
+            'user_terima_id.different' => 'Penerima tidak boleh sama dengan Penyerah!',
+            'user_serah_id.different' => 'Penerima tidak boleh sama dengan Penerima!',
         ];
 
         // ? 3. aturan agar valid
