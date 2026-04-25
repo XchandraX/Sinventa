@@ -12,16 +12,24 @@
             "dest": "/api/index.php"
         },
         {
-            "src": "/js/(.*)",
+            "src": "/js(.*)",
             "dest": "/public/assets/js/"
         },
         {
-            "src": "/css/(.*)",
+            "src": "/css(.*)",
             "dest": "/public/assets/css/"
         },
         {
-            "src": "/icon/(.*)",
+            "src": "/svg(.*)",
             "dest": "/public/assets/icon/"
+        },
+        {
+            "src": "/png(.*)",
+            "dest": "/public/assets/icon/"
+        },
+        {
+            "src": "/pdf(.*)",
+            "dest": "/storage/private/bast-pdf/"
         }
     ],
     "env": {
