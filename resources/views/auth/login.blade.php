@@ -53,7 +53,7 @@
                     <label for="password" class="form-label">Password</label>
                     <div class="input-group">
 
-                        <input type="password" class="pass-input form-control @error('password') is-invalid @enderror"
+                        <input type="password" class="form-control @error('password') is-invalid @enderror"
                             name="password" id="password" placeholder="Masukan Password Anda!">
 
                         <span class="bi toggle-password bi-eye-slash input-group-text"></span>
@@ -87,4 +87,26 @@
         </div>
     </div>
 
+@endsection
+@section('js')
+    <script>
+        $(document).ready(function() {
+            // Satu event listener untuk semua toggle password
+            $(document).on('click', '.toggle-password', function() {
+                // Cari input password dalam satu grup (input-group yang sama)
+                var input = $(this).closest('.input-group').find(
+                    'input[type="password"], input[type="text"]');
+
+                // Toggle icon
+                $(this).toggleClass("bi-eye bi-eye-slash");
+
+                // Toggle type input
+                if (input.attr("type") === "password") {
+                    input.attr("type", "text");
+                } else {
+                    input.attr("type", "password");
+                }
+            });
+        });
+    </script>
 @endsection
