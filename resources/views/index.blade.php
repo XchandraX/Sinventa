@@ -13,7 +13,7 @@
         content='Demo Sistem Inventaris Sarana dan Prasarana Sekolah (SINVESTA) - Uji Kompetensi Keahlian - Pengembangan Perangkat Lunak'>
 
     {{-- ? memanggil icon website (logo sekolah) --}}
-    <link rel="shortcut icon" href="/public/assets/icon/favicon.png">
+    <link rel="shortcut icon" href="{{ asset('assets/icon/favicon.png') }}">
 
     {{-- ? memanggil file CSS BOOTSTRAP --}}
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/vendor/fontawesome/css/all.min.css') }}">
 
     {{-- ? memanggil file CSS TEMA DASHBOARD --}}
-    <link rel="stylesheet" href="/public/assets/css/style.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
     {{-- ? @yield ini berfungsi untuk menambahkan css dari file view lain jika dibutuhkan --}}
     @yield('css')
@@ -213,7 +213,7 @@
                         <h1 class="display-4 fw-bold mb-3" style="color: var(--primary);">
                             <i class="bi bi-box-seam me-2"></i>SINVESTA
                         </h1>
-                        <p class="lead mb-4 text-muted">Sistem Inventaris Berita Acara</p>
+                        <p class="lead mb-4 text-muted">Sistem Inventaris Sarana dan Prasarana Sekolah</p>
 
                         <div class="d-flex flex-wrap gap-3 justify-content-center">
                             <a href="{{ route('daftar.index') }}" class="btn btn-demo">
