@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 // ! Panggil class AuthController agar bisa digunakan oleh route
 use App\Http\Controllers\AuthController;
 // ! Panggil class DaftarController agar bisa digunakan oleh route
@@ -182,4 +183,14 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard/export-bast-to/excel', [BastController::class, 'exportToExcel'])->name('bast.exportToExcel');
     // ? Route untuk fitur cetak daftar bast
     Route::get('/dashboard/print-bast', [BastController::class, 'print'])->name('bast.print');
+});
+
+Route::get('/rahasia-migrate-fresh', function () {
+    try {
+        // Menjalankan migrate:fresh --seed melalui kode
+        Artisan::call('migrate:fresh', ['--force' => true, '--seed' => true]);
+        return "Database berhasil di-reset dan di-seed!";
+    } catch (\Exception $e) {
+        return "Gagal: " . $e->getMessage();
+    }
 });

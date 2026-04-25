@@ -279,9 +279,19 @@ class BastController extends Controller
      */
     public function downloadPdf(Bast $bast)
     {
-        // ? donwload file dokumen berita acara yang sudah disimpan di strage,
-        // ? dengan nama file sesuai dengan nama file yang ada di kolom file_export di tabel bast
-        return Storage::download($bast->file_export);
+        // Ambil tanggal dan data pendukung lainnya (seperti di fungsi store)
+        $tanggal = \Carbon\Carbon::parse($bast->created_at);
+
+        // Generate PDF langsung saat tombol download diklik
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('dashboard.bast.dokumen', [
+            'bast' => $bast,
+            'hari' => strtoupper($tanggal->translatedFormat('l')),
+            'tanggal' => strtoupper(\Riskihajar\Terbilang\Facades\Terbilang::make($tanggal->day)),
+            'bulan' => strtoupper($tanggal->translatedFormat('F')),
+            'tahun_terbilang' => strtoupper(\Riskihajar\Terbilang\Facades\Terbilang::make($tanggal->year)),
+        ])->setPaper('a4', 'portrait');
+
+        return $pdf->download('Bast-'.$bast->id.'.pdf');
     }
 
     public function exportToPdf()
