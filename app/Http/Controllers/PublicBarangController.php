@@ -25,7 +25,7 @@ class PublicBarangController extends Controller
             abort(404, 'Barang dengan ID atau Kode tersebut tidak ditemukan di database Aiven.');
         }
 
-        return view('public.show', [
+        return view('cek.show', [
             'title' => 'Detail Barang Inventaris',
             'barang' => $barang,
         ]);
