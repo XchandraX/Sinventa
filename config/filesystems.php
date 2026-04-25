@@ -30,6 +30,11 @@ return [
 
     'disks' => [
 
+        'vercel' => [
+            'driver' => 'local',
+            'root' => '/tmp',
+        ],
+
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app/private'),

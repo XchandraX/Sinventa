@@ -147,8 +147,8 @@ class BastController extends Controller
 
         // ? 7. simpan dokumen pdf ke storage dengan nama berdasarkan id bast
         $filename = 'Bast-'.$bast->id.'.pdf';
-        $path = 'bast-pdf/'.$filename;
-        Storage::put($path, $pdf->output());
+        $path = '/tmp/'.$filename; // Simpan langsung ke folder /tmp server
+        file_put_contents($path, $pdf->output());
 
         // ? 8. ubah kolom file_export di table bast menjadi nama file pdf yang sudah disimpan di storage,
         // ? lalu simpan kembali ke database
@@ -238,8 +238,8 @@ class BastController extends Controller
 
         // ? 7. simpan dokumen pdf ke storage dengan nama berdasarkan id bast
         $filename = 'Bast-'.$bast->id.'.pdf';
-        $path = 'bast-pdf/'.$filename;
-        Storage::put($path, $pdf->output());
+        $path = '/tmp/'.$filename; // Simpan langsung ke folder /tmp server
+        file_put_contents($path, $pdf->output());
 
         // ? 8. ubah kolom file_export di table bast menjadi nama file pdf yang sudah disimpan di storage,
         // ? lalu simpan kembali ke database

@@ -13,29 +13,29 @@
         content='Demo Sistem Inventaris Sarana dan Prasarana Sekolah (SINVESTA) - Uji Kompetensi Keahlian - Pengembangan Perangkat Lunak'>
 
     {{-- ? memanggil icon website (logo sekolah) --}}
-    <link rel="shortcut icon" href="{{ asset('assets/icon/favicon.png') }}">
+    <link rel="shortcut icon" href="{{ asset('public/assets/icon/favicon.png') }}">
 
     {{-- ? memanggil file CSS BOOTSTRAP --}}
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/assets/css/bootstrap.min.css') }}">
 
     {{-- ? memanggil CSS SELECT2 --}}
-    <link rel="stylesheet" href="{{ asset('assets/css/vendor/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/assets/css/vendor/select2/css/select2.min.css') }}">
 
     {{-- ? memanggil CSS ANIMATE --}}
-    <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/assets/css/animate.css') }}">
 
     {{-- ? memanggil CSS DATA TABLES --}}
-    <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/assets/css/dataTables.bootstrap4.min.css') }}">
 
     {{-- ? memanggil CSS ICON BOOTSTRAP menggunakan CDN --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     {{-- ? menanggil CSS ICON FONTAWESOME --}}
-    <link rel="stylesheet" href="{{ asset('assets/css/vendor/fontawesome/css/fontawesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/vendor/fontawesome/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/assets/css/vendor/fontawesome/css/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/assets/css/vendor/fontawesome/css/all.min.css') }}">
 
     {{-- ? memanggil file CSS TEMA DASHBOARD --}}
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/assets/css/style.css') }}">
 
     {{-- ? @yield ini berfungsi untuk menambahkan css dari file view lain jika dibutuhkan --}}
     @yield('css')
@@ -146,12 +146,12 @@
         <div class="header-left">
             {{-- Logo Dashboard --}}
             <a href="{{ url('/') }}" class="logo">
-                <img src="{{ asset('assets/icon/SMKM2KNG.png') }}" alt="Sinvesta">
+                <img src="{{ asset('public/assets/icon/SMKM2KNG.png') }}" alt="Sinvesta">
             </a>
 
             {{-- Logo Dashboard saat sidebar disembunyikan --}}
             <a href="{{ url('/') }}" class="logo-small">
-                <img src="{{ asset('assets/icon/favicon.png') }}" alt="Sinvesta">
+                <img src="{{ asset('public/assets/icon/favicon.png') }}" alt="Sinvesta">
             </a>
         </div>
 
@@ -358,26 +358,26 @@
 
     {{-- ? JAVASCRIPT AKAN DI PANGGIL DIBAGIAN PALING BAWAH SEBELUM PENUTUP --}}
     {{-- ? JAVASCRIPT JQUERY 3.6.0 --}}
-    <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('public/assets/js/jquery-3.6.0.min.js') }}"></script>
 
     {{-- ? JAVASCRIPT FEATHER --}}
-    <script src="{{ asset('assets/js/feather.min.js') }}"></script>
+    <script src="{{ asset('public/assets/js/feather.min.js') }}"></script>
 
     {{-- ? JAVASCRIPT SLIM SCROLL --}}
-    <script src="{{ asset('assets/js/jquery.slimscroll.min.js') }}"></script>
+    <script src="{{ asset('public/assets/js/jquery.slimscroll.min.js') }}"></script>
 
     {{-- ? JAVASCRIPT SELECT2 --}}
-    <script src="{{ asset('assets/css/vendor/select2/js/select2.min.js') }}"></script>
+    <script src="{{ asset('public/assets/css/vendor/select2/js/select2.min.js') }}"></script>
 
     {{-- ? JAVASCRIPT DATA TABLES --}}
-    <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('public/assets/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('public/assets/js/dataTables.bootstrap4.min.js') }}"></script>
 
     {{-- ? JAVASCRIPT BOOTSTRAP --}}
-    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('public/assets/js/bootstrap.bundle.min.js') }}"></script>
 
     {{-- ? JAVASCRIPT TEMA DASHBOARD --}}
-    <script src="{{ asset('assets/js/script.js') }}"></script>
+    <script src="{{ asset('public/assets/js/script.js') }}"></script>
 
     {{-- ? @yield() ini berfungsi untuk menambahkan javascript dari file view lain jika dibutuhkan --}}
     @yield('js')
