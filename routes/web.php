@@ -1,28 +1,26 @@
 <?php
 
-use Illuminate\Support\Facades\Artisan;
-// ! Panggil class AuthController agar bisa digunakan oleh route
 use App\Http\Controllers\AuthController;
-// ! Panggil class DaftarController agar bisa digunakan oleh route
+// ! Panggil class AuthController agar bisa digunakan oleh route
 use App\Http\Controllers\BarangController;
 // ! Panggil class DaftarController agar bisa digunakan oleh route
-use App\Http\Controllers\PublicBarangController;
-// ! Panggil class DashboardController agar bisa digunakan oleh route
 use App\Http\Controllers\BastController;
-// ! Panggil class UserController agar bisa digunakan oleh route
+// ! Panggil class DaftarController agar bisa digunakan oleh route
+// ! Panggil class DashboardController agar bisa digunakan oleh route
 use App\Http\Controllers\DaftarController;
-// ! Panggil class KategoriController agar bisa digunakan oleh route
+// ! Panggil class UserController agar bisa digunakan oleh route
 use App\Http\Controllers\DashboardController;
-// ! Panggil class Lokasicontroller agar bisa digunakan oleh route
+// ! Panggil class KategoriController agar bisa digunakan oleh route
 use App\Http\Controllers\KategoriController;
-// ! Panggil class Barangcontroller agar bisa digunakan oleh route
+// ! Panggil class Lokasicontroller agar bisa digunakan oleh route
 use App\Http\Controllers\LokasiController;
-// ! Panggil class BastController agar bisa digunakan oleh route
+// ! Panggil class Barangcontroller agar bisa digunakan oleh route
 use App\Http\Controllers\UserController;
+// ! Panggil class BastController agar bisa digunakan oleh route
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\URL;
 
-Route::get('/public/barang/{id}', [App\Http\Controllers\PublicBarangController::class, 'show'])->name('public.barang.show');
+Route::get('/public/barang/{identifier}', [App\Http\Controllers\PublicBarangController::class, 'show'])->name('public.barang.show');
 /**
  * ? fungsi Group Middlweare "Guest"
  * * Digunakan khusus untuk menangani permintaan dari user yang belum melakukan autentikasi (login)
@@ -189,8 +187,9 @@ Route::get('/rahasia-migrate-fresh', function () {
     try {
         // Menjalankan migrate:fresh --seed melalui kode
         Artisan::call('migrate:fresh', ['--force' => true, '--seed' => true]);
-        return "Database berhasil di-reset dan di-seed!";
+
+        return 'Database berhasil di-reset dan di-seed!';
     } catch (\Exception $e) {
-        return "Gagal: " . $e->getMessage();
+        return 'Gagal: '.$e->getMessage();
     }
 });
