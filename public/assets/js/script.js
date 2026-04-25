@@ -11,17 +11,6 @@ $(document).ready(function () {
     $("#imgInp").change(function () { readURL(this); }); if ($('.datatable').length > 0) { $('.datatable').DataTable({ "bFilter": false }); }
     setTimeout(function () { $('#global-loader'); setTimeout(function () { $("#global-loader").fadeOut("slow"); }, 100); }, 500); if ($('.datetimepicker').length > 0) { $('.datetimepicker').datetimepicker({ format: 'DD-MM-YYYY', icons: { up: "fas fa-angle-up", down: "fas fa-angle-down", next: 'fas fa-angle-right', previous: 'fas fa-angle-left' } }); }
 
-    if ($('.toggle-password').length > 0) {
-        $(document).on('click', '.toggle-password', function () {
-            $(this).toggleClass("bi-eye bi-eye-slash");
-            var input = $(".pass-input");
-            if (input.attr("type") == "password") {
-                input.attr("type", "text");
-            } else {
-                input.attr("type", "password");
-            }
-        });
-    }
 
     // Check preference tersimpan
     const currentTheme = localStorage.getItem('theme');

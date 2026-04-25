@@ -105,7 +105,7 @@
     {{-- ? javasccript tema dashboard --}}
     <script src="{{ asset('assets/js/script.js') }}"></script>
 
-
+    @yield('js')
 </body>
 
 </html>

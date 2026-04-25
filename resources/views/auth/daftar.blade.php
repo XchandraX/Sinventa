@@ -35,6 +35,11 @@
                         'label' => 'Konfirmasi Password',
                         'place' => 'Isi Konfirmasi Password',
                     ],
+                    [
+                        'id' => 'reg_code',
+                        'label' => 'Kode Registrasi',
+                        'place' => 'Masukkan kode akses pendaftaran (Dari Admin)',
+                    ],
                 ];
             @endphp
 
@@ -67,14 +72,14 @@
                     {{-- admin --}}
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="role" id="role_admin" value="admin"
-                            @if (old('role' == 'admin' ? 'checked' : '' )) checked @endif>
+                            @if (old('role' == 'admin' ? 'checked' : '')) checked @endif>
                         <label for="role_admin" class="form-check-label">Admin</label>
                     </div>
 
                     {{-- user --}}
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="role" id="role_user" value="user"
-                            @if (old('role' == 'user' ? 'checked' : '' )) checked @endif>
+                            @if (old('role' == 'user' ? 'checked' : '')) checked @endif>
                         <label for="role_user" class="form-check-label">User</label>
                     </div>
 
@@ -111,7 +116,7 @@
                         <label for="{{ $card['id'] }}" class="form-label">{{ $card['label'] }}</label>
 
                         <div class="input-group">
-                            <input type="text" id="{{ $card['id'] }}"
+                            <input type="password" id="{{ $card['id'] }}"
                                 class="form-control @error($card['id']) is-invalid @enderror" name="{{ $card['id'] }}"
                                 placeholder="{{ $card['place'] }}" value="{{ old($card['id']) }}">
                             <span class="bi toggle-password bi-eye-slash input-group-text"></span>
@@ -128,24 +133,6 @@
                     </div>
                 </div>
             @endforeach
-
-
-
-            {{-- Kode Registrasi Universal --}}
-            <div class="mb-4">
-                <div class="form-group">
-                    <label for="reg_code" class="form-label">Kode Registrasi</label>
-                    <input type="text" id="reg_code" name="reg_code"
-                        class="form-control @error('reg_code') is-invalid @enderror"
-                        placeholder="Masukkan kode akses pendaftaran (Dari Admin)">
-
-                    @error('reg_code')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-            </div>
 
             <hr>
 
@@ -165,4 +152,26 @@
             <span>Sudah punya akun? <a href="{{ route('login') }}">Login</a></span>
         </div>
     </div>
+@endsection
+@section('js')
+    <script>
+        $(document).ready(function() {
+            // Satu event listener untuk semua toggle password
+            $(document).on('click', '.toggle-password', function() {
+                // Cari input password dalam satu grup (input-group yang sama)
+                var input = $(this).closest('.input-group').find(
+                    'input[type="password"], input[type="text"]');
+
+                // Toggle icon
+                $(this).toggleClass("bi-eye bi-eye-slash");
+
+                // Toggle type input
+                if (input.attr("type") === "password") {
+                    input.attr("type", "text");
+                } else {
+                    input.attr("type", "password");
+                }
+            });
+        });
+    </script>
 @endsection

@@ -30,131 +30,111 @@
 
                 <div class="row">
 
-                    {{-- kolom nama lengkap --}}
+                    @php
+                        $cards = [
+                            ['id' => 'nama_lengkap', 'label' => 'Nama Lengkap', 'place' => 'Isi Nama Lengkap'],
+                            ['id' => 'username', 'label' => 'Username', 'place' => 'Isi UserName'],
+                            ['id' => 'email', 'label' => 'Email', 'place' => 'Isi Email'],
+                        ];
+                        $cards2 = [
+                            ['id' => 'password', 'label' => 'Password', 'place' => 'Isi Password'],
+                            [
+                                'id' => 'password_confirmation',
+                                'label' => 'Konfirmasi Password',
+                                'place' => 'Isi Konfirmasi Password',
+                            ],
+                        ];
+                    @endphp
+
+                    @foreach ($cards as $card)
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="{{ $card['id'] }}" class="form-label">{{ $card['label'] }}</label>
+                                <input type="text" id="{{ $card['id'] }}"
+                                    class="form-control @error($card['id']) is-invalid @enderror" name="{{ $card['id'] }}"
+                                    placeholder="{{ $card['place'] }}" value="{{ old($card['id']) }}" autofocus>
+
+                                {{-- jika"{{ $card['id'] }}"tidak valid --}}
+                                @error($card['id'])
+                                    <div class="invalid-feedback" id="{{ $card['id'] }}">
+                                        {{-- tampilkan pesan error --}}
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                    @endforeach
+
+
+                    {{-- role --}}
                     <div class="col-lg-6 col-sm-12">
                         <div class="form-group">
-                            <label for="nama_lengkap">Nama Lengkap</label>
-                            <input type="text" class="form-control  @error('nama_lengkap') is-invalid @enderror"
-                                id="nama_lengkap" name="nama_lengkap" value="{{ old('nama_lengkap') }}"
-                                placeholder="Masukkan nama lengkap pengguna">
 
-                            {{-- jika nama_lengkap tidak valid --}}
-                            @error('nama_lengkap')
-                                {{-- tampilkan pesan error --}}
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
+                            <label class="d-block form-label">Daftar Sebagai:</label>
 
-                    {{-- kolom email --}}
-                    <div class="col-lg-6 col-sm-12">
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control  @error('email') is-invalid @enderror" id="email"
-                                name="email" value="{{ old('email') }}" placeholder="Masukkan email pengguna">
-
-                            {{-- jika email tidak valid --}}
-                            @error('email')
-                                {{-- tampilkan pesan error --}}
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-
-                    {{-- kolom username --}}
-                    <div class="col-lg-6 col-sm-12">
-                        <div class="form-group">
-                            <label for="username">Username</label>
-                            <input type="text" class="form-control  @error('username') is-invalid @enderror"
-                                id="username" name="username" value="{{ old('username') }}"
-                                placeholder="Masukkan username pengguna">
-
-                            {{-- jika username tidak valid --}}
-                            @error('username')
-                                {{-- tampilkan pesan error --}}
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-
-                    {{-- kolom lembaga --}}
-                    <div class="col-lg-6 col-sm-12">
-                        <div class="form-group">
-                            <label for="lembaga">Nama Lembaga</label>
-                            <input type="text" class="form-control  @error('lembaga') is-invalid @enderror"
-                                id="lembaga" name="lembaga" value="{{ old('lembaga') }}"
-                                placeholder="Masukkan lembaga pengguna">
-
-                            {{-- jika lembaga tidak valid --}}
-                            @error('lembaga')
-                                {{-- tampilkan pesan error --}}
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-
-                    {{-- kolom role --}}
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <label class="d-block form-label">Role: </label>
+                            {{-- admin --}}
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="role" id="role_admin" value="admin"
-                                    @if (old('role') == 'admin') checked @endif>
+                                <input class="form-check-input" type="radio" name="role" id="role_admin" value="admin"
+                                    @if (old('role' == 'admin' ? 'checked' : '')) checked @endif>
                                 <label for="role_admin" class="form-check-label">Admin</label>
                             </div>
+
+                            {{-- user --}}
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="role" id="role_user" value="user"
-                                    @if (old('role') == 'user') checked @endif>
+                                <input class="form-check-input" type="radio" name="role" id="role_user" value="user"
+                                    @if (old('role' == 'user' ? 'checked' : '')) checked @endif>
                                 <label for="role_user" class="form-check-label">User</label>
                             </div>
 
                             {{-- jika role tidak valid --}}
                             @error('role')
-                                {{-- tampilkan pesan error --}}
-                                <div class="text-danger">{{ $message }}</div>
+                                <div id="role" class="text-danger">
+                                    {{-- tampilkan pesan error --}}
+                                    {{ $message }}
+                                </div>
                             @enderror
                         </div>
                     </div>
 
-                    <hr>
-
-                    {{-- kolom password --}}
+                    {{-- lembaga --}}
                     <div class="col-lg-6 col-sm-12">
                         <div class="form-group">
-                            <label for="password">Password</label>
-                            <div class="pass-group">
-                                <input type="password" class="pass-input @error('password') is-invalid @enderror"
-                                    id="password" name="password" placeholder="Masukkan password pengguna">
-                                <span class="bi toggle-password bi-eye-slash"></span>
-                            </div>
+                            <label for="lembaga" class="form-label">Lembaga</label>
+                            <input type="text" id="lembaga" class="form-control @error('lembaga') is-invalid @enderror"
+                                placeholder="Isi Lembaga" name="lembaga" value="{{ old('lembaga') }}">
 
-                            {{-- jika password tidak valid --}}
-                            @error('password')
-                                {{-- tampilkan pesan error --}}
-                                <div class="text-danger">{{ $message }}</div>
+                            {{-- jika lembaga tidak valid --}}
+                            @error('lembaga')
+                                <div id="lembaga" class="invalid-feedback">
+                                    {{-- tampilkan pesan error --}}
+                                    {{ $message }}
+                                </div>
                             @enderror
                         </div>
                     </div>
 
-                    {{-- kolom password_confirmation --}}
-                    <div class="col-lg-6 col-sm-12">
-                        <div class="form-group">
-                            <label for="password_confirmation">Password Konfirmasi</label>
-                            <div class="pass-group">
-                                <input type="password"
-                                    class="pass-input @error('password_confirmation') is-invalid @enderror"
-                                    id="password_confirmation" name="password_confirmation"
-                                    placeholder="Masukkan password Konfirmasi">
-                                <span class="bi toggle-password bi-eye-slash"></span>
-                            </div>
+                    @foreach ($cards2 as $card)
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label class="form-label">{{ $card['label'] }}</label>
 
-                            {{-- jika password_confirmation tidak valid --}}
-                            @error('password_confirmation')
-                                {{-- tampilkan pesan error --}}
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
+                                <div class="input-group">
+                                    <input type="password" class="form-control @error($card['id']) is-invalid @enderror"
+                                        name="{{ $card['id'] }}" placeholder="{{ $card['place'] }}"
+                                        value="{{ old($card['id']) }}">
+
+                                    <span class="bi toggle-password bi-eye-slash input-group-text"
+                                        style="cursor: pointer;"></span>
+                                </div>
+
+                                @error($card['id'])
+                                    <div class="invalid-feedback d-block">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
+                    @endforeach
 
                     {{-- tombol simpan user --}}
                     <div class="col-12">
@@ -166,4 +146,26 @@
             </form>
         </div>
     </div>
+@endsection
+@section('js')
+    <script>
+        $(document).ready(function() {
+            // Satu event listener untuk semua toggle password
+            $(document).on('click', '.toggle-password', function() {
+                // Cari input password dalam satu grup (input-group yang sama)
+                var input = $(this).closest('.input-group').find(
+                    'input[type="password"], input[type="text"]');
+
+                // Toggle icon
+                $(this).toggleClass("bi-eye bi-eye-slash");
+
+                // Toggle type input
+                if (input.attr("type") === "password") {
+                    input.attr("type", "text");
+                } else {
+                    input.attr("type", "password");
+                }
+            });
+        });
+    </script>
 @endsection
