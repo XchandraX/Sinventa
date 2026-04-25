@@ -20,7 +20,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/public/barang/{identifier}', [App\Http\Controllers\PublicBarangController::class, 'show'])->name('public.barang.show');
+Route::get('/cek-barang/{identifier}', [App\Http\Controllers\PublicBarangController::class, 'show'])->name('public.barang.show');
 /**
  * ? fungsi Group Middlweare "Guest"
  * * Digunakan khusus untuk menangani permintaan dari user yang belum melakukan autentikasi (login)
