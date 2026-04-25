@@ -8,24 +8,8 @@
   },
   "routes": [
     {
-      "src": "/js(.*)",
-      "dest": "/public/assets/js/"
-    },
-    {
-      "src": "/css(.*)",
-      "dest": "/public/assets/css/"
-    },
-    {
-      "src": "/svg(.*)",
-      "dest": "/public/assets/icon/"
-    },
-    {
-      "src": "/png(.*)",
-      "dest": "/public/assets/icon/"
-    },
-    {
-      "src": "/pdf(.*)",
-      "dest": "/storage/private/bast-pdf/"
+      "src": "/assets/(.*)",
+      "dest": "/public/assets/$1"
     },
     {
       "src": "/(.*)",
