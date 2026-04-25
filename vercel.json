@@ -7,6 +7,10 @@
     },
     "routes": [
         {
+            "src": "/(.*)",
+            "dest": "/api/index.php"
+        },
+        {
             "src": "/assets/(.*)",
             "dest": "/public/assets/$1"
         },
@@ -24,11 +28,8 @@
         },
         {
             "handle": "filesystem"
-        },
-        {
-            "src": "/(.*)",
-            "dest": "/api/index.php"
         }
+        
     ],
     "env": {
         "APP_ENV": "production",
