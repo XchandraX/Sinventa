@@ -287,14 +287,14 @@ class BastController extends Controller
     public function exportToPdf()
     {
         // ? amibl semua data barang, urutkan dari paling baru
-        $basts = Bast::with(['barang.kategori', 'barang.lokasi', 'userSerah', 'UserTerima'])->latest()->get();
+        $basts = Bast::with(['barang.kategori', 'barang.lokasi', 'userSerah', 'userTerima'])->latest()->get();
 
         // ? buat QrCode untuk masing-masing barang menggunakan perualanga
         foreach ($basts as $bast) {
             $bast->qr_base64 = base64_encode(
                 QrCode::format('svg') // buat dalam format svg
                     ->size(70) // ukuran 80
-                    ->generate(route('public.barang.show', $barang->id)
+                    ->generate(route('public.barang.show', $bast->barang->id)
                     )
             );
         }
@@ -318,14 +318,14 @@ class BastController extends Controller
     public function print()
     {
         // ? amibl semua data barang, urutkan dari paling baru
-        $basts = Bast::with(['barang.kategori', 'barang.lokasi', 'userSerah', 'UserTerima'])->latest()->get();
+        $basts = Bast::with(['barang.kategori', 'barang.lokasi', 'userSerah', 'userTerima'])->latest()->get();
 
         // ? buat QrCode untuk masing-masing barang menggunakan perualanga
         foreach ($basts as $bast) {
             $bast->qr_base64 = base64_encode(
                 QrCode::format('svg') // buat dalam format svg
                     ->size(80) // ukuran 80
-                    ->generate(route('public.barang.show', $barang->id)
+                    ->generate(route('public.barang.show', $bast->barang->id)
                     )
             );
         }
@@ -366,17 +366,6 @@ class BastController extends Controller
         ]);
     }
 
-    public function setujuiSerah(Bast $bast)
-    {
-        $this->authorize('approveSerah', $bast);
-
-        $bast->update([
-            'status_serah' => 'Disetujui',
-        ]);
-
-        return redirect()->route('bast.show', $bast);
-    }
-
     public function cancelSerah(Bast $bast)
     {
         $this->authorize('cancelSerah', $bast);
@@ -385,7 +374,18 @@ class BastController extends Controller
             'status_serah' => 'Dibatalkan',
         ]);
 
-        return redirect()->route('bast.show', $bast);
+        return redirect()->route('bast.serah.disetujui');
+    }
+
+    public function setujuiSerah(Bast $bast)
+    {
+        $this->authorize('approveSerah', $bast);
+
+        $bast->update([
+            'status_serah' => 'Disetujui',
+        ]);
+
+        return redirect()->route('bast.serah.disetujui');
     }
 
     public function bastTerimaMenunggu()
@@ -416,17 +416,6 @@ class BastController extends Controller
         ]);
     }
 
-    public function setujuiTerima(Bast $bast)
-    {
-        $this->authorize('approveTerima', $bast);
-
-        $bast->update([
-            'status_terima' => 'Disetujui',
-        ]);
-
-        return redirect()->route('bast.show', $bast);
-    }
-
     public function cancelTerima(Bast $bast)
     {
         $this->authorize('cancelTerima', $bast);
@@ -435,6 +424,17 @@ class BastController extends Controller
             'status_terima' => 'Dibatalkan',
         ]);
 
-        return redirect()->route('bast.show', $bast);
+        return redirect()->route('bast.terima.disetujui');
+    }
+
+    public function setujuiTerima(Bast $bast)
+    {
+        $this->authorize('approveTerima', $bast);
+
+        $bast->update([
+            'status_terima' => 'Disetujui',
+        ]);
+
+        return redirect()->route('bast.terima.disetujui');
     }
 }

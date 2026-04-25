@@ -172,6 +172,7 @@
         </div>
 
         {{-- card footer --}}
+        {{-- card footer --}}
         <div class="card-footer">
             @if (auth()->user()->role == 'admin' || auth()->user()->role == 'root')
                 <a href="{{ route('bast.downloadPdf', $bast) }}" class="btn btn-secondary" target="_blank">
@@ -182,13 +183,13 @@
                     <i class="bi bi-pencil-square"></i>
                 </a>
 
-                {{-- tampilkan tombol hapus --}}
-                <form action="{{ route('bast.destroy', $bast) }}" class="d-inline" method="POST">
+                {{-- tombol hapus --}}
+                <form action="{{ route('bast.destroy', $bast) }}" class="d-inline delete-form" method="POST">
                     @csrf
                     @method('DELETE')
-                    <button class="btn btn-danger btn-delete" type="submit"
-                         data-nama="{{ $bast->barang->nama_barang }}" data-title="Hapus Berita Acara?">
-                        <i class="bi bi-trash" style="color: var(--text-secondary)"></i>
+                    <button class="btn btn-danger btn-delete" type="button" data-nama="{{ $bast->barang->nama_barang }}"
+                        data-title="Hapus Berita Acara?">
+                        <i class="bi bi-trash"></i>
                     </button>
                 </form>
             @endif
@@ -197,39 +198,46 @@
                 <form action="{{ route('bast.serah.setujui', $bast) }}" method="POST" class="d-inline">
                     @csrf
                     @method('PUT')
-                    <button type="submit" class="btn btn-success"
-                        onclick="return confirm('Anda akan menyetujui Berita Acara ini sebagai pihak Penyerah! Lanjutkan?')">
-                        <i class="bi bi-check-circle">Setujui Penyerah</i>
+                    <button type="button" class="btn btn-success confirm-submit"
+                        data-message="Anda akan menyetujui Berita Acara ini sebagai pihak Penyerah! Lanjutkan?"
+                        data-confirm-text="Ya, Setujui!" data-icon="question">
+                        <i class="bi bi-check-circle"></i> Setujui Penyerah
                     </button>
                 </form>
             @endif
+
             @if (auth()->user()->id == $bast->user_serah_id && $bast->status_serah == 'Menunggu')
                 <form action="{{ route('bast.serah.cancel', $bast) }}" method="POST" class="d-inline">
                     @csrf
                     @method('PUT')
-                    <button type="submit" class="btn btn-danger"
-                        onclick="return confirm('Anda akan Membatalkan Berita Acara ini sebagai pihak Penyerah! Lanjutkan?')">
-                        <i class="bi bi-x-circle">Batalkan Penyerah</i>
+                    <button type="button" class="btn btn-danger confirm-submit"
+                        data-message="Anda akan Membatalkan Berita Acara ini sebagai pihak Penyerah! Lanjutkan?"
+                        data-confirm-text="Ya, Batalkan!" data-icon="warning">
+                        <i class="bi bi-x-circle"></i> Batalkan Penyerah
                     </button>
                 </form>
             @endif
+
             @if (auth()->user()->id == $bast->user_terima_id && $bast->status_terima == 'Menunggu')
                 <form action="{{ route('bast.terima.setujui', $bast) }}" method="POST" class="d-inline">
                     @csrf
                     @method('PUT')
-                    <button type="submit" class="btn btn-success"
-                        onclick="return confirm('Anda akan menyetujui Berita Acara ini sebagai pihak Penerima! Lanjutkan?')">
-                        <i class="bi bi-check-circle">Setujui Penerima</i>
+                    <button type="button" class="btn btn-success confirm-submit"
+                        data-message="Anda akan menyetujui Berita Acara ini sebagai pihak Penerima! Lanjutkan?"
+                        data-confirm-text="Ya, Setujui!" data-icon="question">
+                        <i class="bi bi-check-circle"></i> Setujui Penerima
                     </button>
                 </form>
             @endif
+
             @if (auth()->user()->id == $bast->user_terima_id && $bast->status_terima == 'Menunggu')
                 <form action="{{ route('bast.terima.cancel', $bast) }}" method="POST" class="d-inline">
                     @csrf
                     @method('PUT')
-                    <button type="submit" class="btn btn-danger"
-                        onclick="return confirm('Anda akan Membatalkan Berita Acara ini sebagai pihak Penerima! Lanjutkan?')">
-                        <i class="bi bi-x-circle">Batalkan Penerima</i>
+                    <button type="button" class="btn btn-danger confirm-submit"
+                        data-message="Anda akan Membatalkan Berita Acara ini sebagai pihak Penerima! Lanjutkan?"
+                        data-confirm-text="Ya, Batalkan!" data-icon="warning">
+                        <i class="bi bi-x-circle"></i> Batalkan Penerima
                     </button>
                 </form>
             @endif
