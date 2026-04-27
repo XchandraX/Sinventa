@@ -42,7 +42,7 @@
                                     <label for="{{ $card['id'] }}">{{ $card['label'] }}</label>
                                     <div class="form-addons">
                                         <input type="{{ $card['type'] }}" id="{{ $card['id'] }}" 
-                                            class="@error($card['id']) is-invalid @enderror" name="{{ $card['id'] }}"
+                                            class="form-control @error($card['id']) is-invalid @enderror" name="{{ $card['id'] }}"
                                             placeholder="{{ $card['place'] }}" value="{{ old($card['id']) }}">
                                         @error($card['id'])
                                             <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -79,7 +79,7 @@
                             <div class="form-login">
                                 <label for="lembaga">Lembaga</label>
                                 <div class="form-addons">
-                                    <input type="text" id="lembaga" class="@error('lembaga') is-invalid @enderror"
+                                    <input type="text" id="lembaga" class="form-control @error('lembaga') is-invalid @enderror"
                                         placeholder="Isi Lembaga" name="lembaga" value="{{ old('lembaga') }}">
                                     @error('lembaga')
                                         <div class="invalid-feedback d-block">{{ $message }}</div>

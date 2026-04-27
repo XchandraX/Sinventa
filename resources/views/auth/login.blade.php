@@ -38,7 +38,7 @@
                     <div class="form-login">
                         <label for="username">Username</label>
                         <div class="form-addons">
-                            <input type="text" id="username" class="@error('username') is-invalid @enderror" 
+                            <input type="text" id="username" class="form-control @error('username') is-invalid @enderror" 
                                 name="username" placeholder="Masukan Username Anda!" value="{{ old('username') }}" autocomplete="off">
                             @error('username')
                                 <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -50,7 +50,7 @@
                     <div class="form-login">
                         <label for="password">Password</label>
                         <div class="pass-group">
-                            <input type="password" class="@error('password') is-invalid @enderror" 
+                            <input type="password" class="form-control @error('password') is-invalid @enderror" 
                                 name="password" id="password" placeholder="Masukan Password Anda!">
                             {{-- Icon mata menggunakan style absolute dari pass-group --}}
                             <span class="bi toggle-password bi-eye-slash"></span>

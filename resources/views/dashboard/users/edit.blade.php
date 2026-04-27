@@ -140,7 +140,7 @@
 
                     <div class="col-12">
                         <button class="btn btn-submit me-2 px-4" type="submit">Update</button>
-                        <a href="{{ route('users.index') }}" class="btn btn-cancel px-4">Batal</a>
+                        <a href="javascript:history.back()" class="btn btn-cancel px-4">Batal</a>
 
                     </div>
                 </div>
