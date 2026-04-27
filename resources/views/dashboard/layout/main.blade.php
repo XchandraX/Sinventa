@@ -101,7 +101,7 @@
             // 1. SWEETALERT UNTUK SEMUA TOMBOL HAPUS
             // ============================================
             // Tombol dengan class 'btn-delete' atau form dengan class 'delete-form'
-            $('.btn-delete, .delete-btn').click(function(e) {
+            $(document).on('click', '.btn-delete, .delete-btn', function(e) {
                 e.preventDefault();
 
                 let form = $(this).closest('form');
@@ -139,7 +139,7 @@
             // ============================================
             // 2. SWEETALERT UNTUK SUBMIT FORM (SETUJUI/BATALKAN)
             // ============================================
-            $('.confirm-submit').click(function(e) {
+            $(document).on('click', '.confirm-submit', function(e) {
                 e.preventDefault();
 
                 let form = $(this).closest('form');
