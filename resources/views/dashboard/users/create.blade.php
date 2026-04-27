@@ -18,8 +18,8 @@
     </div>
 
     {{-- card form tambah user --}}
-    <div class="card">
-        <div class="card-body">
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
 
             {{-- form tambah data user --}}
             <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
@@ -138,8 +138,8 @@
 
                     {{-- tombol simpan user --}}
                     <div class="col-12">
-                        <button type="submit" class="btn btn-submit me-2">Simpan User</button>
-                        <a href="{{ route('users.index') }}" class="btn btn-cancel">Batal</a>
+                        <button type="submit" class="btn btn-submit me-2 px-4">Simpan User</button>
+                        <a href="{{ route('users.index') }}" class="btn btn-cancel px-4">Batal</a>
 
                     </div>
                 </div>

@@ -1,169 +1,148 @@
 {{-- 
 ? @extends() digunakan untuk memanggil auth/layout/main.blade.php
-* jika penamman folder dan file yang dipanggil tidak sama, maka layouting tidak dapat berjalan
 --}}
 @extends('auth.layout.main')
 
-{{-- 
-? konten utama view form login harus di tulis diantara @section('kontent')
-* 'konten' adalah nama dari @yield('konten') yang ada di file main.blade.php
---}}
 @section('konten')
-    {{-- ! konten utama halaman form pendaftaran user ditulis disini!! --}}
-    <div class="col-12 col-lg-5 m-auto py-3 py-lg-5">
-        <span class="mb-0 fs-1">👋</span>
-        <h1 class="-fs-1">Daftar ke SINVESTA!</h1>
-        <p class="lead mb-4">Buat akun baru untuk mengakses sistem inventarsi aset dan berita acara.</p>
+    {{-- Menggunakan wrapper otentikasi --}}
+    <div class="login-wrapper" style="height: auto; min-height: 100vh; display: flex; align-items: center;">
+        <div class="login-content w-100 m-auto" style="height: auto; padding: 20px;">
+            
+            <div class="login-userset card-guest p-4 p-lg-5 shadow-sm" style="max-width: 600px; margin: 0 auto; width: 100%;">
+                
+                <div class="login-userheading text-center">
+                    <span class="mb-2 d-block fs-1">👋</span>
+                    <h3>Daftar ke SINVESTA!</h3>
+                    <h4>Buat akun baru untuk mengakses sistem inventaris aset dan berita acara.</h4>
+                </div>
 
-        <hr>
+                <hr class="mb-4">
 
-        {{-- formulir pendftaran --}}
-        <form action="{{ route('daftar.store') }}" method="POST">
-            {{-- csrf token untuk keamanan --}}
-            @csrf
+                {{-- formulir pendaftaran --}}
+                <form action="{{ route('daftar.store') }}" method="POST">
+                    @csrf
 
-            @php
-                $cards = [
-                    ['id' => 'nama_lengkap', 'label' => 'Nama Lengkap', 'place' => 'Isi Nama Lengkap'],
-                    ['id' => 'username', 'label' => 'Username', 'place' => 'Isi UserName'],
-                    ['id' => 'email', 'label' => 'Email', 'place' => 'Isi Email'],
-                ];
-                $cards2 = [
-                    ['id' => 'password', 'label' => 'Password', 'place' => 'Isi Password'],
-                    [
-                        'id' => 'password_confirmation',
-                        'label' => 'Konfirmasi Password',
-                        'place' => 'Isi Konfirmasi Password',
-                    ],
-                    [
-                        'id' => 'reg_code',
-                        'label' => 'Kode Registrasi',
-                        'place' => 'Masukkan kode akses pendaftaran (Dari Admin)"',
-                    ],
-                ];
-            @endphp
+                    @php
+                        $cards = [
+                            ['id' => 'nama_lengkap', 'label' => 'Nama Lengkap', 'place' => 'Isi Nama Lengkap', 'type' => 'text'],
+                            ['id' => 'username', 'label' => 'Username', 'place' => 'Isi Username', 'type' => 'text'],
+                            ['id' => 'email', 'label' => 'Email', 'place' => 'Isi Email', 'type' => 'email'],
+                        ];
+                        $cards2 = [
+                            ['id' => 'password', 'label' => 'Password', 'place' => 'Isi Password'],
+                            ['id' => 'password_confirmation', 'label' => 'Konfirmasi Password', 'place' => 'Isi Konfirmasi Password'],
+                            ['id' => 'reg_code', 'label' => 'Kode Registrasi', 'place' => 'Masukkan kode akses pendaftaran (Dari Admin)'],
+                        ];
+                    @endphp
 
-            @foreach ($cards as $card)
-                <div class="mb-4">
-                    <div class="form-group">
-                        <label for="{{ $card['id'] }}" class="form-label">{{ $card['label'] }}</label>
-                        <input type="text" id="{{ $card['id'] }}"
-                            class="form-control @error($card['id']) is-invalid @enderror" name="{{ $card['id'] }}"
-                            placeholder="{{ $card['place'] }}" value="{{ old($card['id']) }}" autofocus>
-
-                        {{-- jika"{{ $card['id'] }}"tidak valid --}}
-                        @error($card['id'])
-                            <div class="invalid-feedback" id="{{ $card['id'] }}">
-                                {{-- tampilkan pesan error --}}
-                                {{ $message }}
+                    <div class="row">
+                        @foreach ($cards as $card)
+                            <div class="col-12">
+                                <div class="form-login">
+                                    <label for="{{ $card['id'] }}">{{ $card['label'] }}</label>
+                                    <div class="form-addons">
+                                        <input type="{{ $card['type'] }}" id="{{ $card['id'] }}" 
+                                            class="@error($card['id']) is-invalid @enderror" name="{{ $card['id'] }}"
+                                            placeholder="{{ $card['place'] }}" value="{{ old($card['id']) }}">
+                                        @error($card['id'])
+                                            <div class="invalid-feedback d-block">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
-                        @enderror
-                    </div>
-                </div>
-            @endforeach
-
-
-            {{-- role --}}
-            <div class="mb-4">
-                <div class="form-group">
-
-                    <label class="d-block form-label">Daftar Sebagai:</label>
-
-                    {{-- admin --}}
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="role" id="role_admin" value="admin"
-                            @if (old('role' == 'admin' ? 'checked' : '')) checked @endif>
-                        <label for="role_admin" class="form-check-label">Admin</label>
+                        @endforeach
                     </div>
 
-                    {{-- user --}}
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="role" id="role_user" value="user"
-                            @if (old('role' == 'user' ? 'checked' : '')) checked @endif>
-                        <label for="role_user" class="form-check-label">User</label>
-                    </div>
-
-                    {{-- jika role tidak valid --}}
-                    @error('role')
-                        <div id="role" class="text-danger">
-                            {{-- tampilkan pesan error --}}
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-            </div>
-
-            {{-- lembaga --}}
-            <div class="mb-4">
-                <div class="form-group">
-                    <label for="lembaga" class="form-label">Lembaga</label>
-                    <input type="text" id="lembaga" class="form-control @error('lembaga') is-invalid @enderror"
-                        placeholder="Isi Lembaga" name="lembaga" value="{{ old('lembaga') }}">
-
-                    {{-- jika lembaga tidak valid --}}
-                    @error('lembaga')
-                        <div id="lembaga" class="invalid-feedback">
-                            {{-- tampilkan pesan error --}}
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-            </div>
-
-            @foreach ($cards2 as $card)
-                <div class="mb-4">
-                    <div class="form-group">
-                        <label class="form-label">{{ $card['label'] }}</label>
-
-                        <div class="input-group">
-                            <input type="password" class="form-control @error($card['id']) is-invalid @enderror"
-                                name="{{ $card['id'] }}" placeholder="{{ $card['place'] }}"
-                                value="{{ old($card['id']) }}">
-
-                            <span class="bi toggle-password bi-eye-slash input-group-text" style="cursor: pointer;"></span>
-                        </div>
-
-                        @error($card['id'])
-                            <div class="invalid-feedback d-block">
-                                {{ $message }}
+                    <div class="row">
+                        {{-- role --}}
+                        <div class="col-12 col-md-6">
+                            <div class="form-login">
+                                <label class="d-block mb-3">Daftar Sebagai:</label>
+                                <div>
+                                    <label class="inputcheck d-inline-block me-4"> Admin
+                                        <input type="radio" name="role" id="role_admin" value="admin" @if(old('role') == 'admin') checked @endif>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="inputcheck d-inline-block"> User
+                                        <input type="radio" name="role" id="role_user" value="user" @if(old('role', 'user') == 'user') checked @endif>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                @error('role')
+                                    <div class="invalid-feedback d-block mt-2">{{ $message }}</div>
+                                @enderror
                             </div>
-                        @enderror
+                        </div>
+
+                        {{-- lembaga --}}
+                        <div class="col-12 col-md-6">
+                            <div class="form-login">
+                                <label for="lembaga">Lembaga</label>
+                                <div class="form-addons">
+                                    <input type="text" id="lembaga" class="@error('lembaga') is-invalid @enderror"
+                                        placeholder="Isi Lembaga" name="lembaga" value="{{ old('lembaga') }}">
+                                    @error('lembaga')
+                                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            @endforeach
 
-            <hr>
+                    <div class="row">
+                        @foreach ($cards2 as $card)
+                            <div class="col-12">
+                                <div class="form-login">
+                                    <label for="{{ $card['id'] }}">{{ $card['label'] }}</label>
+                                    
+                                    {{-- Cek dinamis: apakah input ini bertipe password? --}}
+                                    @php $isPassword = str_contains($card['id'], 'password'); @endphp
+                                    
+                                    <div class="{{ $isPassword ? 'pass-group' : 'form-addons' }}">
+                                        <input type="{{ $isPassword ? 'password' : 'text' }}" 
+                                            class="@error($card['id']) is-invalid @enderror"
+                                            name="{{ $card['id'] }}" id="{{ $card['id'] }}" 
+                                            placeholder="{{ $card['place'] }}" value="{{ old($card['id']) }}">
+                                        
+                                        @if($isPassword)
+                                            <span class="bi toggle-password bi-eye-slash" style="cursor: pointer;"></span>
+                                        @endif
+                                        
+                                        @error($card['id'])
+                                            <div class="invalid-feedback d-block">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
 
-            {{-- tombol daftar  --}}
-            <div class="align-items-center mt-0">
-                <div class="d-grid">
-                    <button class="btn btn-primary mb-9" type="submit">Daftar</button>
+                    <hr class="mt-2 mb-4">
+
+                    {{-- tombol daftar  --}}
+                    <div class="form-login">
+                        <button class="btn btn-login w-100" type="submit">Daftar Sekarang</button>
+                    </div>
+
+                </form>
+
+                {{-- link menuju halaman login --}}
+                <div class="signinform text-center mt-4">
+                    <h4>Sudah punya akun? <a href="{{ route('login') }}" class="hover-a">Login</a></h4>
                 </div>
+                
             </div>
-
-        </form>
-        {{-- form pendaftaran selesai --}}
-
-
-        {{-- link menuju halam login --}}
-        <div class="mt-4 text-center">
-            <span>Sudah punya akun? <a href="{{ route('login') }}">Login</a></span>
         </div>
     </div>
 @endsection
+
 @section('js')
     <script>
         $(document).ready(function() {
-            // Satu event listener untuk semua toggle password
+            // JS khusus untuk handle custom class .pass-group
             $(document).on('click', '.toggle-password', function() {
-                // Cari input password dalam satu grup (input-group yang sama)
-                var input = $(this).closest('.input-group').find(
-                    'input[type="password"], input[type="text"]');
-
-                // Toggle icon
+                var input = $(this).siblings('input');
                 $(this).toggleClass("bi-eye bi-eye-slash");
-
-                // Toggle type input
                 if (input.attr("type") === "password") {
                     input.attr("type", "text");
                 } else {

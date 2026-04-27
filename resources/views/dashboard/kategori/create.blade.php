@@ -1,90 +1,84 @@
 {{-- ? panggil file layout.blade.php yg ada difolder dashboard/layout --}}
 @extends('dashboard.layout.main')
 
-{{-- ? tulis kode html untuk halaman create user diantara @section --}}
 @section('konten')
     {{-- ! konten utama halaman dashboard ditulis disini --}}
-    {{-- judul halaman --}}
-    <div class="page-header">
+    
+    {{-- header halaman --}}
+    <div class="page-header mb-4">
         <div class="page-title">
             <h4>{{ $title }}</h4>
-            <h6>Buat Kategori Barang Baru</h6>
+            <h6 class="text-muted">Buat Kategori Barang Baru</h6>
         </div>
-         <div class="page-btn">
-            <a href="{{ route('kategori.index') }}" class="btn btn-added">
-                <i class="bi bi-arrow-left-square"></i>
+        <div class="page-btn">
+            <a href="{{ route('kategori.index') }}" class="btn btn-added d-flex align-items-center gap-2 px-3">
+                <i class="bi bi-arrow-left-square"></i> Kembali
             </a>
         </div>
     </div>
 
     {{-- card form tambah data --}}
-    <div class="card">
-        <div class="card-body">
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
 
             {{-- form tambah data kategori --}}
             <form action="{{ route('kategori.store') }}" method="POST">
-
-
-                {{-- blade csrf --}}
                 @csrf
 
                 <div class="row">
-
                     {{-- kolom kode_kategori --}}
-                    <div class="col-lg-6 col-sm-6 col-12">
+                    <div class="col-lg-6 col-md-6 col-12 mb-3">
                         <div class="form-group">
-                            <label for="kode_kategori">Kode Kategori</label>
-                            <input type="text" class="form-control  @error('kode_kategori') is-invalid @enderror"
+                            <label for="kode_kategori" class="fw-semibold mb-2">Kode Kategori</label>
+                            <input type="text" class="form-control @error('kode_kategori') is-invalid @enderror"
                                 id="kode_kategori" name="kode_kategori" value="{{ old('kode_kategori') }}"
-                                placeholder="Masukkan Kode Kategori">
+                                placeholder="Masukkan Kode Kategori" autocomplete="off">
 
-                            {{-- jika kode_kategori tidak valid --}}
                             @error('kode_kategori')
-                                {{-- tampilkan pesan error --}}
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
 
                     {{-- kolom nama_kategori --}}
-                    <div class="col-lg-6 col-sm-6 col-12">
+                    <div class="col-lg-6 col-md-6 col-12 mb-3">
                         <div class="form-group">
-                            <label for="nama_kategori">Nama Kategori</label>
-                            <input type="text" class="form-control  @error('nama_kategori') is-invalid @enderror"
+                            <label for="nama_kategori" class="fw-semibold mb-2">Nama Kategori</label>
+                            <input type="text" class="form-control @error('nama_kategori') is-invalid @enderror"
                                 id="nama_kategori" name="nama_kategori" value="{{ old('nama_kategori') }}"
-                                placeholder="Masukkan Nama Kategori">
+                                placeholder="Masukkan Nama Kategori" autocomplete="off">
 
-                            {{-- jika nama_kategori tidak valid --}}
                             @error('nama_kategori')
-                                {{-- tampilkan pesan error --}}
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
 
                     {{-- kolom deskripsi --}}
-                    <div class="col-12">
+                    <div class="col-12 mb-4">
                         <div class="form-group">
-                            <label for="deskripsi">Deskripsi</label>
-                            <textarea class="form-control  @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi"
-                                placeholder="Masukkan deskripsi pengguna">{{ old('deskripsi') }}</textarea>
+                            <label for="deskripsi" class="fw-semibold mb-2">Deskripsi</label>
+                            <textarea class="form-control @error('deskripsi') is-invalid @enderror" 
+                                id="deskripsi" name="deskripsi" rows="4"
+                                placeholder="Masukkan deskripsi kategori (opsional)">{{ old('deskripsi') }}</textarea>
 
-                            {{-- jika deskripsi tidak valid --}}
                             @error('deskripsi')
-                                {{-- tampilkan pesan error --}}
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
 
-                    {{-- tombol simpan user --}}
-                    <div class="col-12">
-                        <button type="submit" class="btn btn-submit me-2">Simpan</button>
-                        <a href="{{ route('kategori.index') }}" class="btn btn-cancel">Batal</a>
-
+                    {{-- tombol aksi --}}
+                    <div class="col-12 mt-2">
+                        <button type="submit" class="btn btn-submit me-2 px-4">Simpan
+                        </button>
+                        <a href="{{ route('kategori.index') }}" class="btn btn-cancel px-4">
+                            Batal
+                        </a>
                     </div>
                 </div>
             </form>
+            
         </div>
     </div>
 @endsection

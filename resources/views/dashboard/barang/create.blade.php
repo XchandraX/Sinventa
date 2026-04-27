@@ -17,8 +17,8 @@
         </div>
     </div>
 
-    <div class="card">
-        <div class="card-body">
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
 
             {{-- form tambah barang baru --}}
             <form action="{{ route('barang.store') }}" method="POST">
@@ -134,8 +134,8 @@
                     </div>
 
                     <div class="col-lg-12">
-                        <button class="btn btn-submit me-2" type="submit">Simpan</button>
-                        <a href="{{ route('barang.index') }}" class="btn btn-cancel">Batal</a>
+                        <button class="btn btn-submit me-2 px-4" type="submit">Simpan</button>
+                        <a href="{{ route('barang.index') }}" class="btn btn-cancel px-4">Batal</a>
 
                     </div>
                 </div>
