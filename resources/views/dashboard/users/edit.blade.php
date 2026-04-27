@@ -31,6 +31,7 @@
                 @method('put')
 
                 <div class="row">
+
                     @php
                         $cards = [
                             ['id' => 'nama_lengkap', 'label' => 'Nama Lengkap', 'place' => 'Isi Nama Lengkap'],
@@ -66,36 +67,37 @@
                         </div>
                     @endforeach
 
+                    @if (auth()->user()->role == 'admin' || auth()->user()->role == 'root')
+                        {{-- role --}}
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
 
-                    {{-- role --}}
-                    <div class="col-lg-6 col-sm-12">
-                        <div class="form-group">
+                                <label class="d-block form-label">Daftar Sebagai:</label>
 
-                            <label class="d-block form-label">Daftar Sebagai:</label>
-
-                            {{-- admin --}}
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="role" id="role_admin" value="admin"
-                                    @if (old('role' == 'admin' ? 'checked' : '')) checked @endif>
-                                <label for="role_admin" class="form-check-label">Admin</label>
-                            </div>
-
-                            {{-- user --}}
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="role" id="role_user" value="user"
-                                    @if (old('role' == 'user' ? 'checked' : '')) checked @endif>
-                                <label for="role_user" class="form-check-label">User</label>
-                            </div>
-
-                            {{-- jika role tidak valid --}}
-                            @error('role')
-                                <div id="role" class="text-danger">
-                                    {{-- tampilkan pesan error --}}
-                                    {{ $message }}
+                                {{-- admin --}}
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="role" id="role_admin"
+                                        value="admin" @if (old('role' == 'admin' ? 'checked' : '')) checked @endif>
+                                    <label for="role_admin" class="form-check-label">Admin</label>
                                 </div>
-                            @enderror
+
+                                {{-- user --}}
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="role" id="role_user"
+                                        value="user" @if (old('role' == 'user' ? 'checked' : '')) checked @endif>
+                                    <label for="role_user" class="form-check-label">User</label>
+                                </div>
+
+                                {{-- jika role tidak valid --}}
+                                @error('role')
+                                    <div id="role" class="text-danger">
+                                        {{-- tampilkan pesan error --}}
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
+                    @endif
 
                     {{-- lembaga --}}
                     <div class="col-lg-6 col-sm-12">
@@ -139,7 +141,7 @@
 
                     <div class="col-12">
                         <button class="btn btn-submit me-2 px-4" type="submit">Update</button>
-                        <a href="{{ route('users.index') }}" class="btn btn-cancel px-4">Batal</a>
+                        <a href="javascript:history.back()" class="btn btn-cancel px-4">Batal</a>
 
                     </div>
                 </div>
