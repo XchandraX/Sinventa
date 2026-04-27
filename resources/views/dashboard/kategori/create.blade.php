@@ -12,7 +12,7 @@
         </div>
         <div class="page-btn">
             <a href="{{ route('kategori.index') }}" class="btn btn-added d-flex align-items-center gap-2 px-3">
-                <i class="bi bi-arrow-left-square"></i> Kembali
+                <i class="bi bi-arrow-left-square"></i>
             </a>
         </div>
     </div>
