@@ -19,8 +19,8 @@
     </div>
 
     {{-- card form edit barang baru --}}
-    <div class="card">
-        <div class="card-body">
+    <div class="card shadow-sm border-0">
+         <div class="card-body p-4">
 
             {{-- form edit barang baru --}}
             <form action="{{ route('barang.update', $barang) }}" method="POST">
@@ -138,8 +138,8 @@
                     </div>
 
                     <div class="col-lg-12">
-                        <button class="btn btn-submit me-2" type="submit">Update</button>
-                        <a href="{{ route('barang.index') }}" class="btn btn-cancel">Batal</a>
+                        <button class="btn btn-submit me-2 px-4" type="submit">Update</button>
+                        <a href="{{ route('barang.index') }}" class="btn btn-cancel px-4">Batal</a>
 
                     </div>
                 </div>

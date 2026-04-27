@@ -13,8 +13,8 @@
         </div>
     </div>
 
-    <div class="card">
-        <div class="card-body">
+    <div class="card shadow-sm border-0">
+         <div class="card-body p-4">
             {{-- Perbaikan: Gunakan route update dan method PUT --}}
             <form action="{{ route('bast.update', $bast) }}" method="POST">
                 @csrf
@@ -132,8 +132,8 @@
                     @endforeach
 
                     <div class="col-lg-12">
-                        <button class="btn btn-submit me-2" type="submit">Update</button>
-                        <a href="{{ route('bast.index') }}" class="btn btn-cancel">Batal</a>
+                        <button class="btn btn-submit me-2 px-4" type="submit">Update</button>
+                        <a href="{{ route('bast.index') }}" class="btn btn-cancel px-4">Batal</a>
                     </div>
                 </div>
             </form>

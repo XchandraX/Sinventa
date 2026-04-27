@@ -18,8 +18,8 @@
     </div>
 
     {{-- card form edit user --}}
-    <div class="card">
-        <div class="card-body">
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
 
             {{-- form edit data user --}}
             <form action="{{ route('users.update', $user) }}" method="POST">
@@ -138,8 +138,8 @@
                     @endforeach
 
                     <div class="col-12">
-                        <button class="btn btn-submit me-2" type="submit">Update</button>
-                                            <a href="{{ route('users.index') }}" class="btn btn-cancel">Batal</a>
+                        <button class="btn btn-submit me-2 px-4" type="submit">Update</button>
+                        <a href="{{ route('users.index') }}" class="btn btn-cancel px-4">Batal</a>
 
                     </div>
                 </div>

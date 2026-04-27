@@ -18,8 +18,8 @@
     </div>
 
     {{-- card form tambah data --}}
-    <div class="card">
-        <div class="card-body">
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
 
             {{-- form tambah data kategori --}}
             <form action="{{ route('kategori.update', $kategori) }}" method="POST">
@@ -84,8 +84,8 @@
 
                     {{-- tombol simpan user --}}
                     <div class="col-12">
-                        <button type="submit" class="btn btn-submit me-2">Update</button>
-                                            <a href="{{ route('kategori.index') }}" class="btn btn-cancel">Batal</a>
+                        <button type="submit" class="btn btn-submit me-2 px-4">Update</button>
+                                            <a href="{{ route('kategori.index') }}" class="btn btn-cancel px-4">Batal</a>
 
                     </div>
                 </div>
