@@ -213,7 +213,7 @@
                         <h1 class="display-4 fw-bold mb-3" style="color: var(--primary);">
                             <i class="bi bi-box-seam me-2"></i>SINVESTA
                         </h1>
-                        <p class="lead mb-4 text-muted">Sistem Inventaris Sarana dan Prasarana Sekolah</p>
+                        <p class="lead mb-4 text-muted">Sistem Inventaris Berita Acara</p>
 
                         <div class="d-flex flex-wrap gap-3 justify-content-center">
                             <a href="{{ route('daftar.index') }}" class="btn btn-demo">
