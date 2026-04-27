@@ -11,7 +11,7 @@
             <h6>Mengubah Data Pengguna</h6>
         </div>
         <div class="page-btn">
-            <a href="{{ route('users.index') }}" class="btn btn-added">
+            <a  href="javascript:history.back()" class="btn btn-added">
                 <i class="bi bi-arrow-left-square"></i>
             </a>
         </div>
