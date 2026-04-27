@@ -11,7 +11,7 @@
             <h6 class="text-muted">Buat Kategori Barang Baru</h6>
         </div>
         <div class="page-btn">
-            <a href="{{ route('kategori.index') }}" class="btn btn-added d-flex align-items-center gap-2 px-3">
+            <a href="{{ route('kategori.index') }}" class="btn btn-added">
                 <i class="bi bi-arrow-left-square"></i>
             </a>
         </div>
