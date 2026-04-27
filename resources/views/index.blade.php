@@ -243,16 +243,16 @@
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="feature-card p-4 text-center">
-                        <i class="bi bi-graph-up mb-3" style="font-size: 2rem; color: var(--primary);"></i>
-                        <h5 class="fw-bold">Laporan Real-time</h5>
-                        <p class="small text-muted">Pantau kondisi aset dengan grafik dan laporan yang informatif.</p>
+                        <i class="bi bi-file-earmark-bar-graph mb-3" style="font-size: 2rem; color: var(--primary);"></i>
+                        <h5 class="fw-bold">Bast Real-time</h5>
+                        <p class="small text-muted">melakukan Berita Acara secara real-time.</p>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="feature-card p-4 text-center">
                         <i class="bi bi-shield-lock mb-3" style="font-size: 2rem; color: var(--primary);"></i>
                         <h5 class="fw-bold">Manajemen Role</h5>
-                        <p class="small text-muted">Pengaturan hak akses untuk admin, petugas, dan peminjam.</p>
+                        <p class="small text-muted">Pengaturan hak akses untuk root, admin, dan user.</p>
                     </div>
                 </div>
             </div>
