@@ -4,16 +4,16 @@ namespace App\Http\Controllers;
 
 // ? panggil model user agar bisa di gunakan oleh funciton login
 use App\Models\User;
-
 // ? panggil class fecades auth agar bisa digunakan oleh function login
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use Illuminate\Http\Request;
 class AuthController extends Controller
 {
     //
 
-    public function index() {
+    public function index()
+    {
         /**
          * ? function index akan menjalankan view 'login.blade.ph di dalam folder 'auth'
          * ? lalu mengirimkan data 'title'
@@ -28,61 +28,51 @@ class AuthController extends Controller
      * ? function logi ndigunakan untuk proses autentikasi
      * * gunakan class Request agar dapat menerima data dari view form'login.bladle.php'
      */
-    public function login(Request $request) {
-        // ? 1. membuat aturan validasi
-        $aturan = [
-            'username' => 'required|string',
-            'password' => 'required|string',
-        ];
+    public function login(Request $request)
+    {
+        // 1. Validasi awal (Hanya cek username, password dicek manual nanti agar tidak stop di sini)
+        $request->validate([
+            'username' => 'required',
+        ], [
+            'username.required' => 'Username tidak boleh kosong',
+        ]);
 
-        // ? 2. pesan jika data yang dikirm tidak valid
-        $pesan = [
-            'required' => ':attribute tidak boleh kosong',
-            'string' => ':attribute harus berupa teks.'
-        ];
-
-        // ? 3. lakuakn validasi data
-        $request->validate($aturan, $pesan);
-
-        // ? 4. cek apakah username sudah terdaftar
+        // 2. Cek apakah username ada di database
         $user = User::where('username', $request->username)->first();
 
-        // jika user tidak ditemukan
-        if (!$user) {
-            // kirim pesan error di kolom username
+        if (! $user) {
             return back()->withErrors([
                 'username' => 'Username tidak terdaftar',
             ])->withInput();
         }
-        // jiaka username sudah terdaftar, lanjut ke proses 5
 
-        // ? 5. coba login menggunakan class auth
-        // atur data yang digunakana untuk autentikasi = username dan password (defaultnya email)
-
-        $credentials = $request->only('username', 'password');
-        // jika proses login gagal
-        if (!Auth::attempt($credentials)) {
-            // kirim pesan error di kolom password
+        // 3. Cek apakah password kosong (Manual, agar pesan username tetap bisa muncul barengan)
+        if (! $request->password) {
             return back()->withErrors([
-                'password' => 'Ups! password kamu salah'
+                'password' => 'Password tidak boleh kosong',
             ])->withInput();
         }
-        // jika proses login berhasil, lanjut ke proses 6
 
-        // ? 6. regenerasi session (keamanan) dan simpan data user yang sedang login di browser
+        // 4. Proses Login
+        $credentials = $request->only('username', 'password');
+
+        if (! Auth::attempt($credentials)) {
+            return back()->withErrors([
+                'password' => 'Ups! password kamu salah',
+            ])->withInput();
+        }
+
         $request->session()->regenerate();
 
-        // ? 7. alihkan ke halaman dashboard
-        // ! karena kita belum punya route dashboard
         return redirect()->route('dashboard');
-
     }
 
     /**
      * ? function logout digunakan untuk proses keluar dari sistem
      * * gunakan class Request agar dapat menerima data dari view form'logout.blade.php'
      */
-    public function logout(Request $request) {
+    public function logout(Request $request)
+    {
         // ? Keluar dari sistem
         Auth::logout();
 
@@ -93,6 +83,4 @@ class AuthController extends Controller
         // ? alihkan ke halaman login
         return redirect()->route('/');
     }
-
-
 }
